@@ -17,3 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/DangNhap', [TaiKhoanController::class, 'dangNhap'])->name('DangNhap');
+Route::get('/DangKy', [TaiKhoanController::class, 'dangKy'])->name('DangKy');

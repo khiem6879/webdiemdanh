@@ -11,5 +11,10 @@ class TaiKhoanController extends Controller
     {
       return View('tai_khoan/dang-nhap');
     }
-    
+
+    public function dangKy()
+    {
+      return View('tai_khoan/dang-ky');
+    }
+
 }
