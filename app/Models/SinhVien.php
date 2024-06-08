@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class TaiKhoan extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class SinhVien extends Authenticatable
 {
-
     use HasFactory;
 
     // Tên bảng

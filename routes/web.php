@@ -14,7 +14,9 @@ use App\Http\Controllers\TaiKhoanController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('trang-chu');
 });
 Route::get('/DangNhap', [TaiKhoanController::class, 'dangNhap'])->name('DangNhap');
+Route::post('/xulyDangNhap', [TaiKhoanController::class, 'xulyDangNhap'])->name('XuLyDangNhap');
 Route::get('/DangKy', [TaiKhoanController::class, 'dangKy'])->name('DangKy');
+Route::post('/themtaikhoanGiaoVien', [TaiKhoanController::class, 'themtaikhoanGiaoVien'])->name('themtaikhoanGiaoVien');

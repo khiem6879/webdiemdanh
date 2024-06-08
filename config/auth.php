@@ -38,10 +38,10 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'giao_vien', // Sử dụng provider của sinh viên cho guard 'web'
         ],
-    ],
 
+    ],
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -60,9 +60,10 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'giao_vien' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\GiaoVien::class,
+            'password_key' => 'mat_khau',
         ],
 
         // 'users' => [

@@ -36,56 +36,59 @@
             </div>
 
             <!-------------------- ------ Right Box ---------------------------->
-
-            <div class="col-md-6 right-box">
-                <div class="row align-items-center">
-                    <div class="header-text mb-1">
-                        <h4>Điền Đầy Đủ Thông Tin</h4>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-lg bg-light fs-6" name="ho_ten"
-                            placeholder="Họ Tên">
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-lg bg-light fs-6" name="gmail"
-                            placeholder="Tên đăng nhập dạng Gmail">
-                    </div>
-
-
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control form-control-lg bg-light fs-6" name="mat_khau" placeholder="Mật Khẩu">
-                        <span class="toggle-password" onclick="togglePassword(this)">👁️</span>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control form-control-lg bg-light fs-6" name="xac_nhan_mat_khau" placeholder="Xác Nhận Mật Khẩu">
-                        <span class="toggle-password" onclick="togglePassword(this)">👁️</span>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="date" class="form-control form-control-lg bg-light fs-6" name="ngay_sinh">
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-lg bg-light fs-6" name="so_dien_thoai" placeholder="Số Điện Thoại">
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-lg bg-light fs-6" name="ma_sinh_vien" placeholder="Mã Sinh Viên">
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-lg bg-light fs-6" name="lop" placeholder="Lớp">
-                    </div>
-                    <div class="input-group mb-3">
-                        <button class="btn btn-lg btn-primary w-100 fs-6">Đăng Ký</button>
-                    </div>
-                    <div class="input-group mb-3">
-                        <button class="btn btn-lg btn-light w-100 fs-6"><img src="/images/google.png" style="width:20px"
-                                class="me-2"><small>Đăng nhập với Google</small></button>
-                    </div>
-                    <div class="row">
-                        <small>Bạn đã có tài khoản? <a href="{{route('DangNhap')}}">Đăng Nhập</a></small>
+            <form action="themtaikhoanGiaoVien" id="form-login" method="post">
+                @csrf
+                <div class="col-md-6 right-box">
+                    <div class="row align-items-center">
+                        <div class="header-text mb-1">
+                            <h4>Điền Đầy Đủ Thông Tin</h4>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" name="ho_ten"
+                                placeholder="Họ Tên">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" name="email"
+                                placeholder="Tên đăng nhập dạng email">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control form-control-lg bg-light fs-6" name="mat_khau"
+                                placeholder="Mật Khẩu">
+                            <span class="toggle-password" onclick="togglePassword(this)">👁️</span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control form-control-lg bg-light fs-6"
+                                name="xac_nhan_mat_khau" placeholder="Xác Nhận Mật Khẩu">
+                            <span class="toggle-password" onclick="togglePassword(this)">👁️</span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="date" class="form-control form-control-lg bg-light fs-6" name="ngay_sinh">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" name="so_dien_thoai"
+                                placeholder="Số Điện Thoại">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" name="ma_sinh_vien"
+                                placeholder="Mã Sinh Viên">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" name="lop"
+                                placeholder="Lớp">
+                        </div>
+                        <div class="input-group mb-3">
+                            <button class="btn btn-lg btn-primary w-100 fs-6">Đăng Ký</button>
+                        </div>
+                        <div class="input-group mb-3">
+                            <button class="btn btn-lg btn-light w-100 fs-6"><img src="/images/google.png"
+                                    style="width:20px" class="me-2"><small>Đăng nhập với Google</small></button>
+                        </div>
+                        <div class="row">
+                            <small>Bạn đã có tài khoản? <a href="{{route('DangNhap')}}">Đăng Nhập</a></small>
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            </form>
         </div>
     </div>
     <script>

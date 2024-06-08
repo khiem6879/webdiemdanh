@@ -12,8 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sinh_vien', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+           // Sử dụng ma_sinh_vien làm khóa chính
+           $table->string('ma_sinh_vien', 20)->primary();
+           $table->string('ho_ten', 50);
+           $table->date('ngay_sinh');
+           $table->string('dia_chi', 50);
+           $table->string('so_cccd', 12);
+           $table->string('email', 50);
+           $table->string('mat_khau', 50);
+           $table->string('so_dien_thoai', 11);
+           $table->timestamps();
+           $table->softDeletes();
         });
     }
 
