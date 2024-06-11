@@ -17,4 +17,12 @@ class GiaoVien extends Authenticatable
 
     // Kiểu dữ liệu của khóa chính là chuỗi
     protected $keyType = 'string';
+    // public function getAuthPassword()
+    // {
+    //     return $this->mat_khau;
+    // }
+    public function getPasswordAttribute()
+    {
+        return $this->mat_khau;
+    }
 }

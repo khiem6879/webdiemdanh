@@ -17,25 +17,32 @@ class TaiKhoanController extends Controller
   }
   public function xulyDangNhap(Request $rq)
   {
-      // Kiểm tra xem người dùng là Sinh viên hay Giáo viên
-      $sinh_vien = SinhVien::where('email', $rq->email)->first();
-      $giao_vien = GiaoVien::where('email', $rq->email)->first();
-  
-      if ($sinh_vien && Hash::check($rq->mat_khau, $sinh_vien->mat_khau)) {
-          // Nếu là Sinh viên và mật khẩu đúng
-          if (Auth::guard('sinh_vien')->attempt(['email' => $rq->email, 'mat_khau' => $rq->mat_khau])) {
-              return redirect()->route('trang-chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
-          }
-      } else if ($giao_vien && Hash::check($rq->mat_khau, $giao_vien->mat_khau)) {
-          // Nếu là Giáo viên và mật khẩu đúng
-          if (Auth::guard('giao_vien')->attempt(['email' => $rq->email, 'mat_khau' => $rq->mat_khau])) {
-              return redirect()->route('trang-chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
-          }
+    // Kiểm tra xem người dùng là Sinh viên hay Giáo viên
+    $sinh_vien = SinhVien::where('email', $rq->email)->first();
+    $giao_vien = GiaoVien::where('email', $rq->email)->first();
+    if ($sinh_vien && Hash::check($rq->mat_khau, $sinh_vien->mat_khau)) {
+      // Nếu là Sinh viên và mật khẩu đúng
+      if (Auth::guard('sinh_vien')->attempt(['email' => $rq->email, 'mat_khau' => $rq->mat_khau])) {
+        return redirect()->route('trang-chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
       }
-      // Nếu không phải Sinh viên hoặc Giáo viên, hoặc mật khẩu không đúng
-      return redirect()->route('DangNhap')->with('thong_bao', 'ĐĂNG NHẬP THẤT BẠI');
+      // Nếu là giáo viên và mật khẩu đúng
+    } else if ($giao_vien && Hash::check($rq->mat_khau, $giao_vien->mat_khau)) {
+      if (Auth::guard('giao_vien')->attempt(['email' => $rq->email, 'mat_khau' => $rq->mat_khau])) {
+        return redirect()->route('DangNhap')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
+      }
+    }
+    dd([
+      'giao vien' => $giao_vien,
+      'credentials' => ['email' => $rq->email, 'mat_khau' => $rq->mat_khau],
+      'mat_khau_hash_database' => $giao_vien->mat_khau,
+      'kq_hash_check' => $giao_vien && Hash::check($rq->mat_khau, $giao_vien->mat_khau),
+      'email nhap' => $rq->email,
+      'kq_auth' => Auth::attempt(['email' => $rq->email, 'mat_khau' => $rq->mat_khau]),
+      'mat_khau_nhap' => $rq->mat_khau,
+    ]);
+    return redirect()->route('DangNhap')->with('thong_bao', 'ĐĂNG NHẬP THẤT BẠI');
   }
-  
+
 
 
 
