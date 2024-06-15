@@ -22,4 +22,11 @@ class SinhVien extends Authenticatable
 
     protected $keyType = 'string';
     protected $dates = ['deleted_at'];
+    protected $fillable = [
+        'ma_sinh_vien', 'ho_ten', 'ngay_sinh', 'dia_chi', 'so_cccd', 'so_dien_thoai', 'email', 'mat_khau',
+    ];
+    public function getAuthPassword()
+    {
+        return $this->mat_khau;
+    }
 }
