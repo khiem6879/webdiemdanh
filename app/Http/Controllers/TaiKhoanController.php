@@ -56,7 +56,7 @@ class TaiKhoanController extends Controller
     $dsGV = new GiaoVien();
 
     $dsGV->email = $request->email;
-    $dsGV->mat_khau = Hash::make($request->mat_khau); // Hash mật khẩu
+    $dsGV->mat_khau = Hash::make($request->mat_khau); // Hash mật khẩu  
     $dsGV->save();
     return redirect()->route('DangNhap')->with('thong_bao', 'TẠO TÀI KHOẢN THÀNH CÔNG');
 
