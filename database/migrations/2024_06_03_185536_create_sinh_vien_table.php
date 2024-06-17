@@ -19,7 +19,7 @@ return new class extends Migration
            $table->string('dia_chi', 50);
            $table->string('so_cccd', 12);
            $table->string('email', 50);
-           $table->string('mat_khau', 50);
+           $table->string('mat_khau', 255);
            $table->string('so_dien_thoai', 11);
            $table->timestamps();
            $table->softDeletes();

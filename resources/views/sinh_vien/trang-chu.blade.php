@@ -1,4 +1,4 @@
-@extends('Trang-chu')
+@extends('trang-chu')
 @section('trangchu')
 <div class="sidebar-content">
     <ul class="nav nav-secondary">
@@ -28,13 +28,13 @@
             <div class="collapse" id="sidebarLayouts">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="sidebar-style-2.html">
-                            <span class="sub-item">Sidebar Style 2</span>
+                        <a href="{{ route('sinh_vien.danh_sach') }}">
+                            <span class="sub-item">Danh sách sinh viên</span>
                         </a>
                     </li>
                     <li>
-                        <a href="icon-menu.html">
-                            <span class="sub-item">Icon Menu</span>
+                        <a href="{{ route('sinh_vien.them') }}">
+                            <span class="sub-item">Thêm mới</span>
                         </a>
                     </li>
                 </ul>
@@ -128,4 +128,5 @@
         </li>
     </ul>
 </div>
+
 @endsection

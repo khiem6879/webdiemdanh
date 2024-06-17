@@ -44,3 +44,15 @@ Route::middleware(['auth:tro_ly_khoa', 'checkRole:tro_ly_khoa'])->group(function
 
 Route::get('/DangKy', [TaiKhoanController::class, 'dangKy'])->name('DangKy');
 Route::post('/themtaikhoanGiaoVien', [TaiKhoanController::class, 'themtaikhoanGiaoVien'])->name('themtaikhoanGiaoVien');
+
+
+
+Route::get('/sinhvien/trangchu', [SinhVienController::class, 'trangChu'])->name('sinh_vien.trang_chu');
+Route::get('/sinhvien/danhsach', [SinhVienController::class, 'danhSachSinhVien'])->name('sinh_vien.danh_sach');
+Route::get('/sinhvien/them', [SinhVienController::class, 'themSinhVien'])->name('sinh_vien.them');
+Route::post('/sinhvien/xuly/them', [SinhVienController::class, 'xuLyThemSinhVien'])->name('sinh_vien.xu_ly_them');
+Route::get('/sinhvien/capnhat/{MSSV}', [SinhVienController::class, 'capNhatSinhVien'])->name('sinh_vien.cap_nhat');
+
+Route::put('/sinhvien/xuly/capnhat/{MSSV}', [SinhVienController::class, 'xuLyCapNhatSinhVien'])->name('sinh_vien.xu_ly_cap_nhat');
+
+
