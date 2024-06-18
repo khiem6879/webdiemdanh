@@ -6,6 +6,7 @@ use App\Http\Controllers\SinhVienController;
 use App\Http\Controllers\GiaoVienController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TroLyKhoaController;
+use App\Http\Controllers\LopHocPhanController;
 /*
 
 |--------------------------------------------------------------------------
@@ -38,6 +39,11 @@ Route::middleware(['auth:admin', 'checkRole:admin'])->group(function () {
 
 Route::middleware(['auth:tro_ly_khoa', 'checkRole:tro_ly_khoa'])->group(function () {
     Route::get('/tro-ly-khoa/trang-chu', [TroLyKhoaController::class, 'trangChu'])->name('tro_ly_khoa.trang_chu');
+
+    Route::get('/lop-hoc-phan/them', [LopHocPhanController::class, 'themLopHocPhan'])->name('lop-hoc-phan.them');
+    Route::post('/lop-hoc-phan/danh-sach', [LopHocPhanController::class, 'xulythemLopHocPhan'])->name('lop-hoc-phan.xu_ly_them');
+    Route::get('/lop-hoc-phan/danh-sach', [LopHocPhanController::class, 'danhSach'])->name('tro_ly_khoa.lop_hoc_phan');
+    Route::get('/tro-ly-khoa/danh-sach', [TroLyKhoaController::class, 'danhSach'])->name('tro_ly_khoa.danh_sach');
 });
 
 

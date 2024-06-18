@@ -21,5 +21,9 @@ class GiaoVien extends Authenticatable
     {
         return $this->mat_khau;
     }
+    public function lopHocPhans()
+    {
+        return $this->belongsToMany(LopHocPhan::class, 'giao_vien_lop_hoc_phan', 'giao_vien_email', 'lop_hoc_phan_ma_lop');
+    }
    
 }

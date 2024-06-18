@@ -22,7 +22,7 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">
                 <i class="fas fa-th-list"></i>
-                <p>Giaos Viên</p>
+                <p>Giáo Viên</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="sidebarLayouts">
@@ -43,17 +43,21 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#forms">
                 <i class="fas fa-pen-square"></i>
-                <p>Forms</p>
+                <p>Điểm Danh</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="forms">
                 <ul class="nav nav-collapse">
                     <li>
                         <a href="forms/forms.html">
-                            <span class="sub-item">Basic Form</span>
+                            <span class="sub-item">Điểm Danh Lớp Học</span>
                         </a>
                     </li>
-                </ul>
+                    <li>
+                        <a href="forms/forms.html">
+                            <span class="sub-item">Điểm Danh Ngoài</span>
+                        </a>
+                    </li>
             </div>
         </li>
         <li class="nav-item">

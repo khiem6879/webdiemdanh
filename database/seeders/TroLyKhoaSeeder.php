@@ -15,8 +15,14 @@ class TroLyKhoaSeeder extends Seeder
     {
         
         TroLyKhoa::create([
-            'email' => 'tl1',
-            'mat_khau' => Hash::make('123'), // Đảm bảo mật khẩu được mã hóa
+            'email' => 'tl2',
+            'ho_ten' => 'kkkkkkk',
+            'mat_khau' => Hash::make('123'), 
+            'khoa_id' => '1',
+            'sdt' => 'tl1',
+            'thoi_gian_dang_nhap_cuoi' => 'tl1',
+            'avt' => 'kkkkkkkk',
+            // Đảm bảo mật khẩu được mã hóa
         ]);
     }
 }

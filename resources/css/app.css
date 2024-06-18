@@ -1,0 +1,9 @@
+.password-field {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px; /* Giới hạn chiều rộng để hiển thị một vài ký tự */
+    vertical-align: middle;
+    cursor: pointer; /* Thêm con trỏ chuột để chỉ ra rằng trường này có thể nhấp vào */
+}

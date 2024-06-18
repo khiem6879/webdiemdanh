@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tro_ly_khoa', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('mat_khau');
+        Schema::create('mon_hoc', function (Blueprint $table) {
+            $table->string('ma_mon', 20)->primary();
+            $table->string('ten_mon', 20);
+            $table->integer('khoa_id')->unsigned();
             $table->timestamps();
+    
+            $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao');
         });
     }
 
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tro_ly_khoa');
+        Schema::dropIfExists('mon_hoc');
     }
 };
