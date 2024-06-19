@@ -7,6 +7,7 @@ use App\Http\Controllers\GiaoVienController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TroLyKhoaController;
 use App\Http\Controllers\LopHocPhanController;
+use App\Http\Controllers\DiemDanhNgoaiController;
 /*
 
 |--------------------------------------------------------------------------
@@ -58,7 +59,16 @@ Route::get('/sinhvien/danhsach', [SinhVienController::class, 'danhSachSinhVien']
 Route::get('/sinhvien/them', [SinhVienController::class, 'themSinhVien'])->name('sinh_vien.them');
 Route::post('/sinhvien/xuly/them', [SinhVienController::class, 'xuLyThemSinhVien'])->name('sinh_vien.xu_ly_them');
 Route::get('/sinhvien/capnhat/{MSSV}', [SinhVienController::class, 'capNhatSinhVien'])->name('sinh_vien.cap_nhat');
-
 Route::put('/sinhvien/xuly/capnhat/{MSSV}', [SinhVienController::class, 'xuLyCapNhatSinhVien'])->name('sinh_vien.xu_ly_cap_nhat');
+
+
+
+Route::get('/giaovien/trangchu', [GiaoVienController::class, 'trangChu'])->name('giao_vien.trang_chu');
+Route::get('/giaovien/danhsach', [GiaoVienController::class, 'danhSachGiaoVien'])->name('giao_vien.danh_sach');
+
+Route::get('/admin/trangchu',[AdminController::class,'trangChu'])->name('admin.trang_chu');
+Route::get('/diemdanhngoai/danhsach',[DiemDanhNgoaiController::class,'danhSach'])->name('diem_danh_ngoai.danh_sach');
+
+
 
 

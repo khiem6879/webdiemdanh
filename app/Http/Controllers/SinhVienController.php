@@ -15,7 +15,9 @@ class SinhVienController extends Authenticatable
     public function danhSachSinhVien()
     {
         $sinhviens = SinhVien::all();
-        return view('sinh_vien.danh-sach-sinh-vien', compact('sinhviens'));
+        $sinhviens = SinhVien::paginate(1);
+        return view('sinh_vien.danh-sach-sinh-vien', compact('sinhviens'))->with('i',(request()->input('page',1)-1)*5);
+     
     }
 
     public function themSinhVien()
