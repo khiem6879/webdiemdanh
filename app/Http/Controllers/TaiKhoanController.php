@@ -67,6 +67,14 @@ class TaiKhoanController extends Controller
     $dsGV->save();
     return redirect()->route('DangNhap')->with('thong_bao', 'TẠO TÀI KHOẢN THÀNH CÔNG');
 
+
+    
+  }
+  public function dangXuat()
+  {
+      Auth::guard(session('user_role'))->logout();
+      session()->flush();
+      return redirect()->route('DangNhap')->with('thong_bao', 'ĐĂNG XUẤT THÀNH CÔNG');
   }
 
 }

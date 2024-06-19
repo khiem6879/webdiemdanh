@@ -53,13 +53,16 @@
                                     </td>
                                     <td>{{ $sinhvien->dia_chi }}</td>
                                     <td>
-                                        <div class="form-button-action">
-                                            <a href="{{ route('sinh_vien.cap_nhat', $sinhvien->ma_sinh_vien) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </td>
+                                    <div class="form-button-action">
+                                        <a href="{{ route('sinh_vien.cap_nhat', $sinhvien->ma_sinh_vien) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <form action="{{ route('sinh_vien.xoa', $sinhvien->ma_sinh_vien) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"><i class="fa fa-times"></i></button>
+                                        </form>
+                                    </div>
                                 </tr>
                             @endforeach
                         @else
@@ -80,7 +83,7 @@
 .table th, .table td {
     vertical-align: middle;
     text-align: center;
-    white-space: nowrap; /* Prevent line breaks */
+    white-space: nowrap;/* Ngăn chặn ngắt dòng */
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
