@@ -29,7 +29,7 @@
                 <ul class="nav nav-collapse">
                     <li>
                         <a href="sidebar-style-2.html">
-                            <span class="sub-item">Sidebar Style 2</span>
+                            <span class="sub-item">Danh sách giáo viên</span>
                         </a>
                     </li>
                     <li>

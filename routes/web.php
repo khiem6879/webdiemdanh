@@ -7,6 +7,7 @@ use App\Http\Controllers\GiaoVienController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TroLyKhoaController;
 use App\Http\Controllers\LopHocPhanController;
+use App\Http\Controllers\DiemDanhNgoaiController;
 /*
 
 |--------------------------------------------------------------------------
@@ -59,7 +60,6 @@ Route::get('/sinhvien/danhsach', [SinhVienController::class, 'danhSachSinhVien']
 Route::get('/sinhvien/them', [SinhVienController::class, 'themSinhVien'])->name('sinh_vien.them');
 Route::post('/sinhvien/xuly/them', [SinhVienController::class, 'xuLyThemSinhVien'])->name('sinh_vien.xu_ly_them');
 Route::get('/sinhvien/capnhat/{MSSV}', [SinhVienController::class, 'capNhatSinhVien'])->name('sinh_vien.cap_nhat');
-
 Route::put('/sinhvien/xuly/capnhat/{MSSV}', [SinhVienController::class, 'xuLyCapNhatSinhVien'])->name('sinh_vien.xu_ly_cap_nhat');
 
 

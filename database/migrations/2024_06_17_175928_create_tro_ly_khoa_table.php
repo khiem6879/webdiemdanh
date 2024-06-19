@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tro_ly_khoa', function (Blueprint $table) {
             $table->string('email', 50)->primary();
+            $table->integer('khoa_id')->unsigned();
             $table->string('ho_ten', 40);
             $table->string('mat_khau', 255);
             $table->integer('khoa_id')->unsigned();

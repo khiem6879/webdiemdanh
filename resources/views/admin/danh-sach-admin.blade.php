@@ -5,7 +5,7 @@
         <div class="card-header">
             <div class="row"> 
                 <div class="col-sm-10">
-                    <h1 class="card-title">Danh Sách Sinh Viên</h1>
+                    <h1 class="card-title">Danh Sách Admin</h1>
                 </div>
                 <div class="col-sm-2">
                     <a href="{{ route('sinh_vien.them') }}">
@@ -21,7 +21,7 @@
                 <table id="add-row" class="display table table-striped table-hover">
                     <thead>
                         <tr>
-                          <th>STT</th>
+                         
                             
                             <th>HỌ TÊN</th>
                             <th>NGÀY SINH</th>
