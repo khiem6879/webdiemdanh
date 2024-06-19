@@ -17,4 +17,8 @@ class TroLyKhoa extends Authenticatable
     {
         return $this->mat_khau;
     }
+    public function khoa()
+    {
+        return $this->belongsTo(KhoaDaoTao::class, 'khoa_id');
+    }
 }

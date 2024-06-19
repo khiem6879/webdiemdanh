@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('lop_sinh_vien', function (Blueprint $table) {
             $table->string('ma_lop', 10)->primary();
             $table->string('ten_lop', 20);
-            $table->json('giao_vien_email')->nullable(); // Cột JSON để lưu danh sách email giáo viên
+            $table->string('giao_vien_email', 20);
             $table->json('sinh_vien_mssv')->nullable(); // Cột JSON để lưu danh sách mã sinh viên
             $table->integer('khoa_id')->unsigned();
             $table->timestamps();
-    
             $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao');
+            $table->foreign('giao_vien_email')->references('email')->on('giao_vien');
         });
     }
 

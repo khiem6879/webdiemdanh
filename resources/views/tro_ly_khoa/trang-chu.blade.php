@@ -28,13 +28,13 @@
             <div class="collapse" id="sidebarLayouts">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="sidebar-style-2.html">
-                            <span class="sub-item">Sidebar Style 2</span>
+                        <a href="/lop-hoc-phan/danh-sach">
+                            <span class="sub-item">danh sách</span>
                         </a>
                     </li>
                     <li>
-                        <a href="icon-menu.html">
-                            <span class="sub-item">Icon Menu</span>
+                        <a href="/lop-hoc-phan/them">
+                            <span class="sub-item">thêm</span>
                         </a>
                     </li>
                 </ul>

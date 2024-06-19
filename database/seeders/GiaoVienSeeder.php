@@ -39,7 +39,7 @@ class GiaoVienSeeder extends Seeder
             $dia_chi = 'hcm';
             $cccd = '1233333';
             $so_dien_thoai = '111111';
-            $email = $teacherData['name'];
+            $email = $teacherData['name'] . '@gmail.com';
             $mat_khau = Hash::make('123');
             $khoa_id = $teacherData['khoa_id'];
 

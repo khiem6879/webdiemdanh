@@ -1,5 +1,4 @@
 @extends('tro_ly_khoa.trang-chu')
-
 @section('content')
 <div class="container">
     <h1>Danh sách Lớp Học Phần</h1>
@@ -16,7 +15,6 @@
                 <th>Giáo Viên</th>
                 <th>Sinh Viên</th>
                 <th>Khoa</th>
-                <th>Hành Động</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +22,7 @@
                 <tr>
                     <td>{{ $lopHocPhan->ma_lop }}</td>
                     <td>{{ $lopHocPhan->ten_lop }}</td>
-                    <td>
+                   <td>
                         @if(is_array(json_decode($lopHocPhan->giao_vien_email)))
                             @foreach (json_decode($lopHocPhan->giao_vien_email) as $email)
                                 {{ $email }}<br>

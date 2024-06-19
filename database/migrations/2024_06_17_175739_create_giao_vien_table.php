@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('email', 30)->primary();
             $table->string('ho_ten', 40);
             $table->date('ngay_sinh');
-            $table->string('mat_khau', 50);
+            $table->string('mat_khau', 255);
             $table->string('so_dien_thoai', 11);
             $table->string('cccd', 12);
             $table->string('dia_chi', 100);

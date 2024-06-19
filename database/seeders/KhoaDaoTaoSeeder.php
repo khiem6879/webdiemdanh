@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\KhoaDaoTao;
+use Illuminate\Support\Facades\DB;
+
 class KhoaDaoTaoSeeder extends Seeder
 {
     /**
@@ -12,11 +12,23 @@ class KhoaDaoTaoSeeder extends Seeder
      */
     public function run(): void
     {
-        KhoaDaoTao::create([
-
-            'khoa_id'=>'1',
-            'ten_khoa'=>'CNTT',
+        DB::table('khoa_dao_tao')->insert([
+            [
+                'khoa_id' => '1',
+                'ten_khoa' => 'CNTT',
+            ],
+            [
+                'khoa_id' => '2',
+                'ten_khoa' => 'Oto',
+            ],
+            [
+                'khoa_id' => '3',
+                'ten_khoa' => 'Co',
+            ],
+            [
+                'khoa_id' => '4',
+                'ten_khoa' => 'Dien',
+            ],
         ]);
-
     }
 }

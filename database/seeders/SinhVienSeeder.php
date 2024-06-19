@@ -22,7 +22,7 @@ class SinhVienSeeder extends Seeder
             $dia_chi = 'hcm'; // Giả định địa chỉ cho tất cả sinh viên để đơn giản
             $so_cccd = '1233333'; // Giả định số CCCD cho tất cả sinh viên để đơn giản
             $so_dien_thoai = '111111'; // Giả định số điện thoại cho tất cả sinh viên để đơn giản
-            $email = 'sv' . $i; // Giả định email dạng sv1, sv2, ..., sv10
+            $email = 'sv' . $i . '@gmail.com';
             $mat_khau = Hash::make('123'); // Mã hóa mật khẩu, giả định '123' cho tất cả sinh viên
 
             SinhVien::create([

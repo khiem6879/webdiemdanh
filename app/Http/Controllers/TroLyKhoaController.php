@@ -11,9 +11,9 @@ class TroLyKhoaController extends Authenticatable
     {
         return View('tro_ly_khoa/trang-chu');
     }
-    public function dangSach()
+    public function danhSach()
     {
-        $troLyKhoa = TroLyKhoa::all();
-        return view('tro_ly_khoa/danh-sach', compact('troLyKhoa'));
+        $troLyKhoas = TroLyKhoa::with('khoa')->get();
+        return view('tro_ly_khoa.danh-sach', compact('troLyKhoas'));
     }
 }

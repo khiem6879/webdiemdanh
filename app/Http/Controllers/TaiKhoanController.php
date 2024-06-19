@@ -34,7 +34,8 @@ class TaiKhoanController extends Controller
       return redirect()->route('sinh_vien.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
     } elseif ($giao_vien && Hash::check($rq->mat_khau, $giao_vien->mat_khau)) {
       Auth::guard('giao_vien')->login($giao_vien);
-      session(['user_role' => 'giao_vien']);
+      session(['user_role' => 'giao_vien', 'khoa_id'=>$giao_vien->khoa_id]);
+      // dd(session('user_role'), session('khoa_id'));
       return redirect()->route('giao_vien.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
     } elseif ($admin && Hash::check($rq->mat_khau, $admin->mat_khau)) {
       Auth::guard('admin')->login($admin);
@@ -42,7 +43,8 @@ class TaiKhoanController extends Controller
       return redirect()->route('admin.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
     } elseif ($tro_ly_khoa && Hash::check($rq->mat_khau, $tro_ly_khoa->mat_khau)) {
       Auth::guard('tro_ly_khoa')->login($tro_ly_khoa);
-      session(['user_role' => 'tro_ly_khoa']);
+      session(['user_role' => 'tro_ly_khoa', 'khoa_id' => $tro_ly_khoa->khoa_id]);
+      // dd(session('user_role'), session('khoa_id'));
       return redirect()->route('tro_ly_khoa.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
     } else {
       return redirect()->route('DangNhap')->with('thong_bao', 'ĐĂNG NHẬP THẤT BẠI');
