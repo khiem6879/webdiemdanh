@@ -15,11 +15,58 @@ class SinhVienController extends Authenticatable
     public function danhSachSinhVien()
     {
         $sinhviens = SinhVien::all();
-        $sinhviens = SinhVien::paginate(1);
-        return view('sinh_vien.danh-sach-sinh-vien', compact('sinhviens'))->with('i',(request()->input('page',1)-1)*5);
+        $sinhviens = SinhVien::paginate(5);
+        return view('sinh_vien.danh-sach-sinh-vien', compact('sinhviens'))->with('i',(request()->input('page',1)-1)* 5);
      
     }
-
+    public function timKiem(Request $request) {
+        $search = $request->input('search');
+        $query = SinhVien::query();
+    
+        if ($search !== null) {
+            $query->where('ma_sinh_vien', 'LIKE', "%$search%")
+                  ->orWhere('ho_ten', 'LIKE', "%$search%")
+                  ->orWhere('so_cccd', 'LIKE', "%$search%")
+                  ->orWhere('email', 'LIKE', "%$search%")
+                  ->orWhere('so_dien_thoai', 'LIKE', "%$search%");
+        }
+    
+        $sinhviens = $query->get();
+    
+        $output = '';
+        if ($sinhviens->count() > 0) {
+            foreach ($sinhviens as $sinhvien) {
+                $output .= '
+                <tr>
+                    <td>'.$sinhvien->ma_sinh_vien.'</td>
+                    <td>'.$sinhvien->ho_ten.'</td>
+                    <td>'.$sinhvien->ngay_sinh.'</td>
+                    <td>'.$sinhvien->so_dien_thoai.'</td>
+                    <td>'.$sinhvien->so_cccd.'</td>
+                    <td>'.$sinhvien->email.'</td>
+                    <td>
+                        <span class="password-field" id="password-'.$sinhvien->ma_sinh_vien.'"
+                            onclick="togglePassword(\''.$sinhvien->ma_sinh_vien.'\', \''.$sinhvien->mat_khau.'\')">
+                            '.substr($sinhvien->mat_khau, 0, 8).'...
+                        </span>
+                    </td>
+                    <td>'.$sinhvien->dia_chi.'</td>
+                    <td>
+                        <div class="form-button-action">
+                            <a href="'.route('sinh_vien.cap_nhat', $sinhvien->ma_sinh_vien).'" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </td>
+                </tr>';
+            }
+        } else {
+            $output = '<tr><td colspan="9">Không tồn tại sinh viên</td></tr>';
+        }
+    
+        return response()->json($output);
+    }
     public function themSinhVien()
     {
         return view('sinh_vien.them-sinh-vien');
