@@ -100,9 +100,9 @@ class SinhVienController extends Authenticatable
 
         return redirect()->route('sinh_vien.danh_sach')->with('error', 'Sinh viên không tồn tại.');
     }
-    public function capNhatSinhVien($MSSV)
+    public function capNhatSinhVien(sinh_vien $MSSV)
     {
-        $sinh_vien = SinhVien::find($MSSV);
+        
         if ($sinh_vien) {
             return view('sinh_vien.cap-nhat-sinh-vien', ['sinh_vien' => $sinh_vien]);
         }

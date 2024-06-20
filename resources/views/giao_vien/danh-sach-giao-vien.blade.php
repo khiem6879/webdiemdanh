@@ -3,7 +3,26 @@
 @extends('giao_vien.trang-chu')
 
 @section('content')
-    <div class="col-md-12">
+<div class="col-md-12">
+    <div class="card">
+          <div class="card-header">
+                      <div class="row"> 
+                          <div class="col-sm-3">
+                              <h1 class="card-title">Danh Sách Giáo Viên</h1>
+                          </div>
+                          <div class="col-sm-6">
+                              <input type="text" id="search" class="form-control" placeholder="Tìm kiếm giáo viên..." value="{{ request()->query('search') }}">
+                          </div>
+                          <div class="col-sm-2">
+                              <a href="{{ route('sinh_vien.them') }}">
+                                  <button class="btn btn-primary btn-round ms-auto">
+                                      <i class="fa fa-plus"></i> THÊM
+                                  </button>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+            <div class="card-body">
                     <div class="table-responsive">
                       <table id="add-row" class="display table table-striped table-hover">
                       <thead>
@@ -45,11 +64,35 @@
                           </tbody>
                       </table>
                     </div>
+                    <div class="d-flex justify-content-right">
+                {{ $giaoviens->appends(request()->query())->links('pagination::bootstrap-4') }}
+            </div>
                   </div>
                 </div>
               </div>
+              </div>
+              </div>
              
-           
+              <style>
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;/* Ngăn chặn ngắt dòng */
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function togglePassword(id, password) {
+        var passwordField = document.getElementById('password-' + id);
+        if (passwordField.innerText === password) {
+            passwordField.innerText = password.substring(0, 8) + '...';
+        } else {
+            passwordField.innerText = password;
+        }
+    }
+
+   
+</script>
     
 
 @endsection

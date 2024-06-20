@@ -13,6 +13,7 @@ class GiaoVienController extends Authenticatable
     }
     public function danhSachGiaoVien(){
         $giaoviens= GiaoVien::all();
+        $giaoviens = GiaoVien::paginate(5);
         return view('giao_vien.danh-sach-giao-vien', compact('giaoviens'));
     }
 }

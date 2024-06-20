@@ -37,6 +37,11 @@
                             <span class="sub-item">Thêm mới</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('sinh_vien.cap_nhat') }}">
+                            <span class="sub-item">Cập nhật</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>

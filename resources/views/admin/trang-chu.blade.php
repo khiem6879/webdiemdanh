@@ -43,14 +43,14 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#forms">
                 <i class="fas fa-pen-square"></i>
-                <p>ĐIỂM DANH </p>
+                <p>Trống </p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="forms">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="{{ route('diem_danh_ngoai.danh_sach') }}">
-                            <span class="sub-item">Điểm danh ngoài</span>
+                        <a >
+                            <span class="sub-item">1</span>
                         </a>
                     </li>
                 </ul>
@@ -59,7 +59,7 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#tables">
                 <i class="fas fa-table"></i>
-                <p>Tables</p>
+                <p>Trống</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="tables">
@@ -91,8 +91,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="maps/jsvectormap.html">
-                            <span class="sub-item">Jsvectormap</span>
+                        <a href="{{ route('giao_vien.danh_sach') }}">
+                            <span class="sub-item">Danh sách giáo viên</span>
                         </a>
                     </li>
                 </ul>

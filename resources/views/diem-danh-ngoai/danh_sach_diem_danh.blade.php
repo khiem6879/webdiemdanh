@@ -60,7 +60,7 @@
                 </table>
             </div>
             <div class="d-flex justify-content-right">
-            {{ $sinhviens->links('pagination::bootstrap-4') }}
+            {{ $diemdanhngoais->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>

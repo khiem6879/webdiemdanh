@@ -1,3 +1,4 @@
+<?php
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -7,8 +8,7 @@ return new class extends Migration {
     
     public function up(): void
     {
-        // Xóa bảng nếu tồn tại
-        Schema::dropIfExists('diem_danh_ngoai');
+       
         
         Schema::create('diem_danh_ngoai', function (Blueprint $table) {
             $table->string('ma_diem_danh', 10)->primary();
