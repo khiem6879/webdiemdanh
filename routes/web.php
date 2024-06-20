@@ -21,12 +21,15 @@ use App\Http\Controllers\DiemDanhNgoaiController;
 */
 
 Route::get('/', function () {
-    return view('trang-chu');
+    return view('tai_khoan/dang-nhap');
 });
 Route::get('/DangNhap', [TaiKhoanController::class, 'dangNhap'])->name('DangNhap');
 Route::post('/xulyDangNhap', [TaiKhoanController::class, 'xulyDangNhap'])->name('XuLyDangNhap');
+Route::get('/tai-khoan-thong-tin', [TaiKhoanController::class, 'thongtinTaiKhoan'])->name('tai_khoan.thong-tin-tai-khoan');
 
 Route::get('/Dangxuat', [TaiKhoanController::class, 'dangXuat'])->name('DangXuat');
+Route::get('/tai-khoan/doi-mat-khau', [TaiKhoanController::class, 'hienThiDoiMatKhau'])->name('tai_khoan.doi_mat_khau');
+Route::post('/tai-khoan/doi-mat-khau', [TaiKhoanController::class, 'doiMatKhau'])->name('tai_khoan.cap_nhat_mat_khau');
 
 
 
@@ -68,6 +71,8 @@ Route::delete('/sinh-vien/xoa/{MSSV}', [SinhVienController::class, 'xoaSinhVien'
 Route::put('/sinhvien/xuly/capnhat/{MSSV}', [SinhVienController::class, 'xuLyCapNhatSinhVien'])->name('sinh_vien.xu_ly_cap_nhat');
 
 
+Route::get('/tai-khoan/sua', [TaiKhoanController::class, 'suaTaiKhoan'])->name('tai_khoan.sua');
+Route::post('/tai-khoan/su-ly-sua', [TaiKhoanController::class, 'xulysuaTaiKhoan'])->name('tai_khoan.xu_ly_sua');
 
 
 Route::get('/sinh-vien/tim-kiem', [SinhVienController::class, 'timKiem'])->name('sinh_vien.tim_kiem');

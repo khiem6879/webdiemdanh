@@ -1,9 +1,23 @@
+@php
+  $role = session('user_role');
+  $user = null;
+  if ($role === 'sinh_vien') {
+    $user = Auth::guard('sinh_vien')->user();
+  } elseif ($role === 'giao_vien') {
+    $user = Auth::guard('giao_vien')->user();
+  } elseif ($role === 'admin') {
+    $user = Auth::guard('admin')->user();
+  } elseif ($role === 'tro_ly_khoa') {
+    $user = Auth::guard('tro_ly_khoa')->user();
+  }
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>trangchu</title>
+  <title>web diem danh</title>
   <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
   <link rel="icon" href="{{ asset('assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -84,7 +98,7 @@
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
             <a href="" class="logo">
-                  <img src="{{ asset('assets/img/kaiadmin/logo_light.svg') }}" alt="navbar brand" class="navbar-brand"
+              <img src="{{ asset('assets/img/kaiadmin/logo_light.svg') }}" alt="navbar brand" class="navbar-brand"
                 height="20" />
 
             </a>
@@ -113,8 +127,12 @@
                     <img src="{{ asset('assets/img/profile.jpg') }}" alt="..." class="avatar-img rounded-circle" />
                   </div>
                   <span class="profile-username">
-                    <span class="op-7">Hi,</span>
-                    <span class="fw-bold">Hizrian</span>
+                    <span class="op-7">Chào,</span>
+                    @if($role === 'admin')
+                    <span class="fw-bold">Admin</span>
+                    @else
+                    <span class="fw-bold">{{ $user->ho_ten }}</span>
+                    @endif
                   </span>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -126,19 +144,22 @@
                             class="avatar-img rounded" />
                         </div>
                         <div class="u-text">
-                          <h4>Hizrian</h4>
-                          <p class="text-muted">hello@example.com</p>
-                          <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                        @if($role === 'admin')
+                        <h4>Admin</h4>
+                        <p class="text-muted">{{$user->email}}</p>
+                        @else
+                        <h4>{{$user->ho_ten}}</h4>
+                        <p class="text-muted">{{$user->email}}</p>
+                        @endif
+                          <!-- <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">Thông Tin Tài Khoản</a> -->
                         </div>
                       </div>
                     </li>
                     <li>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">My Profile</a>
-                      <a class="dropdown-item" href="#">My Balance</a>
-                      <a class="dropdown-item" href="#">Inbox</a>
+                      <a class="dropdown-item" href="/tai-khoan-thong-tin">Thông Tin Tài Khoản</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Account Setting</a>
+                      <a class="dropdown-item" href="/tai-khoan/doi-mat-khau">Đổi Mật Khẩu</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/Dangxuat">Đăng Xuất</a>
                     </li>

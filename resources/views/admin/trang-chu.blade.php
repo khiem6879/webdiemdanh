@@ -49,7 +49,7 @@
             <div class="collapse" id="forms">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="{{ route('diem_danh_ngoai.danh_sach') }}">
+                        <a href="">
                             <span class="sub-item">Điểm danh ngoài</span>
                         </a>
                     </li>
