@@ -100,18 +100,16 @@ class SinhVienController extends Authenticatable
 
         return redirect()->route('sinh_vien.danh_sach')->with('error', 'Sinh viên không tồn tại.');
     }
-    public function capNhatSinhVien(sinh_vien $MSSV)
-    {
-        
-        if ($sinh_vien) {
-            return view('sinh_vien.cap-nhat-sinh-vien', ['sinh_vien' => $sinh_vien]);
-        }
-
-        return redirect()->route('sinh_vien.danh_sach')->with('error', 'Sinh viên không tồn tại.');
+   
+  
+    public function capNhatSinhVien($ma_sinh_vien) {
+        $sinh_vien = SinhVien::find($ma_sinh_vien);
+        return view('sinh_vien.cap_nhat', compact('sinh_vien'));
     }
-    public function xuLyCapNhatSinhVien(Request $request, $MSSV)
+    
+    public function xuLyCapNhatSinhVien(Request $request, $ma_sinh_vien)
     {
-        $sinh_vien = SinhVien::find($MSSV);
+        $sinh_vien = SinhVien::find($ma_sinh_vien);
         if ($sinh_vien) {
             $sinh_vien->ma_sinh_vien = $request->input('ma_sinh_vien');
             $sinh_vien->ho_ten = $request->input('ho_ten');
@@ -121,15 +119,14 @@ class SinhVienController extends Authenticatable
             $sinh_vien->email = $request->input('email');
             $sinh_vien->mat_khau = bcrypt($request->input('mat_khau'));
             $sinh_vien->dia_chi = $request->input('dia_chi');
-
-            $sinh_vien->save();
-
-            return redirect()->route('sinh_vien.danh_sach')->with('success', 'Cập nhật sinh viên thành công.');
+    
+           $sinh_vien->update($request->all());
+    return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Cập nhật thành công!');
         }
-
+    
         return redirect()->back()->with('error', 'Sinh viên không tồn tại.');
     }
-
+    
 
 
 }

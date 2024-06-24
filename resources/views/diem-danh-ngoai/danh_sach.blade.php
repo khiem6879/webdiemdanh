@@ -1,4 +1,4 @@
-@extends('admin.trang-chu')
+@extends('giao_vien.trang-chu')
 @section('content')
 <div class="col-md-12">
     <div class="card">
@@ -8,7 +8,7 @@
                     <h1 class="card-title">Danh Sách Điểm Danh</h1>
                 </div>
                 <div class="col-sm-2">
-                    <a href="{{ route('sinh_vien.them') }}">
+                    <a >
                         <button class="btn btn-primary btn-round ms-auto">
                             <i class="fa fa-plus"></i> THÊM
                         </button>

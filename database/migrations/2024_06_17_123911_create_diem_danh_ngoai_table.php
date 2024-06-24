@@ -21,6 +21,7 @@ return new class extends Migration {
 
             // Thiết lập khóa ngoại
             $table->foreign('giao_vien_email')->references('email')->on('giao_vien');
+          
         });
     }
 

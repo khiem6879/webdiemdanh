@@ -53,16 +53,16 @@
                                     </td>
                                     <td>{{ $sinhvien->dia_chi }}</td>
                                     <td>
-                                    <div class="form-button-action">
-                                        <a href="{{ route('sinh_vien.xu_ly_cap_nhat', $sinhvien->ma_sinh_vien) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('sinh_vien.xoa', $sinhvien->ma_sinh_vien) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"><i class="fa fa-times"></i></button>
-                                        </form>
-                                    </div>
+                                            <div class="form-button-action">
+                                                    <a href="{{ route('sinh_vien.cap_nhat', $sinhvien->ma_sinh_vien) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <form >
+                                                     
+                                                        <button type="submit" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"><i class="fa fa-times"></i></button>
+                                                    </form>
+                                            </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         @else

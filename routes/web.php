@@ -62,14 +62,23 @@ Route::get('/sinh-vien/trang-chu', [SinhVienController::class, 'trangChu'])->nam
 Route::get('/sinh-vien/danh-sach', [SinhVienController::class, 'danhSachSinhVien'])->name('sinh_vien.danh_sach');
 Route::get('/sinh-vien/them', [SinhVienController::class, 'themSinhVien'])->name('sinh_vien.them');
 Route::post('/sinh-vien/xu-ly-them', [SinhVienController::class, 'xuLyThemSinhVien'])->name('sinh_vien.xu_ly_them');
-Route::get('/sinh-vien/cap-nhat', [SinhVienController::class, 'capNhatSinhVien'])->name('sinh_vien.cap_nhat');
-Route::put('/sinh-vien/xu-ly/cap-nhat/{MSSV}', [SinhVienController::class, 'xuLyCapNhatSinhVien'])->name('sinh_vien.xu_ly_cap_nhat');
-Route::delete('/sinh-vien/xoa/{MSSV}', [SinhVienController::class, 'xoaSinhVien'])->name('sinh_vien.xoa');
 
+
+
+Route::get('sinh-vien/cap-nhat/{ma_sinh_vien}', [SinhVienController::class, 'capNhatSinhVien'])->name('sinh_vien.cap_nhat');
+Route::put('sinh-vien/xu-ly-cap-nhat/{ma_sinh_vien}', [SinhVienController::class, 'xuLyCapNhatSinhVien'])->name('sinh_vien.xu_ly_cap_nhat');
+Route::delete('/sinh-vien/xoa/{ma_sinh_vien}', [SinhVienController::class, 'xoaSinhVien'])->name('sinh_vien.xoa');
 Route::get('/sinh-vien/tim-kiem', [SinhVienController::class, 'timKiem'])->name('sinh_vien.tim_kiem');
 
+
+
 Route::get('/giao-vien/trang-chu', [GiaoVienController::class, 'trangChu'])->name('giao_vien.trang_chu');
-Route::get('/giao-vien/danh-sach', [GiaoVienController::class, 'danhSachGiaoVien'])->name('giao_vien.danh_sach');
+Route::get('/giao-vien/danh-sach', [GiaoVienController::class, 'danhSach'])->name('giao_vien.danh_sach');
+Route::get('/giao-vien/them', [GiaoVienController::class, 'Them'])->name('giao_vien.them');
+Route::post('/giao-vien/them', [GiaoVienController::class, 'xuLyThem'])->name('giao_vien.xu_ly_them');
+
+
+Route::get('/khoa/danh-sach', [KhoaDaoTaoController::class, 'danhSach'])->name('khoa_dao_tao.danh_sach');
 
 Route::get('/tro-ly-khoa/trang-chu', [TroLyKhoaController::class, 'trangChu'])->name('tro_ly_khoa.trang_chu');
 Route::get('/tro-ly-khoa/danh-sach', [TroLyKhoaController::class, 'danhSachGiaoVien'])->name('tro_ly_khoa.danh_sach');

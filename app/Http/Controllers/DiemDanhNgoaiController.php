@@ -11,7 +11,7 @@ class DiemDanhNgoaiController extends Controller
     {
         $diemdanhngoais= DiemDanhNgoai::all();
         $diemdanhngoais =DiemDanhNgoai::paginate(5);
-        return view('diem-danh-ngoai.danh_sach_diem_danh', compact('diemdanhngoais'));
+        return view('diem-danh-ngoai.danh_sach', compact('diemdanhngoais'));
        
 
     }

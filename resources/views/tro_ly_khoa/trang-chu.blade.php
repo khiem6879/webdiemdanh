@@ -59,14 +59,14 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#tables">
                 <i class="fas fa-table"></i>
-                <p>Tables</p>
+                <p>Khoa dao tao</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="tables">
                 <ul class="nav nav-collapse">
                     <li>
                         <a href="tables/tables.html">
-                            <span class="sub-item">Basic Table</span>
+                            <span class="sub-item">Danh sach khoa</span>
                         </a>
                     </li>
                     <li>
