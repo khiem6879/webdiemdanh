@@ -34,9 +34,7 @@ class GiaoVienController extends Authenticatable
         }
         $giaovien = new GiaoVien;
         $giaovien->email = $request->email;
-        
         $giaovien->ho_ten = $request->ho_ten;
-        
         $giaovien->mat_khau = Hash::make($request->mat_khau);
         $giaovien->ten_khoa = $request->ten_khoa;
         $giaovien->ngay_sinh = $request->ngay_sinh;
@@ -47,5 +45,32 @@ class GiaoVienController extends Authenticatable
 
         return redirect()->route('giao_vien.danh_sach');
     }
+    public function capNhat($email) {
+        $giao_vien = GiaoVien::find($email);
+        return view('giao_vien.cap_nhat', compact('giao_vien'));
+    }
+    
+    public function xuLyCapNhat(Request $request, $email)
+    {
+        $giao_vien = GiaoVien::find($email);
+        if ($giao_vien) {
+            $giao_vien->email = $request->input('ma_sinh_vien');
+            $$giao_vien->ho_ten = $request->input('ho_ten');
+            $giao_vien->mat_khau = bcrypt($request->input('mat_khau'));
+            $giaovien->ten_khoa = $request->input('ten_khoa');
+            $giao_vien->ngay_sinh = $request->input('ngay_sinh');
+            $giao_vien->so_dien_thoai = $request->input('so_dien_thoai');
+            $giao_vien->so_cccd = $request->input('so_cccd');
+            $giao_vien->email = $request->input('email');
+          
+            $giao_vien->dia_chi = $request->input('dia_chi');
+    
+           $sinh_vien->update($request->all());
+    return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Cập nhật thành công!');
+        }
+    
+        return redirect()->back()->with('error', 'Sinh viên không tồn tại.');
+    }
+    
 
 }

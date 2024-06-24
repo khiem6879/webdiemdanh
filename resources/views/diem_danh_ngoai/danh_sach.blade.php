@@ -21,22 +21,18 @@
                 <table id="add-row" class="display table table-striped table-hover">
                     <thead>
                         <tr>
-                         
-                            
                             <th>Mã ĐIỂM DANH</th>
                             <th>MÃ QR</th>
                             <th>GIÁO VIÊN</th>
                             <th>THỜI GIAN QR</th>
                             <th>NGÀY</th>
                             <th>SỐ LƯỢNG</th>
-                            
                             <th style="width: 10%">THAO TÁC</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($diemdanhngoais as $diemdanhngoai)
                             <tr>
-                             
                                 <td>{{ $diemdanhngoai->ma_diem_danh}}</td>
                                 <td>{{ $diemdanhngoai->ma_qr }}</td>
                                 <td>{{ $diemdanhngoai->giao_vien_email }}</td>
