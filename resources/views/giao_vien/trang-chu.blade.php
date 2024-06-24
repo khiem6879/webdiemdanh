@@ -1,4 +1,4 @@
-@extends('Trang-chu')
+@extends($layout)
 @section('trangchu')
 <div class="sidebar-content">
     <ul class="nav nav-secondary">
