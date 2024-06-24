@@ -12,6 +12,7 @@
   }
 @endphp
 
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -286,6 +287,8 @@
       fillColor: "rgba(255, 165, 52, .14)",
     });
   </script>
+  
+  @yield('scripts')
 </body>
 
 </html>

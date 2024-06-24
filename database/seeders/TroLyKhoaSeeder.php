@@ -15,7 +15,7 @@ class TroLyKhoaSeeder extends Seeder
     {
         $troLyKhoas = [
             [
-                'email' => 'tl1',
+                'email' => 'tl1@gmail.com',
                 'ho_ten' => 'TroLyKhoa1',
                 'mat_khau' => Hash::make('123'),
                 'khoa_id' => '1',
@@ -24,7 +24,7 @@ class TroLyKhoaSeeder extends Seeder
                 'avt' => 'avt1.png',
             ],
             [
-                'email' => 'tl2',
+                'email' => 'tl2@gmail.com',
                 'ho_ten' => 'TroLyKhoa2',
                 'mat_khau' => Hash::make('123'),
                 'khoa_id' => '2',
@@ -33,7 +33,7 @@ class TroLyKhoaSeeder extends Seeder
                 'avt' => 'avt2.png',
             ],
             [
-                'email' => 'tl3',
+                'email' => 'tl3@gmail.com',
                 'ho_ten' => 'TroLyKhoa3',
                 'mat_khau' => Hash::make('123'),
                 'khoa_id' => '3',
@@ -42,7 +42,7 @@ class TroLyKhoaSeeder extends Seeder
                 'avt' => 'avt3.png',
             ],
             [
-                'email' => 'tl4',
+                'email' => 'tl4@gmail.com',
                 'ho_ten' => 'TroLyKhoa4',
                 'mat_khau' => Hash::make('123'),
                 'khoa_id' => '4',

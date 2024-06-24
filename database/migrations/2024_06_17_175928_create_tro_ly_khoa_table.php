@@ -16,7 +16,6 @@ return new class extends Migration
             $table->integer('khoa_id')->unsigned();
             $table->string('ho_ten', 40);
             $table->string('mat_khau', 255);
-            $table->integer('khoa_id')->unsigned();
             $table->string('so_dien_thoai', 11);
             $table->string('thoi_gian_dang_nhap_cuoi');
             $table->string('avt');

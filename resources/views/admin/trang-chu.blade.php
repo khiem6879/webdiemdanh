@@ -17,24 +17,19 @@
             <span class="sidebar-mini-icon">
                 <i class="fa fa-ellipsis-h"></i>
             </span>
-            <h4 class="text-section">Components</h4>
+            <h4 class="text-section">QUẢN LÝ</h4>
         </li>
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">
                 <i class="fas fa-th-list"></i>
-                <p>ADMIN</p>
+                <p>TRỢ LÝ KHOA</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="sidebarLayouts">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="sidebar-style-2.html">
-                            <span class="sub-item">Sidebar Style 2</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="icon-menu.html">
-                            <span class="sub-item">Icon Menu</span>
+                        <a href="/admin/tro-ly-khoa/danh-sach">
+                            <span class="sub-item">DANH SÁCH</span>
                         </a>
                     </li>
                 </ul>
@@ -43,14 +38,14 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#forms">
                 <i class="fas fa-pen-square"></i>
-                <p>ĐIỂM DANH </p>
+                <p>GIÁO VIÊN </p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="forms">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="">
-                            <span class="sub-item">Điểm danh ngoài</span>
+                        <a href="/admin/giao-vien/danh-sach">
+                            <span class="sub-item">DANH SÁCH</span>
                         </a>
                     </li>
                 </ul>
@@ -59,14 +54,14 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#tables">
                 <i class="fas fa-table"></i>
-                <p>Tables</p>
+                <p>SINH VIÊN</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="tables">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="tables/tables.html">
-                            <span class="sub-item">Basic Table</span>
+                        <a href="/admin/sinh-vien/danh-sach">
+                            <span class="sub-item">DANH SÁCH</span>
                         </a>
                     </li>
                     <li>
@@ -80,35 +75,31 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#giaovien">
                 <i class="fas fa-table"></i>
-                <p>GIÁO VIÊN</p>
+                <p>LỚP SINH VIÊN</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="giaovien">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="giao-vien/trang-chu">
-                            <span class="sub-item">Trang Chủ</span>
+                        <a href="/admin/lop-sinh-vien/danh-sach">
+                            <span class="sub-item">DANH SÁCH</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="maps/jsvectormap.html">
-                            <span class="sub-item">Jsvectormap</span>
-                        </a>
-                    </li>
+                    
                 </ul>
             </div>
         </li>
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#trolykhoa">
                 <i class="fas fa-table"></i>
-                <p>TRỢ LÝ KHOA</p>
+                <p>LỚP HỌC PHẦN</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="trolykhoa">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="tro-ly-khoa/trang-chu">
-                            <span class="sub-item">Trang Chủ</span>
+                        <a href="/admin/lop-hoc-phan/danh-sach">
+                            <span class="sub-item">DANH SÁCH</span>
                         </a>
                     </li>
                     <li>

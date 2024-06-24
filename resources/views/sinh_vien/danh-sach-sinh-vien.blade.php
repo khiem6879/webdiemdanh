@@ -1,4 +1,4 @@
-@extends('sinh_vien.trang-chu')
+@extends($layout)
 @section('content')
 <div class="col-md-12">
     <div class="card">
@@ -76,6 +76,9 @@
             <div class="d-flex justify-content-right">
                 {{ $sinhviens->appends(request()->query())->links('pagination::bootstrap-4') }}
             </div>
+
+
+
         </div>
     </div>
 </div>
@@ -107,7 +110,7 @@
                 success: function(data) {
                     $('#sinhvien-table').html(data);
                 }
-            });
+            });z
         });
     });
 </script>

@@ -12,17 +12,8 @@
 </head>
 
 <body>
-
-    <!----------------------- Main Container -------------------------->
-
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
-
-        <!----------------------- Login Container -------------------------->
-
         <div class="row border rounded-5 p-3 bg-white shadow box-area">
-
-            <!--------------------------- Left Box ----------------------------->
-
             <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
                 style="background: #103cbe;">
                 <div class="featured-image mb-3">
@@ -34,9 +25,7 @@
                     style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Cao Đẳng Kỹ Thuật Cao
                     Thắng</small>
             </div>
-
-            <!-------------------- ------ Right Box ---------------------------->
-            <form action="themtaikhoanGiaoVien" id="form-login" method="post">
+            <form action="{{ route('xu_ly_dang_ky') }}" method="post">
                 @csrf
                 <div class="col-md-6 right-box">
                     <div class="row align-items-center">
@@ -46,42 +35,69 @@
                         <div class="input-group mb-3">
                             <input type="text" class="form-control form-control-lg bg-light fs-6" name="ho_ten"
                                 placeholder="Họ Tên">
+                            @error('ho_ten')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control form-control-lg bg-light fs-6" name="email"
                                 placeholder="Tên đăng nhập dạng email">
+                            @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="input-group mb-3">
                             <input type="password" class="form-control form-control-lg bg-light fs-6" name="mat_khau"
                                 placeholder="Mật Khẩu">
                             <span class="toggle-password" onclick="togglePassword(this)">👁️</span>
+                            @error('mat_khau')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="input-group mb-3">
                             <input type="password" class="form-control form-control-lg bg-light fs-6"
                                 name="xac_nhan_mat_khau" placeholder="Xác Nhận Mật Khẩu">
                             <span class="toggle-password" onclick="togglePassword(this)">👁️</span>
+                            @error('xac_nhan_mat_khau')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="input-group mb-3">
                             <input type="date" class="form-control form-control-lg bg-light fs-6" name="ngay_sinh">
+                            @error('ngay_sinh')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control form-control-lg bg-light fs-6" name="so_dien_thoai"
                                 placeholder="Số Điện Thoại">
+                            @error('so_dien_thoai')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control form-control-lg bg-light fs-6" name="ma_sinh_vien"
                                 placeholder="Mã Sinh Viên">
+                            @error('ma_sinh_vien')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control form-control-lg bg-light fs-6" name="lop"
-                                placeholder="Lớp">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" name="so_cccd"
+                                placeholder="Số Căn Cước Công Dân">
+                            @error('so_cccd')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" name="dia_chi"
+                                placeholder="Địa Chỉ">
+                            @error('dia_chi')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="input-group mb-3">
                             <button class="btn btn-lg btn-primary w-100 fs-6">Đăng Ký</button>
-                        </div>
-                        <div class="input-group mb-3">
-                            <button class="btn btn-lg btn-light w-100 fs-6"><img src="/images/google.png"
-                                    style="width:20px" class="me-2"><small>Đăng nhập với Google</small></button>
                         </div>
                         <div class="row">
                             <small>Bạn đã có tài khoản? <a href="{{route('DangNhap')}}">Đăng Nhập</a></small>

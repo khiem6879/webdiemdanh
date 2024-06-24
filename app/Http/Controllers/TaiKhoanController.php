@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DangKyRequest;
+use App\Http\Requests\DoiMatKhauRequest;
+use App\Http\Requests\CapNhatTaiKhoanRequest;
 use Illuminate\Http\Request;
 use App\Models\GiaoVien;
 use App\Models\SinhVien;
@@ -56,34 +59,29 @@ class TaiKhoanController extends Controller
   {
     $user = null;
     $role = session('user_role');
-    $layout = 'trang-chu'; // Bố cục mặc định
 
     if ($role === 'sinh_vien') {
       $user = Auth::guard('sinh_vien')->user();
-      $layout = 'sinh_vien.trang-chu';
     } elseif ($role === 'giao_vien') {
       $user = Auth::guard('giao_vien')->user();
-      $layout = 'giao_vien.trang-chu';
     } elseif ($role === 'admin') {
       $user = Auth::guard('admin')->user();
-      $layout = 'admin.trang-chu';
     } elseif ($role === 'tro_ly_khoa') {
       $user = Auth::guard('tro_ly_khoa')->user();
-      $layout = 'tro_ly_khoa.trang-chu';
     }
 
     if (!$user) {
       return redirect()->route('DangNhap')->with('thong_bao', 'Vui lòng đăng nhập để tiếp tục.');
     }
 
-    return compact('user', 'role', 'layout');
+    return compact('user', 'role',);
   }
 
   public function thongtinTaiKhoan()
   {
-    
+
     $data = $this->layThongTinNguoiDung();
-    
+
     if ($data['user']) {
       return view('tai_khoan.thong-tin-tai-khoan', $data);
     } else {
@@ -93,10 +91,7 @@ class TaiKhoanController extends Controller
 
 
 
-  public function dangKy()
-  {
-    return View('tai_khoan/dang-ky');
-  }
+
   public function suaTaiKhoan()
   {
 
@@ -113,7 +108,7 @@ class TaiKhoanController extends Controller
   {
     $user = null;
     $role = session('user_role');
-
+    // dd($role);
     if ($role === 'sinh_vien') {
       $user = Auth::guard('sinh_vien')->user();
       $user->update($request->all());
@@ -125,27 +120,36 @@ class TaiKhoanController extends Controller
       $user->update($request->all());
     } elseif ($role === 'tro_ly_khoa') {
       $user = Auth::guard('tro_ly_khoa')->user();
+      // dd($request->all());
       $user->update($request->all());
     }
+
 
     return redirect()->route('tai_khoan.thong-tin-tai-khoan')->with('thong_bao', 'Cập nhật thông tin thành công.');
   }
 
-
-  public function themtaikhoanGiaoVien(Request $request)
+  public function dangKy()
   {
-
-    $dsGV = new GiaoVien();
-
-    $dsGV->email = $request->email;
-    $dsGV->mat_khau = Hash::make($request->mat_khau); // Hash mật khẩu  
-
-    $dsGV->save();
-    return redirect()->route('DangNhap')->with('thong_bao', 'TẠO TÀI KHOẢN THÀNH CÔNG');
-
-
-
+    return View('tai_khoan/dang-ky');
   }
+  public function xulyDangKy(DangKyRequest $request)
+  {
+    if ($request->mat_khau === $request->xac_nhan_mat_khau) {
+      $dsSV = new SinhVien();
+      $dsSV->ma_sinh_vien = $request->ma_sinh_vien;
+      $dsSV->ho_ten = $request->ho_ten;
+      $dsSV->ngay_sinh = $request->ngay_sinh;
+      $dsSV->dia_chi = $request->dia_chi;
+      $dsSV->so_cccd = $request->so_cccd;
+      $dsSV->email = $request->email;
+      $dsSV->so_dien_thoai = $request->so_dien_thoai;
+      $dsSV->mat_khau = Hash::make($request->mat_khau); // Hash mật khẩu  
+      $dsSV->save();
+      return redirect()->route('DangNhap')->with('thong_bao', 'TẠO TÀI KHOẢN THÀNH CÔNG');
+    }
+    return redirect()->route('DangKy')->with('thong_bao', 'TẠO TÀI KHOẢN KHÔNG THÀNH CÔNG');
+  }
+
   public function hienThiDoiMatKhau()
   {
     $data = $this->layThongTinNguoiDung();
@@ -158,7 +162,7 @@ class TaiKhoanController extends Controller
     }
   }
 
-  public function doiMatKhau(Request $request)
+  public function doiMatKhau(DoiMatKhauRequest $request)
   {
 
     $data = $this->layThongTinNguoiDung();

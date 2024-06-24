@@ -1,12 +1,7 @@
-@extends('tro_ly_khoa.trang-chu')
+@extends($layout)
 @section('content')
 <div class="container">
     <h1>Danh sách Lớp Học Phần</h1>
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
     <table class="table table-bordered">
         <thead>
             <tr>

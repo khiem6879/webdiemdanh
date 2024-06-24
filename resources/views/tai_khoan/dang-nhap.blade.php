@@ -63,10 +63,10 @@
                         <div class="input-group mb-3">
                             <button class="btn btn-lg btn-primary w-100 fs-6">Đăng Nhập</button>
                         </div>
-                        <div class="input-group mb-3">
+                        <!-- <div class="input-group mb-3">
                             <button class="btn btn-lg btn-light w-100 fs-6"><img src="/images/google.png"
                                     style="width:20px" class="me-2"><small>Đăng nhập với Google</small></button>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <small>Bạn chưa có tài khoản? <a href="{{route('DangKy')}}">Đăng Kí</a></small>
                         </div>

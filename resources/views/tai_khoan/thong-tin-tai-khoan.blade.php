@@ -54,7 +54,7 @@
             </tr>
             <tr>
                 <th>CCCD</th>
-                <td>{{ $user->cccd }}</td>
+                <td>{{ $user->so_cccd }}</td>
             </tr>
             <tr>
                 <th>Khoa</th>
@@ -89,4 +89,7 @@
         <i class="fas fa-key"></i> Đổi Mật Khẩu
     </a>
 </div>
+@if (session('thong_bao'))
+        <script>Swal.fire("{{ session('thong_bao') }}")</script>
+@endif
 @endsection
