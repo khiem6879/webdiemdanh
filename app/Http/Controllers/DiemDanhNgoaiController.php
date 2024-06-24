@@ -9,7 +9,10 @@ class DiemDanhNgoaiController extends Controller
 {
     public function danhSach()
     {
-        return view ('diem_danh_ngoai.danh-sach-diem-danh');
+        $diemdanhngoais= DiemDanhNgoai::all();
+        $diemdanhngoais =DiemDanhNgoai::paginate(5);
+        return view('diem-danh-ngoai.danh_sach', compact('diemdanhngoais'));
+       
 
     }
     

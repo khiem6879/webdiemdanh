@@ -37,6 +37,7 @@
                             <span class="sub-item">Thêm mới</span>
                         </a>
                     </li>
+                    
                 </ul>
             </div>
         </li>
@@ -80,7 +81,7 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#giaovien">
                 <i class="fas fa-table"></i>
-                <p>GIÁO VIÊN</p>
+                <p>Trong</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="giaovien">
@@ -101,7 +102,7 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#trolykhoa">
                 <i class="fas fa-table"></i>
-                <p>TRỢ LÝ KHOA</p>
+                <p>Trong</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="trolykhoa">

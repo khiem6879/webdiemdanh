@@ -8,7 +8,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TroLyKhoaController;
 use App\Http\Controllers\LopHocPhanController;
 use App\Http\Controllers\LopSinhVienController;
+
+use App\Http\Controllers\KhoaDaoTaoController;
+
 use App\Http\Controllers\DiemDanhNgoaiController;
+
 /*
 
 |--------------------------------------------------------------------------
@@ -49,19 +53,14 @@ Route::middleware(['auth:giao_vien', 'checkRole:giao_vien'])->group(function () 
 });
 
 Route::middleware(['auth:admin', 'checkRole:admin'])->group(function () {
-    Route::get('/admin/trang-chu', [AdminController::class, 'trangChu'])->name('admin.trang_chu');
-    Route::get('/admin/lop-sinh-vien/danh-sach', [LopSinhVienController::class, 'danhSach'])->name('lop_sinh_vien.danh_sach');
-
     Route::get('/admin/sinh-vien/danh-sach', [SinhVienController::class, 'danhSachSinhVien'])->name('sinh_vien.danh_sach');
-    Route::get('admin/giao-vien/danh-sach', [GiaoVienController::class, 'danhSach'])->name('giao_vien.danh_sach');
+    Route::get('/admin/trang-chu', [AdminController::class, 'trangChu'])->name('admin.trang_chu');
     Route::get('/admin/tro-ly-khoa/danh-sach', [TroLyKhoaController::class, 'danhSach'])->name('tro_ly_khoa.danh_sach');
-    Route::get('/admin/lop-hoc-phan/danh-sach', [LopHocPhanController::class, 'danhSach'])->name('lop_hoc_phan.danh_sach');
 });
 
 Route::middleware(['auth:tro_ly_khoa', 'checkRole:tro_ly_khoa'])->group(function () {
-    Route::get('/tro-ly-khoa/trang-chu', [TroLyKhoaController::class, 'trangChu'])->name('tro_ly_khoa.trang_chu');
-
-    Route::get('/lop-hoc-phan/them', [LopHocPhanController::class, 'themLopHocPhan'])->name('lop_hoc_phan.them');
+    
+   
     Route::post('/lop-hoc-phan/xu-ly-them', [LopHocPhanController::class, 'xulythemLopHocPhan'])->name('lop_hoc_phan.xu_ly_them');
   
     
@@ -70,6 +69,7 @@ Route::middleware(['auth:tro_ly_khoa', 'checkRole:tro_ly_khoa'])->group(function
 
 
 
+Route::get('/admin/trang-chu', [AdminController::class, 'trangChu'])->name('admin.trang_chu');
 
 
 Route::get('/sinhvien/trangchu', [SinhVienController::class, 'trangChu'])->name('sinh_vien.trang_chu');
@@ -81,8 +81,22 @@ Route::delete('/sinh-vien/xoa/{MSSV}', [SinhVienController::class, 'xoaSinhVien'
 Route::put('/sinhvien/xuly/capnhat/{MSSV}', [SinhVienController::class, 'xuLyCapNhatSinhVien'])->name('sinh_vien.xu_ly_cap_nhat');
 
 
-Route::get('/tai-khoan/sua', [TaiKhoanController::class, 'suaTaiKhoan'])->name('tai_khoan.sua');
-Route::post('/tai-khoan/su-ly-sua', [TaiKhoanController::class, 'xulysuaTaiKhoan'])->name('tai_khoan.xu_ly_sua');
 
 
 Route::get('/sinh-vien/tim-kiem', [SinhVienController::class, 'timKiem'])->name('sinh_vien.tim_kiem');
+
+
+
+Route::get('/giao-vien/trang-chu', [GiaoVienController::class, 'trangChu'])->name('giao_vien.trang_chu');
+Route::get('/giao-vien/danh-sach', [GiaoVienController::class, 'danhSach'])->name('giao_vien.danh_sach');
+Route::get('/giao-vien/them', [GiaoVienController::class, 'Them'])->name('giao_vien.them');
+Route::post('/giao-vien/them', [GiaoVienController::class, 'xuLyThem'])->name('giao_vien.xu_ly_them');
+
+
+Route::get('/khoa/danh-sach', [KhoaDaoTaoController::class, 'danhSach'])->name('khoa_dao_tao.danh_sach');
+
+Route::get('/tro-ly-khoa/trang-chu', [TroLyKhoaController::class, 'trangChu'])->name('tro_ly_khoa.trang_chu');
+Route::get('/tro-ly-khoa/danh-sach', [TroLyKhoaController::class, 'danhSachGiaoVien'])->name('tro_ly_khoa.danh_sach');
+
+Route::get('/diem-danh-ngoai/danh-sach',[DiemDanhNgoaiController::class,'danhSach'])->name('diem-danh-ngoai.danh_sach');
+
