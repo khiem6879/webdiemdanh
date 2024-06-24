@@ -37,7 +37,7 @@ class GiaoVienSeeder extends Seeder
             $ho_ten = $teacherData['name'];
             $ngay_sinh = '2003-10-22';
             $dia_chi = 'hcm';
-            $cccd = '1233333';
+            $so_cccd = '1233333';
             $so_dien_thoai = '111111';
             $email = $teacherData['name'] . '@gmail.com';
             $mat_khau = Hash::make('123');
@@ -47,7 +47,7 @@ class GiaoVienSeeder extends Seeder
                 'ho_ten' => $ho_ten,
                 'ngay_sinh' => $ngay_sinh,
                 'dia_chi' => $dia_chi,
-                'cccd' => $cccd,
+                'so_cccd' => $so_cccd,
                 'so_dien_thoai' => $so_dien_thoai,
                 'email' => $email,
                 'mat_khau' => $mat_khau,

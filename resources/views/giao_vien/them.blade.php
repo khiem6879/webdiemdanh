@@ -1,4 +1,4 @@
-@extends('sinh_vien.trang-chu')
+@extends($layout)
 
 @section('content')
 <form action="{{ route('giao_vien.xu_ly_them') }}" method="POST">

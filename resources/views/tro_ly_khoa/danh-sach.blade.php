@@ -5,8 +5,8 @@
     <table class="table">
         <thead>
             <tr>
+            <th>Ảnh đại diện</th>
                 <th>Tên</th>
-                <th>Ảnh đại diện</th>
                 <th>Email</th>
                 <th>Khoa</th>
                 <th>Mật khẩu</th>
@@ -17,8 +17,8 @@
         <tbody>
             @foreach($troLyKhoas as $tlk)
                 <tr>
+                <td>{{ $tlk->avt }}</td>
                     <td>{{ $tlk->ho_ten }}</td>
-                    <td></td>
                     <td>{{ $tlk->email }}</td>
                     <td>{{ $tlk->khoa->ten_khoa }}</td> 
                     <td>
@@ -27,7 +27,7 @@
                             {{ substr($tlk->mat_khau, 0, 8) }}...
                         </span>
                     </td>
-                    <td>{{ $tlk->sdt }}</td>
+                    <td>{{ $tlk->so_dien_thoai }}</td>
                     <td>{{ $tlk->thoi_gian_dang_nhap_cuoi }}</td>
             @endforeach
         </tbody>

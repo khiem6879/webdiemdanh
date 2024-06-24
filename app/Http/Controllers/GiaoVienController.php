@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\GiaoVien;
-use App\Models\KhoaDaoTao;
-use Illuminate\Support\Facades\Hash; // Thêm dòng này
 class GiaoVienController extends Authenticatable
 {
     public function trangChu()
     {
         return View('giao_vien/trang-chu');
     }
+<<<<<<< HEAD
     
     public function danhSach()
     {
@@ -44,6 +43,11 @@ class GiaoVienController extends Authenticatable
         $giaovien->save();
 
         return redirect()->route('giao_vien.danh_sach');
+=======
+    public function danhSachGiaoVien(){
+        $giaoviens= GiaoVien::all();
+        return view('giao_vien.danh-sach-giao-vien', compact('giaoviens'));
+>>>>>>> d902fc7b38f83ce23ee0332087db444a13623a2c
     }
     public function capNhat($email) {
         $giao_vien = GiaoVien::find($email);
