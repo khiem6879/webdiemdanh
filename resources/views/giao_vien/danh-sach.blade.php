@@ -42,17 +42,16 @@
                             <td>{{ $giaovien->ho_ten }}</td>
                             <td>{{ $giaovien->email }}</td>
                             <td>{{ $giaovien->mat_khau }}</td>
-                            <td>{{ $giaovien->khoa->ten_khoa }}</td>
-                            
+                            <td>{{ $giaovien->khoa->ten_khoa }}</td> <!-- Display department name here -->
                             <td>{{ $giaovien->ngay_sinh }}</td>
                             <td>{{ $giaovien->so_dien_thoai }}</td>
                             <td>{{ $giaovien->so_cccd }}</td>
                             <td>{{ $giaovien->dia_chi }}</td>
                             <td>
-                            <div class="form-button-action">
-                                                    <a href="{{ route('giao_vien.sua', $giaovien->email) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
+                                <div class="form-button-action">
+                                    <a class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
                                     <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
                                         <i class="fa fa-times"></i>
                                     </button>
@@ -72,22 +71,22 @@
 </div>
 </div>
 
-<style>
-.table th, .table td {
-    vertical-align: middle;
-    text-align: center;
-    white-space: nowrap; /* Prevent line breaks */
-}
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    function togglePassword(id, password) {
-        var passwordField = document.getElementById('password-' + id);
-        if (passwordField.innerText === password) {
-            passwordField.innerText = password.substring(0, 8) + '...';
-        } else {
-            passwordField.innerText = password;
-        }
+    <style>
+    .table th, .table td {
+        vertical-align: middle;
+        text-align: center;
+        white-space: nowrap; /* Prevent line breaks */
     }
-</script>
-@endsection
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function togglePassword(id, password) {
+            var passwordField = document.getElementById('password-' + id);
+            if (passwordField.innerText === password) {
+                passwordField.innerText = password.substring(0, 8) + '...';
+            } else {
+                passwordField.innerText = password;
+            }
+        }
+    </script>
+    @endsection

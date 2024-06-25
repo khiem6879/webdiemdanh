@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\GiaoVien;
 use App\Models\KhoaDaoTao;
 
+
 class GiaoVienController extends Authenticatable
 {
     public function trangChu()
@@ -47,6 +48,13 @@ class GiaoVienController extends Authenticatable
     $giaovien->save();
 
     return redirect()->route('giao_vien.danh_sach');
+
+        return redirect()->route('giao_vien.danh_sach');
+    }
+    public function danhSachGiaoVien(){
+        $giaoviens= GiaoVien::all();
+        return view('giao_vien.danh-sach-giao-vien', compact('giaoviens'));
+
     }
 
 
@@ -67,6 +75,17 @@ class GiaoVienController extends Authenticatable
         $giao_vien->ho_ten = $request->input('ho_ten');
         if ($request->filled('mat_khau')) {
             $giao_vien->mat_khau = bcrypt($request->input('mat_khau'));
+            $giao_vien->ten_khoa = $request->input('ten_khoa');
+            $giao_vien->ngay_sinh = $request->input('ngay_sinh');
+            $giao_vien->so_dien_thoai = $request->input('so_dien_thoai');
+            $giao_vien->so_cccd = $request->input('so_cccd');
+            $giao_vien->email = $request->input('email');
+          
+            $giao_vien->dia_chi = $request->input('dia_chi');
+    
+           $giao_vien->update($request->all());
+    return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Cập nhật thành công!');
+
         }
         $giao_vien->khoa_id = $request->input('khoa_id');
         $giao_vien->ngay_sinh = $request->input('ngay_sinh');

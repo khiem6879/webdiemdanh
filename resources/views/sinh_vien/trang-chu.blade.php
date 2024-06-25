@@ -28,7 +28,7 @@
             <div class="collapse" id="sidebarLayouts">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="{{ route('sinh_vien.danh_sach') }}">
+                        <a href="">
                             <span class="sub-item">Danh sách sinh viên</span>
                         </a>
                     </li>

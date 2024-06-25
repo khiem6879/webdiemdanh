@@ -45,9 +45,10 @@ class LopSinhVien extends Model
         $this->attributes['sinh_vien_mssv'] = json_encode($value);
     }
 
+   
     public function sinhViens()
     {
-        return $this->hasMany(SinhVien::class, 'lop_id', 'ma_lop');
+        return $this->belongsToMany(SinhVien::class, 'lop_sinh_vien', 'ma_lop', 'ma_sinh_vien');
     }
 
 }

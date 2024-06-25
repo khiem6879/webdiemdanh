@@ -31,7 +31,9 @@ class GiaoVien extends Authenticatable
 
     public function khoa()
     {
-        return $this->belongsTo(KhoaDaoTao::class, 'khoa_id', 'khoa_id');
+        return $this->belongsTo(KhoaDaoTao::class, 'khoa_id');
     }
+   
+
 }
 

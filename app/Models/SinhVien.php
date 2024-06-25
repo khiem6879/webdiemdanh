@@ -31,7 +31,7 @@ class SinhVien extends Authenticatable
     }
     public function lopSinhVien()
     {
-        return $this->belongsTo(LopSinhVien::class, 'lop_id', 'ma_lop');
+        return $this->belongsToMany(LopSinhVien::class, 'lop_sinh_vien', 'ma_sinh_vien', 'ma_lop');
     }
  
 }

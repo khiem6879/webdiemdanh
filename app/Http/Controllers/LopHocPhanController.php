@@ -25,17 +25,10 @@ class LopHocPhanController extends Controller
         return view('lop_hoc_phan.danh-sach', compact('lopHocPhans'));
     }
 
-    // public function themLopHocPhan()
-    // {
-    //     $giaoViens = GiaoVien::all();
-    //     $lopSinhViens = LopSinhVien::all();
-    //     $sinhViens = SinhVien::all();
-    //     $khoaDaoTao = KhoaDaoTao::all();
-    //     return view('lop_hoc_phan.them', compact('giaoViens', 'sinhViens', 'khoaDaoTao', 'lopSinhViens'));
-    // }
-
     public function themLopHocPhan()
     {
+
+        $uniqueMaLop = generateUniqueMaLop(); // Gọi hàm để sinh mã lớp duy nhất
         $khoa_id = session('khoa_id');
         
         // Lấy giáo viên thuộc khoa đang đăng nhập
@@ -47,13 +40,13 @@ class LopHocPhanController extends Controller
         // Lấy tất cả sinh viên thuộc các lớp trong khoa
         $sinhViens = SinhVien::whereIn('ma_sinh_vien', $lopSinhViens->pluck('sinh_vien_mssv'))->get();
 
-        return view('lop_hoc_phan.them', compact('giaoViens', 'sinhViens', 'lopSinhViens'));
+        return view('lop_hoc_phan.them', compact('uniqueMaLop','giaoViens', 'sinhViens', 'lopSinhViens'));
     }
 
     public function xulythemLopHocPhan(Request $request)
     {
         $lopHocPhan = new LopHocPhan();
-        $lopHocPhan->ma_lop = $request->input('ma_lop');
+        $lopHocPhan->ma_lop = generateUniqueMaLop();
         $lopHocPhan->ten_lop = $request->input('ten_lop');
         $lopHocPhan->giao_vien_email = json_encode($request->input('giao_vien'));
         $lopHocPhan->sinh_vien_mssv = json_encode($request->input('sinh_vien'));
