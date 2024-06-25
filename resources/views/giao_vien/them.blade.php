@@ -16,13 +16,13 @@
         <div class="col-md-6">
             <div class="form-group mb-3">
                 <label class="form-label">Họ tên</label>
-                <input name="ho_ten" type="text" class="form-control" placeholder="Họ tên" value="{{ old('ho_ten') }}" required />
+                <input name="ho_ten" type="text" class="form-control" placeholder="Họ tên" required />
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group mb-3">
                 <label class="form-label">Email</label>
-                <input name="email" type="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required />
+                <input name="email" type="email" class="form-control" placeholder="Email" required />
             </div>
         </div>
         <div class="col-md-6">
@@ -36,7 +36,7 @@
                 <label class="form-label">Khoa</label>
                 <select name="khoa_id" class="form-control">
                     @foreach ($khoas as $khoa)
-                        <option value="{{ $khoa->khoa_id }}" {{ old('khoa_id') == $khoa->khoa_id ? 'selected' : '' }}>{{ $khoa->ten_khoa }}</option>
+                        <option value="{{ $khoa->khoa_id }}">{{ $khoa->ten_khoa }}</option>
                     @endforeach
                 </select>
             </div>
@@ -44,19 +44,19 @@
         <div class="col-md-6">
             <div class="form-group mb-3">
                 <label class="form-label">Ngày sinh</label>
-                <input name="ngay_sinh" type="date" class="form-control" value="{{ old('ngay_sinh') }}" required />
+                <input name="ngay_sinh" type="date" class="form-control"  required />
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group mb-3">
                 <label class="form-label">Số điện thoại</label>
-                <input name="so_dien_thoai" type="text" class="form-control" placeholder="Số điện thoại" value="{{ old('so_dien_thoai') }}" required />
+                <input name="so_dien_thoai" type="text" class="form-control" placeholder="Số điện thoại" required />
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group mb-3">
                 <label class="form-label">CCCD</label>
-                <input name="so_cccd" type="text" class="form-control" placeholder="CCCD" value="{{ old('so_cccd') }}" required />
+                <input name="so_cccd" type="text" class="form-control" placeholder="CCCD"  required />
             </div>
         </div>
         <div class="col-md-6">

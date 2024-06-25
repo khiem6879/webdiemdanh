@@ -57,7 +57,7 @@ class SinhVienController extends Authenticatable
                     <td>' . $sinhvien->dia_chi . '</td>
                     <td>
                         <div class="form-button-action">
-                            <a href="' . route('sinh_vien.cap_nhat', $sinhvien->ma_sinh_vien) . '" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
+                            <a href="' . route('sinh_vien.sua', $sinhvien->ma_sinh_vien) . '" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"><i class="fa fa-times"></i></button>
@@ -76,7 +76,7 @@ class SinhVienController extends Authenticatable
         return view('sinh_vien.them-sinh-vien');
     }
 
-    public function xuLyThemSinhVien(Request $request)
+    public function xuLyThem(Request $request)
     {
         $sinhvien = new SinhVien;
         $sinhvien->ma_sinh_vien = $request->ma_sinh_vien;
@@ -103,12 +103,12 @@ class SinhVienController extends Authenticatable
     }
    
   
-    public function capNhatSinhVien($ma_sinh_vien) {
+    public function sua($ma_sinh_vien) {
         $sinh_vien = SinhVien::find($ma_sinh_vien);
-        return view('sinh_vien.cap_nhat', compact('sinh_vien'));
+        return view('sinh_vien.cap-nhat', compact('sinh_vien'));
     }
     
-    public function xuLyCapNhatSinhVien(Request $request, $ma_sinh_vien)
+    public function xuLySua(Request $request, $ma_sinh_vien)
     {
         $sinh_vien = SinhVien::find($ma_sinh_vien);
         if ($sinh_vien) {
@@ -127,7 +127,19 @@ class SinhVienController extends Authenticatable
     
         return redirect()->back()->with('error', 'Sinh viên không tồn tại.');
     }
-    
+    public function xoa($ma_sinh_vien)
+{
+    $sinh_vien = SinhVien::find($ma_sinh_vien);
+    if ($sinh_vien) {
+        $sinh_vien->delete();
+        return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Xóa thành công!');
+    }
+    return redirect()->route('sinh_vien.danh_sach')->with('error', 'Sinh viên không tồn tại.');
+}public function xoaHet()
+{
+    SinhVien::truncate();
+    return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Đã xóa toàn bộ sinh viên.');
+}
 
 
 }

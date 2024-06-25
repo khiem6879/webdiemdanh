@@ -13,11 +13,12 @@ class TroLyKhoa extends Authenticatable
     protected $primaryKey = 'email';
     public $incrementing = false;
     protected $keyType = 'string';
+
     protected $fillable = [
         'ho_ten',
         'so_dien_thoai',
         'email',
-        'khoa_id ',
+        'khoa_id',
         'mat_khau',
         'thoi_gian_dang_nhap_cuoi',
         'avt',
@@ -27,8 +28,9 @@ class TroLyKhoa extends Authenticatable
     {
         return $this->mat_khau;
     }
+
     public function khoa()
     {
-        return $this->belongsTo(KhoaDaoTao::class, 'khoa_id');
+        return $this->belongsTo(KhoaDaoTao::class, 'khoa_id', 'khoa_id');
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('ngay_sinh');
             $table->string('mat_khau', 255);
             $table->string('so_dien_thoai', 11);
-            $table->string('so_cccd', 12);
+            $table->string('so_cccd', 12)->nullable(false);
             $table->string('dia_chi', 100);
             $table->integer('khoa_id')->unsigned();
             $table->timestamps();

@@ -1,4 +1,4 @@
-@extends($layout)
+@extends('trang-chu')
 @section('trangchu')
 <div class="sidebar-content">
     <ul class="nav nav-secondary">
@@ -136,22 +136,3 @@
 
 
 
-@section('content')
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    kkkkkkkkkkkkkkkkkk
-</body>
-
-</html>
-@if (session('thong_bao'))
-        <script>Swal.fire("{{ session('thong_bao') }}")</script>
-@endif
-@endsection

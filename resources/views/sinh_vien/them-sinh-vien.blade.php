@@ -1,8 +1,9 @@
 @extends('sinh_vien.trang-chu')
 
 @section('content')
-                <form id="addSinhVienForm" action="{{ route('sinh_vien.xu_ly_them') }}" method="POST">
+                <form  action="{{ route('sinh_vien.xu_ly_them') }}" method="POST">
                     @csrf
+                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mb-3">
