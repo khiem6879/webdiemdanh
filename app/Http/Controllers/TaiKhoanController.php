@@ -44,6 +44,7 @@ class TaiKhoanController extends Controller
     } elseif ($admin && Hash::check($rq->mat_khau, $admin->mat_khau)) {
       Auth::guard('admin')->login($admin);
       session(['user_role' => 'admin']);
+
       return redirect()->route('admin.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
     } elseif ($tro_ly_khoa && Hash::check($rq->mat_khau, $tro_ly_khoa->mat_khau)) {
       Auth::guard('tro_ly_khoa')->login($tro_ly_khoa);

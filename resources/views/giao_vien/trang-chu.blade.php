@@ -1,4 +1,4 @@
-@extends($layout)
+@extends('Trang-chu')
 @section('trangchu')
 <div class="sidebar-content">
     <ul class="nav nav-secondary">
@@ -17,24 +17,24 @@
             <span class="sidebar-mini-icon">
                 <i class="fa fa-ellipsis-h"></i>
             </span>
-            <h4 class="text-section">Components</h4>
+            <h4 class="text-section">QUẢN LÝ</h4>
         </li>
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">
                 <i class="fas fa-th-list"></i>
-                <p>Giáo Viên</p>
+                <p>LỚP SINH VIÊN</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="sidebarLayouts">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="{{ route('giao_vien.danh_sach') }}">
-                            <span class="sub-item">Danh sách giáo viên</span>
+                        <a href="/giao-vien/lop-sinh-vien/danh-sach">
+                            <span class="sub-item">DANH SÁCH</span>
                         </a>
                     </li>
                     <li>
-                        <a href="icon-menu.html">
-                            <span class="sub-item">Icon Menu</span>
+                        <a href="/giao-vien/lop-sinh-vien/them">
+                            <span class="sub-item">THÊM</span>
                         </a>
                     </li>
                 </ul>

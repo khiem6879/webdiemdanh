@@ -8,11 +8,11 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="ma_lop">Mã Lớp</label>
-                    <input type="text" class="form-control" id="ma_lop" name="ma_lop" value="{{ Str::random(6) }}" required>
+                    <input type="text" class="form-control" id="ma_lop" name="ma_lop" value="{{ $uniqueMaLop }}" required>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group">
+                <div class="form-group">    
                     <label for="ten_lop">Tên Lớp</label>
                     <input type="text" class="form-control" id="ten_lop" name="ten_lop" required>
                 </div>

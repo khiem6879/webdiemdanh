@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\GiaoVien;
+use App\Models\KhoaDaoTao;
+use Illuminate\Support\Facades\Hash;
 class GiaoVienController extends Authenticatable
 {
     public function trangChu()
     {
         return View('giao_vien/trang-chu');
     }
-<<<<<<< HEAD
     
     public function danhSach()
     {
@@ -43,11 +44,11 @@ class GiaoVienController extends Authenticatable
         $giaovien->save();
 
         return redirect()->route('giao_vien.danh_sach');
-=======
+    }
     public function danhSachGiaoVien(){
         $giaoviens= GiaoVien::all();
         return view('giao_vien.danh-sach-giao-vien', compact('giaoviens'));
->>>>>>> d902fc7b38f83ce23ee0332087db444a13623a2c
+
     }
     public function capNhat($email) {
         $giao_vien = GiaoVien::find($email);
@@ -61,7 +62,7 @@ class GiaoVienController extends Authenticatable
             $giao_vien->email = $request->input('ma_sinh_vien');
             $$giao_vien->ho_ten = $request->input('ho_ten');
             $giao_vien->mat_khau = bcrypt($request->input('mat_khau'));
-            $giaovien->ten_khoa = $request->input('ten_khoa');
+            $giao_vien->ten_khoa = $request->input('ten_khoa');
             $giao_vien->ngay_sinh = $request->input('ngay_sinh');
             $giao_vien->so_dien_thoai = $request->input('so_dien_thoai');
             $giao_vien->so_cccd = $request->input('so_cccd');
@@ -69,7 +70,7 @@ class GiaoVienController extends Authenticatable
           
             $giao_vien->dia_chi = $request->input('dia_chi');
     
-           $sinh_vien->update($request->all());
+           $giao_vien->update($request->all());
     return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Cập nhật thành công!');
         }
     

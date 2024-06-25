@@ -19,15 +19,12 @@ class RoleMiddleware
         if (!Auth::check()) {
             return redirect()->route('DangNhap');
         }
-     
         $user = Auth::user();
         $user_role = session('user_role');
         if (!in_array($user_role, $roles)) {
             // dd($user_role);  
             return redirect()->route('DangNhap')->with('thong_bao', 'Bạn không có quyền truy cập');
         }
- 
-
         return $next($request);
     }
     
