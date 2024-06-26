@@ -57,4 +57,14 @@ class LopHocPhanController extends Controller
 
     }
 
+    public function chiTiet($ma_lop)
+    {
+        $lopHocPhan = LopHocPhan::where('ma_lop', $ma_lop)->first();
+        $sinhvienIds = json_decode($lopHocPhan->sinh_vien_mssv, true);
+        $giaovienEmails = json_decode($lopHocPhan->giao_vien_email, true);
+
+        $students = SinhVien::whereIn('ma_sinh_vien', $sinhvienIds)->paginate(5);
+
+        return view('lop_hoc_phan.chi-tiet', compact('lopHocPhan', 'students', 'giaovienEmails'));
+    }
 }

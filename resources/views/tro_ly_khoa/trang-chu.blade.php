@@ -22,7 +22,7 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">
                 <i class="fas fa-th-list"></i>
-                <p>TRỢ LÝ KHOA</p>
+                <p>GIÁO VIÊN</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="sidebarLayouts">
@@ -43,14 +43,19 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#forms">
                 <i class="fas fa-pen-square"></i>
-                <p>Điểm danh</p>
+                <p>LỚP HỌC PHẦN</p>
                 <span class="caret"></span>
             </a>
             <div class="collapse" id="forms">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="{{ route('diem-danh-ngoai.danh_sach') }}">
-                            <span class="sub-item">Điểm danh ngoài</span>
+                        <a href="/tro_ly_khoa/lop-hoc-phan/danh-sach">
+                            <span class="sub-item">DANH SÁCH</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/tro_ly_khoa/lop-hoc-phan/them">
+                            <span class="sub-item">THÊM</span>
                         </a>
                     </li>
                 </ul>

@@ -17,9 +17,11 @@ return new class extends Migration
         $table->json('giao_vien_email')->nullable(); // Cột JSON để lưu danh sách email giáo viên
         $table->json('sinh_vien_mssv')->nullable(); // Cột JSON để lưu danh sách mã sinh viên
         $table->integer('khoa_id')->unsigned();
+        $table->string('ma_mon', 20);
         $table->timestamps();
 
         $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao');
+        $table->foreign('ma_mon')->references('ma_mon')->on('mon_hoc')->onDelete('cascade');
         });
     }
 

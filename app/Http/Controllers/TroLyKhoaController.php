@@ -3,23 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Facades\Hash;
 use App\Models\TroLyKhoa;
 use App\Models\KhoaDaoTao;
 
 class TroLyKhoaController extends Controller
 {
-    public function danhSach() {
+
+    public function trangChu()
+    {
+        return view('tro_ly_khoa.trang-chu');
+    }
+
+
+    public function danhSach()
+    {
         $trolykhoas = TroLyKhoa::with('khoa')->paginate(5);
         return view('tro_ly_khoa.danh-sach', compact('trolykhoas'));
     }
 
-    public function them() {
+    public function them()
+    {
         $khoas = KhoaDaoTao::all();
         return view('tro_ly_khoa.them', compact('khoas'));
     }
 
-    public function xuLyThem(Request $request) {
+    public function xuLyThem(Request $request)
+    {
         $troLyKhoa = new TroLyKhoa();
         $troLyKhoa->ho_ten = $request->input('ho_ten');
         $troLyKhoa->email = $request->input('email');
@@ -34,12 +44,12 @@ class TroLyKhoaController extends Controller
             $file->move(public_path('images'), $filename);
             $troLyKhoa->avt = $filename;
         } else {
-            $troLyKhoa->avt = 'default-avatar.png'; 
+            $troLyKhoa->avt = 'default-avatar.png';
         }
         // dd($request);
-    
+
         $troLyKhoa->save();
-    
+
         return redirect()->route('tro_ly_khoa.danh_sach')->with('thong_bao', 'Thêm mới Trợ lý Khoa thành công!');
     }
 }

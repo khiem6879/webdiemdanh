@@ -24,4 +24,8 @@ class LopHocPhan extends Model
     {
         return $this->belongsTo(KhoaDaoTao::class, 'khoa_id');
     }
+    public function monHoc()
+    {
+        return $this->belongsTo(MonHoc::class, 'ma_mon');
+    }
 }

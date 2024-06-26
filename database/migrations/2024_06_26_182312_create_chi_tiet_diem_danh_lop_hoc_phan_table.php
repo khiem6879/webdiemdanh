@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lop_sinh_vien', function (Blueprint $table) {
-            $table->string('ma_lop', 10)->primary();
-            $table->string('ten_lop', 20);
-            $table->string('giao_vien_email', 20);
+        Schema::create('chi_tiet_diem_danh_lop_hoc_phan', function (Blueprint $table) {
+            $table->string('ma_diem_danh', 10);
             $table->json('sinh_vien_mssv')->nullable(); // Cột JSON để lưu danh sách mã sinh viên
-            $table->integer('khoa_id')->unsigned();
+            $table->string('trang_thai', 10);
+            $table->dateTime('thoi_gian');
+            $table->string('vi_tri', 50);
             $table->timestamps();
-            
-            $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao');
-            $table->foreign('giao_vien_email')->references('email')->on('giao_vien');
+
+
+            $table->foreign('ma_diem_danh')->references('ma_diem_danh')->on('diem_danh_lop_hoc_phan')->onDelete('cascade');
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lop_sinh_vien');
+        Schema::dropIfExists('chi_tiet_diem_danh_lop_hoc_phan');
     }
 };
