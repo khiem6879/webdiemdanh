@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('ten_mon', 50);
             $table->integer('khoa_id')->unsigned();
             $table->timestamps();
+            
+            $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao')->onDelete('cascade');
 
         });
     }

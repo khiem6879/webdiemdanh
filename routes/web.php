@@ -77,13 +77,14 @@ Route::post('/tro-ly-khoa/xu-ly-them', [TroLyKhoaController::class, 'xuLyThem'])
 
 Route::middleware(['auth:tro_ly_khoa', 'checkRole:tro_ly_khoa'])->group(function () {
     
-
+    Route::get('/tro-ly-khoa/giao-vien/danh-sach', [GiaoVienController::class, 'danhSach'])->name('tro-ly-khoa.giao-vien.danh_sach');
    
-    Route::get('tro_ly_khoa/lop-hoc-phan/danh-sach', [LopHocPhanController::class, 'danhSach'])->name('lop_hoc_phan.danh_sach');
+    Route::get('/tro_ly_khoa/lop-hoc-phan/danh-sach', [LopHocPhanController::class, 'danhSach'])->name('tro_ly_khoa.lop_hoc_phan.danh_sach');
     
 
     Route::get('/lop-hoc-phan/{ma_lop}/chi-tiet', [LopHocPhanController::class, 'chiTiet'])->name('lop_hoc_phan.chi_tiet');
-
+    Route::get('/tro_ly_khoa/lop-hoc-phan/them', [LopHocPhanController::class, 'themLopHocPhan'])->name('tro_ly_khoa.lop_hoc_phan.them');
+    Route::post('/lop-hoc-phan/xu-ly-them', [LopHocPhanController::class, 'xulythemLopHocPhan'])->name('lop_hoc_phan.xu_ly_them');
    
 
 });

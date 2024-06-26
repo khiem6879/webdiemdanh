@@ -9,16 +9,14 @@ class MonHoc extends Model
 {
     use HasFactory;
 
-    protected $table = 'diem_danh_lop_hoc_phan';
-    protected $primaryKey = 'ma_diem_danh';
+    protected $table = 'mon_hoc';
+    protected $primaryKey = 'ma_mon';
     public $incrementing = false; // Để khóa chính không tự động tăng
 
     protected $fillable = [
-        'ma_diem_danh',
-        'ma_qr',
-        'ma_lop',
-        'thoi_gian_qr',
-        'ngay',
+        'ma_mon',
+        'ten_mon',
+        'khoa_id',
     ];
 
     public function lopHocPhan()

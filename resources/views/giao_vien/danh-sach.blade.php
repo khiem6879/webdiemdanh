@@ -1,4 +1,4 @@
-@extends('giao_vien.trang-chu')
+@extends($layout)
 
 @section('content')
 <div class="col-md-12">
