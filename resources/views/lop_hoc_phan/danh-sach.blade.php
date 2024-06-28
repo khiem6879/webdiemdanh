@@ -39,12 +39,13 @@
                             @endif
                         </div>
                         @if(is_array(json_decode($lopHocPhan->sinh_vien_mssv)) && count(json_decode($lopHocPhan->sinh_vien_mssv)) > 3)
-                            <a href="#" class="toggle-students btn btn-sm btn-link" data-id="{{ $lopHocPhan->ma_lop }}" onclick="toggleStudents('{{ $lopHocPhan->ma_lop }}')">
+                            <a href="#" class="toggle-students btn btn-sm btn-link" data-id="{{ $lopHocPhan->ma_lop }}"
+                                onclick="toggleStudents('{{ $lopHocPhan->ma_lop }}')">
                                 <i class="fa fa-eye"></i> Hiện thêm
                             </a>
                         @endif
                     </td>
-                    <td></td>
+                    <td>{{ $lopHocPhan->monHoc->ten_mon }}</td>
                     <td>{{ $lopHocPhan->khoa->ten_khoa }}</td>
                     <td>
                         <a href="{{ route('lop_hoc_phan.chi_tiet', $lopHocPhan->ma_lop) }}" class="btn btn-info btn-sm">
@@ -55,6 +56,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $lopHocPhans->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 
 <script>

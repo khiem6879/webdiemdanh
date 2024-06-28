@@ -28,7 +28,7 @@
             <div class="collapse" id="sidebarLayouts">
                 <ul class="nav nav-collapse">
                     <li>
-                        <a href="/lop-hoc-phan/danh-sach">
+                        <a href="/tro-ly-khoa/giao-vien/danh-sach">
                             <span class="sub-item">danh sách</span>
                         </a>
                     </li>

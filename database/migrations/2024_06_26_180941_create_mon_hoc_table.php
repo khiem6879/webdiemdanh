@@ -17,6 +17,8 @@ return new class extends Migration
            
             $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao');
             $table->timestamps();
+            
+            $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao')->onDelete('cascade');
 
         });
     }

@@ -8,7 +8,9 @@
             <div class="row">
                 <div class="col-md-3"><strong>Mã Lớp:</strong> {{ $lopHocPhan->ma_lop }}</div>
                 <div class="col-md-3"><strong>Tên Lớp:</strong> {{ $lopHocPhan->ten_lop }}</div>
+                <div class="col-md-3"><strong>Môn Học:</strong> {{  $lopHocPhan->monHoc->ten_mon }}</div>
                 <div class="col-md-3"><strong>Khoa:</strong> {{ $lopHocPhan->khoa->ten_khoa }}</div>
+         
             </div>
         </div>
     </div>
@@ -59,6 +61,9 @@
             <div class="d-flex justify-content-center">
                 {{ $students->links('pagination::bootstrap-4') }}
             </div>
+            <a href="{{ route('tro_ly_khoa.lop_hoc_phan.danh_sach') }}" class="btn btn-secondary mb-3">
+                <i class="fa fa-arrow-left fa-sm"></i> Quay Lại
+            </a>   
         </div>
     </div>
 </div>

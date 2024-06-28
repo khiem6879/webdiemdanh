@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('chi_tiet_diem_danh_ngoai', function (Blueprint $table) {
-            Schema::create('chi_tiet_diem_danh_ngoai', function (Blueprint $table) {
+          
                 $table->string('ma_diem_danh', 10);
                 $table->json('sinh_vien_mssv')->nullable(); // Cột JSON để lưu danh sách mã sinh viên
                 $table->dateTime('thoi_gian');
@@ -22,7 +22,6 @@ return new class extends Migration
                 $table->foreign('ma_diem_danh')->references('ma_diem_danh')->on('diem_danh_ngoai')->onDelete('cascade');
             
             });
-        });
     }
 
     /**

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\TroLyKhoa;
+use Illuminate\Support\Facades\Auth;
 use App\Models\KhoaDaoTao;
+
 
 class TroLyKhoaController extends Controller
 {
@@ -25,7 +27,26 @@ class TroLyKhoaController extends Controller
         $khoas = KhoaDaoTao::all();
         return view('tro_ly_khoa.them', compact('khoas'));
     }
-
+    public function danhSachGiaoVien()
+    {
+        // Lấy thông tin trợ lý khoa đang đăng nhập
+        $troLyKhoa = Auth::guard('tro_ly_khoa')->user();
+        
+        // Kiểm tra xem trợ lý khoa đã đăng nhập chưa
+        if ($troLyKhoa) {
+            // Lấy khoa_id của trợ lý khoa
+            $khoaId = $troLyKhoa->khoa_id;
+            
+            // Lấy danh sách giáo viên theo khoa_id
+            $giaoViens = GiaoVien::where('khoa_id', $khoaId)->get();
+            
+            // Trả về view với danh sách giáo viên
+            return view('giao_vien.danh_sach', compact('giaoViens'));
+        } else {
+            // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            return redirect()->route('login');
+        }
+    }
     public function xuLyThem(Request $request)
     {
         $troLyKhoa = new TroLyKhoa();
