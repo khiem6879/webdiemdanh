@@ -135,7 +135,8 @@ class SinhVienController extends Authenticatable
         return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Xóa thành công!');
     }
     return redirect()->route('sinh_vien.danh_sach')->with('error', 'Sinh viên không tồn tại.');
-}public function xoaHet()
+}
+    public function xoaHet()
 {
     SinhVien::truncate();
     return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Đã xóa toàn bộ sinh viên.');

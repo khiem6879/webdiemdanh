@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('so_dien_thoai', 11);
             $table->string('so_cccd', 12)->nullable(false);
             $table->string('dia_chi', 100);
-            $table->integer('khoa_id')->unsigned();
+            $table->unsignedBigInteger('khoa_id');
             $table->timestamps();
     
             $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao');

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('mon_hoc', function (Blueprint $table) {
             $table->string('ma_mon', 20)->primary();
             $table->string('ten_mon', 50);
-            $table->integer('khoa_id')->unsigned();
+           
+            $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao');
             $table->timestamps();
 
         });

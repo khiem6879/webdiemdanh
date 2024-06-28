@@ -51,10 +51,10 @@
                                     <td>{{ $tlk->so_dien_thoai }}</td>
                                     <td>{{ $tlk->thoi_gian_dang_nhap_cuoi }}</td>
                                     <td>
-                                        <a  class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
+                                        <a  href="{{ route('tro_ly_khoa.sua', $tlk->email) }}"class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <form  method="POST" style="display:inline-block;">
+                                        <form action="{{ route('tro_ly_khoa.xoa', $tlk->email) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa môn học này không?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" data-bs-toggle="tooltip" title="Xóa" class="btn btn-link btn-danger">
@@ -78,7 +78,13 @@
         </div>
     </div>
 </div>
-
+<style>
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;
+}
+</style>
 <script>
     function togglePassword(id, password) {
         var passwordField = document.getElementById('password-' + id);

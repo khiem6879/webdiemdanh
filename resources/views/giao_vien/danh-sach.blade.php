@@ -42,21 +42,25 @@
                             <td>{{ $giaovien->ho_ten }}</td>
                             <td>{{ $giaovien->email }}</td>
                             <td>{{ $giaovien->mat_khau }}</td>
-                            <td>{{ $giaovien->khoa->ten_khoa }}</td> <!-- Display department name here -->
+                            <td>{{ $giaovien->khoa->ten_khoa }}</td> 
                             <td>{{ $giaovien->ngay_sinh }}</td>
                             <td>{{ $giaovien->so_dien_thoai }}</td>
                             <td>{{ $giaovien->so_cccd }}</td>
                             <td>{{ $giaovien->dia_chi }}</td>
                             <td>
-                                <div class="form-button-action">
-                                    <a class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </div>
-                            </td>
+                                            <div class="form-button-action">
+                                                    <a href="{{ route('giao_vien.sua', $giaovien->email) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <form action="{{ route('giao_vien.xoa', $giaovien->email) }}" method="POST" style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" data-bs-toggle="tooltip" title="Xóa" class="btn btn-link btn-danger">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </form>
+                                            </div>
+                                    </td>
                         </tr>
                         @endforeach
                     </tbody>

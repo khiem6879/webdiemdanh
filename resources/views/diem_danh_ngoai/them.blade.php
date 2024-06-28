@@ -1,62 +1,37 @@
-@extends('layouts.app')
+@extends('giao_vien.trang-chu')
 
 @section('content')
-<form method="POST">
-    @csrf
-    <div class="row">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <div class="col-md-6">
-            <div class="form-group mb-3">
-                <label class="form-label">Mã Điểm Danh</label>
-                <input name="ma_diem_danh" type="text" class="form-control" placeholder="Mã Điểm Danh" value="{{ old('ma_diem_danh') }}" required />
-            </div>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Thêm Điểm Danh Ngoài</h1>
         </div>
-        <div class="col-md-6">
-            <div class="form-group mb-3">
-                <label class="form-label">Mã QR</label>
-                <input name="ma_qr" type="text" class="form-control" placeholder="Mã QR" value="{{ old('ma_qr') }}" required />
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group mb-3">
-                <label class="form-label">Email Giáo Viên</label>
-                <select name="giao_vien_email" class="form-control">
-                    @foreach ($giaoviens as $giaovien)
-                        <option value="{{ $giaovien->email }}" {{ old('giao_vien_email') == $giaovien->email ? 'selected' : '' }}>{{ $giaovien->ho_ten }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group mb-3">
-                <label class="form-label">Thời Gian QR</label>
-                <input name="thoi_gian_qr" type="datetime-local" class="form-control" value="{{ old('thoi_gian_qr') }}" required />
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group mb-3">
-                <label class="form-label">Ngày</label>
-                <input name="ngay" type="date" class="form-control" value="{{ old('ngay') }}" required />
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group mb-3">
-                <label class="form-label">Số Lượng</label>
-                <input name="so_luong" type="number" class="form-control" placeholder="Số Lượng" value="{{ old('so_luong') }}" required />
-            </div>
+        <div class="card-body">
+            <form action="{{ route('diem-danh-ngoai.xu_ly_them') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="ma_diem_danh">Mã Điểm Danh</label>
+                    <input type="text" class="form-control" id="ma_diem_danh" name="ma_diem_danh" required>
+                </div>
+                <div class="form-group">
+                    <label for="giao_vien_email">Giáo Viên Email</label>
+                    <input type="email" class="form-control" id="giao_vien_email" name="giao_vien_email" required>
+                </div>
+                <div class="form-group">
+                    <label for="thoi_gian_qr">Thời Gian QR</label>
+                    <input type="datetime-local" class="form-control" id="thoi_gian_qr" name="thoi_gian_qr">
+                </div>
+                <div class="form-group">
+                    <label for="ngay">Ngày</label>
+                    <input type="date" class="form-control" id="ngay" name="ngay">
+                </div>
+                <div class="form-group">
+                    <label for="so_luong">Số Lượng</label>
+                    <input type="number" class="form-control" id="so_luong" name="so_luong">
+                </div>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+            </form>
         </div>
     </div>
-    <div class="modal-footer border-0">
-        <button type="submit" class="btn btn-primary">Thêm</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-    </div>
-</form>
+</div>
 @endsection

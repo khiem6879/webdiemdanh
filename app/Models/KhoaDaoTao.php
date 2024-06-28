@@ -17,4 +17,8 @@ class KhoaDaoTao extends Model
     {
         return $this->hasMany(GiaoVien::class, 'khoa_id', 'khoa_id');
     }
+    public function monHocs()
+    {
+        return $this->hasMany(MonHoc::class, 'khoa_id');
+    }
 }

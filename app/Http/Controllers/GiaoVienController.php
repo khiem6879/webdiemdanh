@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\GiaoVienRequest;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash; 
 use App\Models\GiaoVien;
@@ -57,8 +58,6 @@ class GiaoVienController extends Authenticatable
 
     }
 
-
-    
     public function sua($email) {
         $giao_vien = GiaoVien::find($email);
         $khoas = KhoaDaoTao::all();
@@ -68,38 +67,39 @@ class GiaoVienController extends Authenticatable
     public function xuLySua(Request $request, $email)
 
 {
-   
+
     $giao_vien = GiaoVien::find($email);
-    if ($giao_vien) {
-        $giao_vien->email = $request->input('email');
-        $giao_vien->ho_ten = $request->input('ho_ten');
-        if ($request->filled('mat_khau')) {
+    if ($giao_vien) 
+    {
+
+            $giao_vien->email = $request->input('email');
+            $giao_vien->ho_ten = $request->input('ho_ten');
             $giao_vien->mat_khau = bcrypt($request->input('mat_khau'));
-            $giao_vien->ten_khoa = $request->input('ten_khoa');
+          
+            $giao_vien->khoa_id= $request->input('khoa_id');
             $giao_vien->ngay_sinh = $request->input('ngay_sinh');
             $giao_vien->so_dien_thoai = $request->input('so_dien_thoai');
             $giao_vien->so_cccd = $request->input('so_cccd');
             $giao_vien->email = $request->input('email');
-          
             $giao_vien->dia_chi = $request->input('dia_chi');
-    
-           $giao_vien->update($request->all());
-    return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Cập nhật thành công!');
+        
+            $giao_vien->update($request->all());
+        
 
-        }
-        $giao_vien->khoa_id = $request->input('khoa_id');
-        $giao_vien->ngay_sinh = $request->input('ngay_sinh');
-        $giao_vien->so_dien_thoai = $request->input('so_dien_thoai');
-        $giao_vien->so_cccd = $request->input('so_cccd');
-        $giao_vien->dia_chi = $request->input('dia_chi');
-
-        $giao_vien->save();
-
+     }
         return redirect()->route('giao_vien.danh_sach')->with('thong_bao', 'Cập nhật thành công!');
-    }
-
-    return redirect()->back()->with('error', 'Giáo viên không tồn tại.');
-}
-
 
 }
+            public function xoa($email)
+            {
+                $giao_vien = GiaoVien::find($email);
+                if ($giao_vien) {
+                    $giao_vien->delete();
+                    return redirect()->route('giao_vien.danh_sach')->with('thong_bao', 'Xóa thành công!');
+                }
+                return redirect()->route('giao_vien.danh_sach')->with('error', 'giao viên không tồn tại.');
+
+
+            }
+            
+        }
