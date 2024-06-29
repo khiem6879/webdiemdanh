@@ -2,6 +2,12 @@
 @section('content')
 <div class="container">
     <h1>Danh sách Lớp Học Phần</h1>
+    
+    <!-- Thêm ô tìm kiếm -->
+    <div class="mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm theo mã lớp hoặc tên lớp">
+    </div>
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -12,9 +18,10 @@
                 <th>Môn Học</th>
                 <th>Khoa</th>
                 <th>Chi Tiết</th>
+                <th>Điểm Danh</th> <!-- Thêm cột Điểm Danh -->
             </tr>
         </thead>
-        <tbody>
+        <tbody id="classList">
             @foreach ($lopHocPhans as $lopHocPhan)
                 <tr>
                     <td>{{ $lopHocPhan->ma_lop }}</td>
@@ -52,6 +59,11 @@
                             <i class="fa fa-info-circle"></i> Chi Tiết
                         </a>
                     </td>
+                    <td>
+                        <a href="{{ route('lop_hoc_phan.diem_danh', $lopHocPhan->ma_lop) }}" class="btn btn-success btn-sm">
+                            <i class="fa fa-check-circle"></i> Điểm Danh
+                        </a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -60,7 +72,13 @@
         {{ $lopHocPhans->links('pagination::bootstrap-4') }}
     </div>
 </div>
-
+<style>
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;/* Ngăn chặn ngắt dòng */
+}
+</style>
 <script>
     function toggleStudents(maLop) {
         var studentList = document.getElementById('student-list-' + maLop);
@@ -77,5 +95,21 @@
             }
         }
     }
+
+    // Thêm chức năng tìm kiếm
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+        var searchValue = this.value.toLowerCase();
+        var classList = document.getElementById('classList').getElementsByTagName('tr');
+
+        for (var i = 0; i < classList.length; i++) {
+            var maLop = classList[i].getElementsByTagName('td')[0].textContent.toLowerCase();
+            var tenLop = classList[i].getElementsByTagName('td')[1].textContent.toLowerCase();
+            if (maLop.includes(searchValue) || tenLop.includes(searchValue)) {
+                classList[i].style.display = '';
+            } else {
+                classList[i].style.display = 'none';
+            }
+        }
+    });
 </script>
 @endsection

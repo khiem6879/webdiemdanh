@@ -4,6 +4,7 @@ use Illuminate\Support\Str;
 use App\Models\LopHocPhan;
 use App\Models\LopSinhVien;
 use App\Models\MonHoc;
+use App\Models\DiemDanhLopHocPhan;
 
 
 if (! function_exists('generateUniqueMaLop')) {
@@ -14,7 +15,8 @@ if (! function_exists('generateUniqueMaLop')) {
         } while (
             LopHocPhan::where('ma_lop', $maLop)->exists() ||
             LopSinhVien::where('ma_lop', $maLop)->exists() ||
-            MonHoc::where('ma_mon',$maLop)->exists()
+            MonHoc::where('ma_mon',$maLop)->exists() || 
+            DiemDanhLopHocPhan::where('ma_diem_danh',$maLop)->exists()
         );
 
         return $maLop;

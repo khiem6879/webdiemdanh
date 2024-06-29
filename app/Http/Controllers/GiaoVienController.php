@@ -65,7 +65,6 @@ class GiaoVienController extends Authenticatable
 
         return redirect()->route('giao_vien.danh_sach');
 
-        return redirect()->route('giao_vien.danh_sach');
     }
     public function danhSachGiaoVien()
     {
@@ -74,43 +73,13 @@ class GiaoVienController extends Authenticatable
 
     }
 
-<<<<<<< HEAD
-    public function sua($email) {
-=======
-
-
     public function sua($email)
     {
->>>>>>> 08477e33e18f42dd7aef1778779b0fbaccd7ae64
         $giao_vien = GiaoVien::find($email);
         $khoas = KhoaDaoTao::all();
         return view('giao_vien.sua', compact('giao_vien', 'khoas'));
     }
 
-<<<<<<< HEAD
-{
-
-    $giao_vien = GiaoVien::find($email);
-    if ($giao_vien) 
-    {
-
-            $giao_vien->email = $request->input('email');
-            $giao_vien->ho_ten = $request->input('ho_ten');
-            $giao_vien->mat_khau = bcrypt($request->input('mat_khau'));
-          
-            $giao_vien->khoa_id= $request->input('khoa_id');
-            $giao_vien->ngay_sinh = $request->input('ngay_sinh');
-            $giao_vien->so_dien_thoai = $request->input('so_dien_thoai');
-            $giao_vien->so_cccd = $request->input('so_cccd');
-            $giao_vien->email = $request->input('email');
-            $giao_vien->dia_chi = $request->input('dia_chi');
-        
-            $giao_vien->update($request->all());
-        
-
-     }
-        return redirect()->route('giao_vien.danh_sach')->with('thong_bao', 'Cập nhật thành công!');
-=======
     public function xuLySua(Request $request, $email)
     {
 
@@ -146,9 +115,7 @@ class GiaoVienController extends Authenticatable
         return redirect()->back()->with('error', 'Giáo viên không tồn tại.');
     }
 
->>>>>>> 08477e33e18f42dd7aef1778779b0fbaccd7ae64
 
-}
             public function xoa($email)
             {
                 $giao_vien = GiaoVien::find($email);

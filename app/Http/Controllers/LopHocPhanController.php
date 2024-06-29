@@ -3,39 +3,58 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Storage;
 use App\Models\LopHocPhan;
 use App\Models\GiaoVien;
 use App\Models\SinhVien;
 use App\Models\KhoaDaoTao;
+use App\Models\DiemDanhLopHocPhan;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Writer\PngWriter;
 use App\Models\LopSinhVien;
 use App\Models\MonHoc;
+use Illuminate\Support\Facades\Auth;
 
 class LopHocPhanController extends Controller
 {
 
     public function danhSach()
     {
+        if (Auth::guard('tro_ly_khoa')->check()) {
+            $troLyKhoa = Auth::guard('tro_ly_khoa')->user();
+            $khoaId = $troLyKhoa->khoa_id;
+            $lopHocPhans = LopHocPhan::where('khoa_id', $khoaId)->paginate(5);
+        } elseif (Auth::guard('admin')->check()) {
+            $lopHocPhans = LopHocPhan::paginate(5);
+        } elseif (Auth::guard('giao_vien')->check()) {
+            $giaoVien = Auth::guard('giao_vien')->user();
+            $email = $giaoVien->email;
 
-        // Lấy khoa_id từ session
-        $khoa_id = session('khoa_id');
+            // Truy vấn với whereRaw
+            $lopHocPhans = LopHocPhan::whereRaw("INSTR(giao_vien_email, '$email') > 0")->paginate(5);
 
-        // Lấy danh sách lớp học phần dựa trên khoa_id
-        $lopHocPhans = LopHocPhan::where('khoa_id', $khoa_id)->paginate(5);
+            // Debug: In ra kết quả truy vấn
+            // dd($lopHocPhans);
+
+        } else {
+            return redirect()->route('login');
+        }
 
         return view('lop_hoc_phan.danh-sach', compact('lopHocPhans'));
     }
 
-    public function themLopHocPhan() {
+    public function themLopHocPhan()
+    {
         $uniqueMaLop = generateUniqueMaLop();
         $khoa_id = session('khoa_id');
-    
+
         // Lấy giáo viên thuộc khoa đang đăng nhập
         $giaoViens = GiaoVien::where('khoa_id', $khoa_id)->paginate(5);
-    
+
         // Lấy lớp sinh viên thuộc khoa đang đăng nhập
         $lopSinhViens = LopSinhVien::where('khoa_id', $khoa_id)->get();
-    
+
         $sinhVienDetails = [];
         foreach ($lopSinhViens as $lopSinhVien) {
             $mssvArray = json_decode($lopSinhVien->sinh_vien_mssv);
@@ -51,13 +70,13 @@ class LopHocPhanController extends Controller
                 }
             }
         }
-    
+
         // Lấy tất cả môn học thuộc khoa đang đăng nhập
         $monHocs = MonHoc::where('khoa_id', $khoa_id)->get();
-    
+
         // Lấy tất cả các lớp theo khoa đang đăng nhập
         $lopHocs = LopSinhVien::where('khoa_id', $khoa_id)->get();
-    
+
         return view('lop_hoc_phan.them', compact('uniqueMaLop', 'giaoViens', 'sinhVienDetails', 'monHocs', 'lopHocs'));
     }
     public function xulythemLopHocPhan(Request $request)
@@ -85,4 +104,45 @@ class LopHocPhanController extends Controller
 
         return view('lop_hoc_phan.chi-tiet', compact('lopHocPhan', 'students', 'giaovienEmails'));
     }
+
+
+
+
+    public function diemDanh($maLop)
+    {
+        $lopHocPhan = LopHocPhan::where('ma_lop', $maLop)->firstOrFail();
+        $maDiemDanh = generateUniqueMaLop(); // Tạo mã điểm danh duy nhất
+        $thoiGianQr = now()->addMinutes(10); // Thời gian tồn tại QR (10 phút)
+        $ngay = now()->toDateString(); // Ngày điểm danh
+
+        // Tạo mã QR
+        $qrCodeData = route('sinh_vien.trang_chu');
+        $result = Builder::create()
+            ->writer(new PngWriter())
+            ->data($qrCodeData)
+            ->size(200)
+            ->build();
+
+        // Lưu hình ảnh mã QR vào storage
+        $fileName = $maDiemDanh . '.png';
+        Storage::put('public/qr_codes/' . $fileName, $result->getString());
+
+        // Lưu thông tin điểm danh vào cơ sở dữ liệu
+        DiemDanhLopHocPhan::create([
+            'ma_diem_danh' => $maDiemDanh,
+            'ma_qr' => $fileName,
+            'ma_lop' => $maLop,
+            'thoi_gian_qr' => $thoiGianQr,
+            'ngay' => $ngay
+        ]);
+
+        return redirect()->route('lop_hoc_phan.danh_sach_diem_danh')->with('thong_bao', 'Tạo điểm danh thành công.');
+    }
+    public function danhSachDiemDanh()
+    {
+        $diemDanhs = DiemDanhLopHocPhan::orderBy('created_at', 'desc')->paginate(10);
+        return view('lop_hoc_phan.danh-sach-diem-danh', compact('diemDanhs'));
+    }
+
+   
 }

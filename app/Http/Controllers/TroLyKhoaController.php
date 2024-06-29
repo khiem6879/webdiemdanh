@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\TroLyKhoa;
 use Illuminate\Support\Facades\Auth;
 use App\Models\KhoaDaoTao;
-
+use App\Models\GiaoVien;
 
 class TroLyKhoaController extends Controller
 {

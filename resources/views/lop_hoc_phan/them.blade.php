@@ -8,7 +8,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="ma_lop">Mã Lớp</label>
-                    <input type="text" class="form-control" id="ma_lop" name="ma_lop" value="{{ $uniqueMaLop }}" readonly required>
+                    <input type="text" class="form-control" id="ma_lop" name="ma_lop" value="{{ $uniqueMaLop }}"
+                        readonly required>
                 </div>
             </div>
             <div class="col-md-6">
@@ -20,9 +21,10 @@
         </div>
         <div class="form-group">
             <label for="giao_vien">Giáo Viên</label>
-            <input type="text" class="form-control" id="search_gv" placeholder="Tìm kiếm giáo viên">
+
             <div class="row equal-height">
                 <div class="col-md-6">
+                    <input type="text" class="form-control" id="search_gv" placeholder="Tìm kiếm giáo viên">
                     <select multiple class="form-control" id="giao_vien_all">
                         @foreach ($giaoViens as $giaoVien)
                             <option value="{{ $giaoVien->email }}">{{ $giaoVien->email }} - {{ $giaoVien->ho_ten }}</option>
@@ -34,6 +36,8 @@
                 </div>
             </div>
         </div>
+
+
         <div class="form-group">
             <label for="filter_lop">Lọc theo lớp</label>
             <select class="form-control" id="filter_lop">
@@ -46,12 +50,19 @@
 
         <div class="form-group">
             <label for="sinh_vien">Sinh Viên</label>
-            <input type="text" class="form-control" id="search_sv" placeholder="Tìm kiếm sinh viên">
             <div class="row equal-height">
                 <div class="col-md-6">
+                <div class="col-md-12">
+              
+                        <input type="text" class="form-control" id="search_sv" placeholder="Tìm kiếm sinh viên">
+                   
+                    
+                    </div>
                     <select multiple class="form-control" id="sinh_vien_all">
                         @foreach ($sinhVienDetails as $sinhVien)
-                            <option value="{{ $sinhVien['ma_sinh_vien'] }}" data-lop="{{ $sinhVien['lop'] }}">{{ $sinhVien['ma_sinh_vien'] }} - {{ $sinhVien['ho_ten'] }} ({{ $sinhVien['lop'] }})</option>
+                            <option value="{{ $sinhVien['ma_sinh_vien'] }}" data-lop="{{ $sinhVien['lop'] }}">
+                                {{ $sinhVien['ma_sinh_vien'] }} - {{ $sinhVien['ho_ten'] }} ({{ $sinhVien['lop'] }})
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -170,8 +181,8 @@
         align-items: stretch;
     }
 
-    .equal-height .col-md-4,
-    .equal-height .col-md-8 {
+    .equal-height .col-md-6,
+    .equal-height .col-md-6 {
         display: flex;
         flex-direction: column;
     }

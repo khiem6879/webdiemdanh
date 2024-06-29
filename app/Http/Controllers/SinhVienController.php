@@ -101,13 +101,14 @@ class SinhVienController extends Authenticatable
 
         return redirect()->route('sinh_vien.danh_sach')->with('error', 'Sinh viên không tồn tại.');
     }
-   
-  
-    public function sua($ma_sinh_vien) {
+
+
+    public function sua($ma_sinh_vien)
+    {
         $sinh_vien = SinhVien::find($ma_sinh_vien);
         return view('sinh_vien.cap-nhat', compact('sinh_vien'));
     }
-    
+
     public function xuLySua(Request $request, $ma_sinh_vien)
     {
         $sinh_vien = SinhVien::find($ma_sinh_vien);
@@ -120,27 +121,25 @@ class SinhVienController extends Authenticatable
             $sinh_vien->email = $request->input('email');
             $sinh_vien->mat_khau = bcrypt($request->input('mat_khau'));
             $sinh_vien->dia_chi = $request->input('dia_chi');
-    
-           $sinh_vien->update($request->all());
-    return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Cập nhật thành công!');
+
+            $sinh_vien->update($request->all());
+            return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Cập nhật thành công!');
         }
-    
+
         return redirect()->back()->with('error', 'Sinh viên không tồn tại.');
     }
     public function xoa($ma_sinh_vien)
-{
-    $sinh_vien = SinhVien::find($ma_sinh_vien);
-    if ($sinh_vien) {
-        $sinh_vien->delete();
-        return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Xóa thành công!');
+    {
+        $sinh_vien = SinhVien::find($ma_sinh_vien);
+        if ($sinh_vien) {
+            $sinh_vien->delete();
+            return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Xóa thành công!');
+        }
+        return redirect()->route('sinh_vien.danh_sach')->with('error', 'Sinh viên không tồn tại.');
     }
-    return redirect()->route('sinh_vien.danh_sach')->with('error', 'Sinh viên không tồn tại.');
-}
     public function xoaHet()
-{
-    SinhVien::truncate();
-    return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Đã xóa toàn bộ sinh viên.');
-}
-
-
+    {
+        SinhVien::truncate();
+        return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Đã xóa toàn bộ sinh viên.');
+    }
 }
