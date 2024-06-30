@@ -15,6 +15,7 @@ return [
     | any other location as required by the application or its packages.
     |
     */
+   
 
     'name' => env('APP_NAME', 'Laravel'),
 
@@ -70,7 +71,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Ho_Chi_Minh',
 
     /*
     |--------------------------------------------------------------------------

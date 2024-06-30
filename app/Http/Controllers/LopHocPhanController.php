@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Illuminate\Support\Facades\Storage;
+
 use App\Models\LopHocPhan;
 use App\Models\GiaoVien;
 use App\Models\SinhVien;
 use App\Models\KhoaDaoTao;
-use App\Models\DiemDanhLopHocPhan;
-use Endroid\QrCode\Builder\Builder;
-use Endroid\QrCode\Writer\PngWriter;
+
+
 use App\Models\LopSinhVien;
 use App\Models\MonHoc;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +32,6 @@ class LopHocPhanController extends Controller
             // Truy vấn với whereRaw
             $lopHocPhans = LopHocPhan::whereRaw("INSTR(giao_vien_email, '$email') > 0")->paginate(5);
 
-            // Debug: In ra kết quả truy vấn
             // dd($lopHocPhans);
 
         } else {
@@ -108,41 +105,5 @@ class LopHocPhanController extends Controller
 
 
 
-    public function diemDanh($maLop)
-    {
-        $lopHocPhan = LopHocPhan::where('ma_lop', $maLop)->firstOrFail();
-        $maDiemDanh = generateUniqueMaLop(); // Tạo mã điểm danh duy nhất
-        $thoiGianQr = now()->addMinutes(10); // Thời gian tồn tại QR (10 phút)
-        $ngay = now()->toDateString(); // Ngày điểm danh
-
-        // Tạo mã QR
-        $qrCodeData = route('sinh_vien.trang_chu');
-        $result = Builder::create()
-            ->writer(new PngWriter())
-            ->data($qrCodeData)
-            ->size(200)
-            ->build();
-
-        // Lưu hình ảnh mã QR vào storage
-        $fileName = $maDiemDanh . '.png';
-        Storage::put('public/qr_codes/' . $fileName, $result->getString());
-
-        // Lưu thông tin điểm danh vào cơ sở dữ liệu
-        DiemDanhLopHocPhan::create([
-            'ma_diem_danh' => $maDiemDanh,
-            'ma_qr' => $fileName,
-            'ma_lop' => $maLop,
-            'thoi_gian_qr' => $thoiGianQr,
-            'ngay' => $ngay
-        ]);
-
-        return redirect()->route('lop_hoc_phan.danh_sach_diem_danh')->with('thong_bao', 'Tạo điểm danh thành công.');
-    }
-    public function danhSachDiemDanh()
-    {
-        $diemDanhs = DiemDanhLopHocPhan::orderBy('created_at', 'desc')->paginate(10);
-        return view('lop_hoc_phan.danh-sach-diem-danh', compact('diemDanhs'));
-    }
-
-   
+    
 }

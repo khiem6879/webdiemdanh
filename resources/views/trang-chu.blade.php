@@ -12,7 +12,7 @@
   }
 @endphp
 
-    
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +22,7 @@
   <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
   <link rel="icon" href="{{ asset('assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.0"></script>
 
@@ -31,11 +31,10 @@
 
   <!-- Fonts and icons -->
   <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
-  <!-- <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      document.body.style.zoom = "85%";
-    });
-  </script> -->
+
+  <!-- Core JS Files -->
+
+
   <script>
     WebFont.load({
       google: { families: ["Public Sans:300,400,500,600,700"] },
@@ -130,10 +129,10 @@
                   <span class="profile-username">
                     <span class="op-7">Chào,</span>
                     @if($role === 'admin')
-                    <span class="fw-bold">Admin</span>
-                    @else
-                    <span class="fw-bold">{{ $user->ho_ten }}</span>
-                    @endif
+            <span class="fw-bold">Admin</span>
+          @else
+      <span class="fw-bold">{{ $user->ho_ten }}</span>
+    @endif
                   </span>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -145,13 +144,13 @@
                             class="avatar-img rounded" />
                         </div>
                         <div class="u-text">
-                        @if($role === 'admin')
-                        <h4>Admin</h4>
-                        <p class="text-muted">{{$user->email}}</p>
-                        @else
-                        <h4>{{$user->ho_ten}}</h4>
-                        <p class="text-muted">{{$user->email}}</p>
-                        @endif
+                          @if($role === 'admin')
+                <h4>Admin</h4>
+                <p class="text-muted">{{$user->email}}</p>
+              @else
+          <h4>{{$user->ho_ten}}</h4>
+          <p class="text-muted">{{$user->email}}</p>
+        @endif
                           <!-- <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">Thông Tin Tài Khoản</a> -->
                         </div>
                       </div>
@@ -177,7 +176,10 @@
         @yield('content')
       </div>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    @yield('scripts')
     <!-- Custom template | don't include it in your project! -->
     <div class="custom-template">
       <div class="title">Settings</div>
@@ -224,6 +226,7 @@
   <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
   <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
   <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+
 
   <!-- jQuery Scrollbar -->
   <script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
@@ -287,10 +290,11 @@
       fillColor: "rgba(255, 165, 52, .14)",
     });
   </script>
-  
+
   @yield('scripts')
 </body>
 @if(session('thong_bao'))
-    <script>Swal.fire("{{ session('thong_bao') }}")</script>
+  <script>Swal.fire("{{ session('thong_bao') }}")</script>
 @endif
+
 </html>

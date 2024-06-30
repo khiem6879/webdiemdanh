@@ -54,8 +54,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="forms/forms.html">
-                            <span class="sub-item">Điểm Danh Ngoài</span>
+                        <a href="/giao-vien/lop-hoc-phan/diem-danh-danh-sach">
+                            <span class="sub-item">ĐIỂM DANH</span>
                         </a>
                     </li>
             </div>

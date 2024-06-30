@@ -35,6 +35,7 @@ class TaiKhoanController extends Controller
     if ($sinh_vien && Hash::check($rq->mat_khau, $sinh_vien->mat_khau)) {
       Auth::guard('sinh_vien')->login($sinh_vien);
       session(['user_role' => 'sinh_vien']);
+          //  dd(session('user_role'));
       return redirect()->route('sinh_vien.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
     } elseif ($giao_vien && Hash::check($rq->mat_khau, $giao_vien->mat_khau)) {
       Auth::guard('giao_vien')->login($giao_vien);
