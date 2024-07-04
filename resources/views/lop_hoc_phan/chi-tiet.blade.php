@@ -61,7 +61,7 @@
             <div class="d-flex justify-content-center">
                 {{ $students->links('pagination::bootstrap-4') }}
             </div>
-            <a href="{{ route('tro_ly_khoa.lop_hoc_phan.danh_sach') }}" class="btn btn-secondary mb-3">
+            <a href="{{ route('lop_hoc_phan.danh_sach') }}" class="btn btn-secondary mb-3">
                 <i class="fa fa-arrow-left fa-sm"></i> Quay Lại
             </a>   
         </div>
