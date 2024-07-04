@@ -32,7 +32,7 @@
                             <th>Tên</th>
                             <th>Email</th>
                             <th>Khoa đào tạo</th>
-                            <th>Mật khẩu</th>
+                           
                             <th>Số điện thoại</th>
                             <th>Đăng nhập gần nhất</th>
                             <th>Thao tác</th>
@@ -47,12 +47,6 @@
                                     <td>{{ $tlk->ho_ten }}</td>
                                     <td>{{ $tlk->email }}</td>
                                     <td>{{ $tlk->khoa->ten_khoa }}</td>
-                                    <td>
-                                        <span class="password-field" id="password-{{ $tlk->id }}"
-                                            onclick="togglePassword('{{ $tlk->id }}', '{{ $tlk->mat_khau }}')">
-                                            {{ substr($tlk->mat_khau, 0, 8) }}...
-                                        </span>
-                                    </td>
                                     <td>{{ $tlk->so_dien_thoai }}</td>
                                     <td>
                     {{ $tlk->thoi_gian_dang_nhap_cuoi ? Carbon::parse($tlk->thoi_gian_dang_nhap_cuoi)->setTimezone('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s') : 'Chưa đăng nhập' }}
@@ -99,14 +93,7 @@
     }
 </style>
 <script>
-    function togglePassword(id, password) {
-        var passwordField = document.getElementById('password-' + id);
-        if (passwordField.innerText === password) {
-            passwordField.innerText = password.substring(0, 8) + '...';
-        } else {
-            passwordField.innerText = password;
-        }
-    }
+
 
     $(document).ready(function () {
         $('#search').on('keyup', function () {
