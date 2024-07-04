@@ -15,7 +15,7 @@ return [
     | any other location as required by the application or its packages.
     |
     */
-   
+
 
     'name' => env('APP_NAME', 'Laravel'),
 
@@ -84,7 +84,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'vi',
 
     /*
     |--------------------------------------------------------------------------
@@ -170,6 +170,8 @@ return [
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
     ])->toArray(),
 
     /*
@@ -185,6 +187,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 

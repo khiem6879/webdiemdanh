@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\SinhVien;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Carbon\Carbon;
 
 class SinhVienController extends Authenticatable
 {
@@ -18,10 +24,12 @@ class SinhVienController extends Authenticatable
     public function danhSachSinhVien()
     {
         $sinhviens = SinhVien::all();
-        $sinhviens = SinhVien::paginate(5);
+        $sinhviens = SinhVien::orderBy('created_at', 'desc')->paginate(10);
         return view('sinh_vien.danh-sach-sinh-vien', compact('sinhviens'))->with('i', (request()->input('page', 1) - 1) * 5);
 
     }
+
+
     public function timKiem(Request $request)
     {
         $search = $request->input('search');
@@ -78,6 +86,12 @@ class SinhVienController extends Authenticatable
 
     public function xuLyThem(Request $request)
     {
+        $request->validate([
+            'ma_sinh_vien' => 'required|unique:sinh_viens,ma_sinh_vien',
+            'email' => 'required|email|unique:sinh_viens,email',
+            // Các trường khác
+        ]);
+
         $sinhvien = new SinhVien;
         $sinhvien->ma_sinh_vien = $request->ma_sinh_vien;
         $sinhvien->ho_ten = $request->ho_ten;
@@ -85,12 +99,85 @@ class SinhVienController extends Authenticatable
         $sinhvien->so_dien_thoai = $request->so_dien_thoai;
         $sinhvien->so_cccd = $request->so_cccd;
         $sinhvien->email = $request->email;
-        $sinhvien->mat_khau = Hash::make($request->mat_khau);
+        $sinhvien->mat_khau = Hash::make($request->so_cccd);
         $sinhvien->dia_chi = $request->dia_chi;
         $sinhvien->save();
 
-        return redirect()->route('sinh_vien.danh_sach');
+        return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Thêm sinh viên thành công!');
     }
+
+    public function uploadExcel(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        $filePath = $request->file('file')->getRealPath();
+        $data = Excel::toArray([], $filePath)[0]; // Lấy sheet đầu tiên
+
+        $errors = [];
+        $successCount = 0;
+        $existingCount = 0;
+
+        foreach ($data as $index => $row) {
+            if ($index == 0) {
+                // Bỏ qua hàng tiêu đề
+                continue;
+            }
+
+            // Kiểm tra nếu hàng không có dữ liệu thì bỏ qua
+            if (empty($row[0]) && empty($row[1]) && empty($row[2]) && empty($row[3]) && empty($row[4]) && empty($row[5]) && empty($row[6])) {
+                continue;
+            }
+
+            $ma_sinh_vien = $row[0];
+            $email = $row[5];
+
+            // Kiểm tra tồn tại của ma_sinh_vien và email
+            if (SinhVien::where('ma_sinh_vien', $ma_sinh_vien)->exists() || SinhVien::where('email', $email)->exists()) {
+                $errors[] = "{$ma_sinh_vien}";
+                $existingCount++;
+                continue;
+            }
+
+            // Kiểm tra và chuyển đổi ngày tháng từ chuỗi thành ngày tháng
+            try {
+                $ngay_sinh = Carbon::createFromFormat('d/m/Y', $row[2])->format('Y-m-d');
+            } catch (\Exception $e) {
+                $ngay_sinh = null;
+            }
+
+            try {
+                SinhVien::create([
+                    'ma_sinh_vien' => $ma_sinh_vien,
+                    'ho_ten' => $row[1],
+                    'ngay_sinh' => $ngay_sinh,
+                    'dia_chi' => $row[3],
+                    'so_cccd' => $row[4],
+                    'email' => $email,
+                    'so_dien_thoai' => $row[6],
+                    'mat_khau' => Hash::make($row[4]), // Hash mật khẩu từ số cccd
+                ]);
+                $successCount++;
+            } catch (\Exception $e) {
+                $errors[] = "Lỗi khi thêm sinh viên với MSSV {$ma_sinh_vien}: " . $e->getMessage();
+            }
+        }
+        // Tạo thông báo tổng hợp
+        $message = '';
+        if ($successCount > 0) {
+            $message .= "Thêm {$successCount} sinh viên thành công.";
+        }
+        if ($existingCount > 0) {
+            $message .= "{$existingCount} sinh viên đã tồn tại.";
+        }
+        if (count($errors) > 0) {
+            $message .= " Lỗi với " . count($errors) . " sinh viên: " . implode(", ", $errors);
+        }
+
+        return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', $message);
+    }
+
     public function xoaSinhVien($MSSV)
     {
         $sinhvien = SinhVien::find($MSSV);

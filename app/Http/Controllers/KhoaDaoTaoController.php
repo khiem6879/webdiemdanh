@@ -10,8 +10,9 @@ class KhoaDaoTaoController extends Controller
    
     
     public function danhSach(){
-        $khoadaotaos= KhoaDaoTao::all();
-        $khoadaotaos = KhoaDaoTao::paginate(5);
-        return view('khoa.danh-sach', compact('khoadaotaos'));
+   
+      $khoas= KhoaDaoTao::all();
+        $khoas = KhoaDaoTao::paginate(5);
+        return view('khoa.danh-sach', compact('khoas'));
     }
 }

@@ -111,15 +111,21 @@
             </div>
         </li>
         <li class="nav-item">
-            <a href="widgets.html">
-                <i class="fas fa-desktop"></i>
-                <p>Widgets</p>
-                <span class="badge badge-success">4</span>
+            <a data-bs-toggle="collapse" href="#khoa-dao-tao">
+                <i class="fas fa-table"></i>
+                <p>KHOA ĐÀO TẠO</p>
+                <span class="caret"></span>
             </a>
+            <div class="collapse" id="khoa-dao-tao">
+                <ul class="nav nav-collapse">
+                    <li>
+                        <a href="/admin/khoa-dao-tao/danh-sach">
+                            <span class="sub-item">DANH SÁCH</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </li>
     </ul>
 </div>
-@if (session('thong_bao'))
-        <script>Swal.fire("{{ session('thong_bao') }}")</script>
-@endif
 @endsection

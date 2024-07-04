@@ -11,6 +11,7 @@
         </tr>
         <!-- Các trường dữ liệu riêng cho từng loại tài khoản -->
         @if($role === 'sinh_vien')
+       
             <tr>
                 <th>MSSV</th>
                 <td>{{ $user->ma_sinh_vien }}</td>
@@ -35,7 +36,10 @@
                 <th>Địa Chỉ</th>
                 <td>{{ $user->dia_chi }}</td>
             </tr>
+            <th>Vai Trò</th>
+            <td>Sinh Viên</td>
         @elseif($role === 'giao_vien')
+      
             <tr>
                 <th>Họ Tên</th>
                 <td>{{ $user->ho_ten }}</td>
@@ -60,14 +64,16 @@
                 <th>Khoa</th>
                 <td>{{ $user->khoa->ten_khoa }}</td>
             </tr>
-
+            <th>Vai Trò</th>
+            <td>Giáo Viên</td>
         @elseif($role === 'admin')
             <tr>
                 <th>Vai Trò</th>
                 <td>Quản Trị Viên</td>
             </tr>
         @elseif($role === 'tro_ly_khoa')
-        <tr>
+    
+            <tr>
                 <th>Số Điện Thoại</th>
                 <td>{{ $user->so_dien_thoai }}</td>
             </tr>
@@ -79,6 +85,8 @@
                 <th>Khoa</th>
                 <td>{{ $user->khoa->ten_khoa }}</td>
             </tr>
+            <th>Vai Trò</th>
+            <td>Trợ Lý Khoa</td>
         @endif
         <!-- Thêm các trường dữ liệu khác nếu cần -->
     </table>
@@ -90,6 +98,6 @@
     </a>
 </div>
 @if (session('thong_bao'))
-        <script>Swal.fire("{{ session('thong_bao') }}")</script>
+    <script>Swal.fire("{{ session('thong_bao') }}")</script>
 @endif
 @endsection

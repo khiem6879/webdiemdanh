@@ -25,12 +25,7 @@
                 <input name="email" type="email" class="form-control" placeholder="Email" required />
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group mb-3">
-                <label class="form-label">Mật khẩu</label>
-                <input name="mat_khau" type="password" class="form-control" placeholder="Mật khẩu" required />
-            </div>
-        </div>
+
         <div class="col-md-6">
             <div class="form-group mb-3">
                 <label class="form-label">Khoa</label>
@@ -66,9 +61,7 @@
             </div>
         </div>
     </div>
-    <div class="modal-footer border-0">
-        <button type="submit" class="btn btn-primary">Thêm</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-    </div>
+    <button type="submit" class="btn btn-primary">Thêm Giáo Viên</button>
+
 </form>
 @endsection

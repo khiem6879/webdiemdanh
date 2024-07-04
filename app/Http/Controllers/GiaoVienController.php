@@ -55,7 +55,7 @@ class GiaoVienController extends Authenticatable
         $giaovien = new GiaoVien;
         $giaovien->email = $request->email;
         $giaovien->ho_ten = $request->ho_ten;
-        $giaovien->mat_khau = Hash::make($request->mat_khau);
+        $giaovien->mat_khau = Hash::make($request->so_cccd);
         $giaovien->khoa_id = $request->khoa_id;
         $giaovien->ngay_sinh = $request->ngay_sinh;
         $giaovien->so_dien_thoai = $request->so_dien_thoai;

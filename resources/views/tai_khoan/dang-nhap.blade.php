@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Đăng Nhập</title>
 </head>
 
 <body>
@@ -85,10 +85,26 @@
                 passwordInput.type = 'password';
             }
         });
+
+        @if(session('select_role'))
+            Swal.fire({
+                title: 'Chọn vai trò',
+                text: 'Bạn có thể chọn một trong hai vai trò:',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Giáo Viên',
+                cancelButtonText: 'Trợ Lý Khoa'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Giáo Viên
+                    window.location.href = '{{ route('XuLyChonVaiTro') }}?role=giao_vien&email={{ session('email') }}&password={{ session('password') }}';
+                } else {
+                    // Trợ Lý Khoa
+                    window.location.href = '{{ route('XuLyChonVaiTro') }}?role=tro_ly_khoa&email={{ session('email') }}&password={{ session('password') }}';
+                }
+            });
+        @endif
     </script>
 </body>
 
 </html>
-@if(session('thong_bao'))
-    <script>Swal.fire("{{ session('thong_bao') }}")</script>
-@endif

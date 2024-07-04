@@ -34,6 +34,7 @@ Route::get('/', function () {
 
 Route::get('/Dang-Ky', [TaiKhoanController::class, 'dangKy'])->name('DangKy');
 Route::post('/Dang-Ky', [TaiKhoanController::class, 'xulyDangKy'])->name('xu_ly_dang_ky');
+Route::get('/xu-ly-chon-vai-tro', [TaiKhoanController::class,'xuLyChonVaiTro'])->name('XuLyChonVaiTro');
 
 Route::get('/DangNhap', [TaiKhoanController::class, 'dangNhap'])->name('DangNhap');
 Route::post('/xulyDangNhap', [TaiKhoanController::class, 'xulyDangNhap'])->name('XuLyDangNhap');
@@ -68,7 +69,7 @@ Route::middleware(['auth:giao_vien', 'checkRole:giao_vien'])->group(function () 
 
     Route::get('/giao-vien/lop-hoc-phan/{ma_lop}/chi-tiet', [LopHocPhanController::class, 'chiTiet'])->name('lop_hoc_phan.chi_tiet');
 
-
+    Route::get('/giao-vien/mon-hoc/danh-sach', [MonHocController::class, 'danhSach'])->name('giao_vien.mon_hoc.danh-sach');
 
     Route::post('lop-hoc-phan/chinh/sua', [DiemDanhLopHocPhanController::class, 'chinhSuaThoiGian'])->name('lop_hoc_phan.chinh_sua_thoi_gian');
     Route::get('lop-hoc-phan/diem-danh/{maLop}', [DiemDanhLopHocPhanController::class, 'diemDanh'])->name('lop_hoc_phan.diem_danh');
@@ -79,8 +80,8 @@ Route::middleware(['auth:giao_vien', 'checkRole:giao_vien'])->group(function () 
     
 
 });
-
-
+Route::post('sinh_vien/xem_excel', [SinhVienController::class, 'xemExcel'])->name('sinh_vien.xem_excel');
+Route::post('/sinh-vien/upload-excel', [SinhVienController::class, 'uploadExcel'])->name('sinh_vien.upload_excel');
 
 Route::get('/mon-hoc/danh-sach', [MonHocController::class, 'danhSach'])->name('mon_hoc.danh-sach');
 Route::get('/mon-hoc/them', [MonHocController::class, 'them'])->name('mon_hoc.them');
@@ -128,6 +129,7 @@ Route::middleware(['auth:admin', 'checkRole:admin'])->group(function () {
     Route::delete('/admin/tro-ly-khoa/xoa/{email}', [TroLyKhoaController::class, 'xoa'])->name('tro_ly_khoa.xoa');
 
 
+    Route::get('/admin/khoa-dao-tao/danh-sach', [KhoaDaoTaoController::class, 'danhSach'])->name('admin.khoa_dao_tao.danh_sach');
     
 
 });

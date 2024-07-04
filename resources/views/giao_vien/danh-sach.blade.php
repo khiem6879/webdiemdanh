@@ -27,7 +27,6 @@
                         <tr>
                             <th>HỌ TÊN</th>
                             <th>EMAIL</th>
-                            <th>MẬT KHẨU</th>
                             <th>KHOA</th>
                             <th>NGÀY SINH</th>
                             <th>SỐ ĐIỆN THOẠI</th>
@@ -41,26 +40,29 @@
                         <tr>
                             <td>{{ $giaovien->ho_ten }}</td>
                             <td>{{ $giaovien->email }}</td>
-                            <td>{{ $giaovien->mat_khau }}</td>
                             <td>{{ $giaovien->khoa->ten_khoa }}</td> 
                             <td>{{ $giaovien->ngay_sinh }}</td>
                             <td>{{ $giaovien->so_dien_thoai }}</td>
                             <td>{{ $giaovien->so_cccd }}</td>
-                            <td>{{ $giaovien->dia_chi }}</td>
                             <td>
-                                            <div class="form-button-action">
-                                                    <a href="{{ route('giao_vien.sua', $giaovien->email) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                    <form action="{{ route('giao_vien.xoa', $giaovien->email) }}" method="POST" style="display:inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" data-bs-toggle="tooltip" title="Xóa" class="btn btn-link btn-danger">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </form>
-                                            </div>
-                                    </td>
+                                <span class="short-address" id="address-{{ $giaovien->id }}" onclick="toggleAddress('{{ $giaovien->id }}', '{{ $giaovien->dia_chi }}')">
+                                    {{ \Illuminate\Support\Str::limit($giaovien->dia_chi, 20, '...') }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="form-button-action">
+                                    <a href="{{ route('giao_vien.sua', $giaovien->email) }}" class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <form action="{{ route('giao_vien.xoa', $giaovien->email) }}" method="POST" style="display:inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" data-bs-toggle="tooltip" title="Xóa" class="btn btn-link btn-danger">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -75,22 +77,31 @@
 </div>
 </div>
 
-    <style>
-    .table th, .table td {
-        vertical-align: middle;
-        text-align: center;
-        white-space: nowrap; /* Prevent line breaks */
-    }
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        function togglePassword(id, password) {
-            var passwordField = document.getElementById('password-' + id);
-            if (passwordField.innerText === password) {
-                passwordField.innerText = password.substring(0, 8) + '...';
-            } else {
-                passwordField.innerText = password;
-            }
+<style>
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap; 
+}
+.short-address {
+    cursor: pointer;
+}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function toggleAddress(id, fullAddress) {
+        var addressElement = document.getElementById('address-' + id);
+        var currentText = addressElement.innerText;
+
+        if (currentText.endsWith('...')) {
+            // Hiển thị địa chỉ đầy đủ
+            addressElement.innerText = fullAddress;
+        } else {
+            // Rút gọn địa chỉ
+            addressElement.innerText = fullAddress.substring(0, 20) + '...';
         }
-    </script>
-    @endsection
+    }
+</script>
+@endsection

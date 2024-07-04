@@ -27,35 +27,99 @@ class TaiKhoanController extends Controller
     $password = $rq->mat_khau;
 
     // Tìm kiếm theo email và kiểm tra chính xác trường hợp chữ
-    $sinh_vien = SinhVien::whereRaw('BINARY `email` = ?', [$email])->first();
-    $giao_vien = GiaoVien::whereRaw('BINARY `email` = ?', [$email])->first();
-    $admin = Admin::whereRaw('BINARY `email` = ?', [$email])->first();
-    $tro_ly_khoa = TroLyKhoa::whereRaw('BINARY `email` = ?', [$email])->first();
+    $sinh_vien = SinhVien::whereRaw('BINARY email = ?', [$email])->first();
+    $giao_vien = GiaoVien::whereRaw('BINARY email = ?', [$email])->first();
+    $admin = Admin::whereRaw('BINARY email = ?', [$email])->first();
+    $tro_ly_khoa = TroLyKhoa::whereRaw('BINARY email = ?', [$email])->first();
 
-    if ($sinh_vien && Hash::check($rq->mat_khau, $sinh_vien->mat_khau)) {
+    if ($sinh_vien && Hash::check($password, $sinh_vien->mat_khau)) {
       Auth::guard('sinh_vien')->login($sinh_vien);
       session(['user_role' => 'sinh_vien']);
-          //  dd(session('user_role'));
       return redirect()->route('sinh_vien.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
-    } elseif ($giao_vien && Hash::check($rq->mat_khau, $giao_vien->mat_khau)) {
-      Auth::guard('giao_vien')->login($giao_vien);
-      session(['user_role' => 'giao_vien', 'khoa_id' => $giao_vien->khoa_id]);
-      // dd(session('user_role'), session('khoa_id'));
-      return redirect()->route('giao_vien.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
-    } elseif ($admin && Hash::check($rq->mat_khau, $admin->mat_khau)) {
+    } elseif ($admin && Hash::check($password, $admin->mat_khau)) {
       Auth::guard('admin')->login($admin);
       session(['user_role' => 'admin']);
       return redirect()->route('admin.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
-    } elseif ($tro_ly_khoa && Hash::check($rq->mat_khau, $tro_ly_khoa->mat_khau)) {
+    } elseif ($giao_vien && $tro_ly_khoa && Hash::check($password, $giao_vien->mat_khau)) {
+      return redirect()->route('DangNhap')->with([
+        'select_role' => true,
+        'email' => $email,
+        'password' => $password
+      ]);
+    } elseif ($giao_vien && Hash::check($password, $giao_vien->mat_khau)) {
+      Auth::guard('giao_vien')->login($giao_vien);
+      session(['user_role' => 'giao_vien', 'khoa_id' => $giao_vien->khoa_id]);
+      return redirect()->route('giao_vien.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
+    } elseif ($tro_ly_khoa && Hash::check($password, $tro_ly_khoa->mat_khau)) {
       Auth::guard('tro_ly_khoa')->login($tro_ly_khoa);
       session(['user_role' => 'tro_ly_khoa', 'khoa_id' => $tro_ly_khoa->khoa_id]);
-      // dd(session('user_role'), session('khoa_id'));
       return redirect()->route('tro_ly_khoa.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
     } else {
       return redirect()->route('DangNhap')->with('thong_bao', 'ĐĂNG NHẬP THẤT BẠI');
     }
-
   }
+  public function xuLyChonVaiTro(Request $rq)
+{
+    $email = $rq->email;
+    $password = $rq->password;
+    $role = $rq->role;
+
+    if ($role == 'giao_vien') {
+        $giao_vien = GiaoVien::whereRaw('BINARY email = ?', [$email])->first();
+        if (Hash::check($password, $giao_vien->mat_khau)) {
+            Auth::guard('giao_vien')->login($giao_vien);
+            session(['user_role' => 'giao_vien', 'khoa_id' => $giao_vien->khoa_id]);
+            return redirect()->route('giao_vien.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
+        }
+    } elseif ($role == 'tro_ly_khoa') {
+        $tro_ly_khoa = TroLyKhoa::whereRaw('BINARY email = ?', [$email])->first();
+        if (Hash::check($password, $tro_ly_khoa->mat_khau)) {
+            Auth::guard('tro_ly_khoa')->login($tro_ly_khoa);
+            session(['user_role' => 'tro_ly_khoa', 'khoa_id' => $tro_ly_khoa->khoa_id]);
+            return redirect()->route('tro_ly_khoa.trang_chu')->with('thong_bao', 'ĐĂNG NHẬP THÀNH CÔNG');
+        }
+    }
+
+    return redirect()->route('DangNhap')->with('thong_bao', 'ĐĂNG NHẬP THẤT BẠI');
+}
+
+  public function doiMatKhau(DoiMatKhauRequest $request)
+  {
+    $data = $this->layThongTinNguoiDung();
+
+    // Kiểm tra xem người dùng đã đăng nhập hay chưa
+    if (!$data['user']) {
+      return redirect()->route('DangNhap')->with('thong_bao', 'Vui lòng đăng nhập để đổi mật khẩu.');
+    }
+
+    // Kiểm tra mật khẩu hiện tại
+    if (!Hash::check($request->mat_khau, $data['user']->mat_khau)) {
+      return back()->withErrors(['mat_khau' => 'Mật khẩu hiện tại không chính xác']);
+    }
+
+    // Cập nhật mật khẩu mới cho tài khoản hiện tại
+    $data['user']->mat_khau = Hash::make($request->mat_khau_moi);
+    $data['user']->save();
+
+    // Nếu tài khoản là giáo viên, kiểm tra xem có vai trò trợ lý khoa không và ngược lại
+    if ($data['user'] instanceof GiaoVien) {
+      $tro_ly_khoa = TroLyKhoa::whereRaw('BINARY email = ?', [$data['user']->email])->first();
+      if ($tro_ly_khoa) {
+        $tro_ly_khoa->mat_khau = Hash::make($request->mat_khau_moi);
+        $tro_ly_khoa->save();
+      }
+    } elseif ($data['user'] instanceof TroLyKhoa) {
+      $giao_vien = GiaoVien::whereRaw('BINARY email = ?', [$data['user']->email])->first();
+      if ($giao_vien) {
+        $giao_vien->mat_khau = Hash::make($request->mat_khau_moi);
+        $giao_vien->save();
+      }
+    }
+
+    return redirect()->route('tai_khoan.thong-tin-tai-khoan')->with('thong_bao', 'Đổi mật khẩu thành công');
+  }
+
+
   private function layThongTinNguoiDung()
   {
     $user = null;
@@ -75,7 +139,7 @@ class TaiKhoanController extends Controller
       return redirect()->route('DangNhap')->with('thong_bao', 'Vui lòng đăng nhập để tiếp tục.');
     }
 
-    return compact('user', 'role',);
+    return compact('user', 'role', );
   }
 
   public function thongtinTaiKhoan()
@@ -163,27 +227,7 @@ class TaiKhoanController extends Controller
     }
   }
 
-  public function doiMatKhau(DoiMatKhauRequest $request)
-  {
-
-    $data = $this->layThongTinNguoiDung();
-
-    // Kiểm tra xem người dùng đã đăng nhập hay chưa
-    if (!$data['user']) {
-      return redirect()->route('DangNhap')->with('thong_bao', 'Vui lòng đăng nhập để đổi mật khẩu.');
-    }
-    // dd($data['user']);
-    // Kiểm tra mật khẩu hiện tại
-    if (!Hash::check($request->mat_khau, $data['user']->mat_khau)) {
-      return back()->withErrors(['mat_khau' => 'Mật khẩu hiện tại không chính xác']);
-    }
-
-    // Cập nhật mật khẩu mới
-    $data['user']->mat_khau = Hash::make($request->mat_khau_moi);
-    $data['user']->save();
-
-    return redirect()->route('tai_khoan.thong-tin-tai-khoan')->with('thong_bao', 'Đổi mật khẩu thành công');
-  }
+ 
   public function dangXuat()
   {
     Auth::guard(session('user_role'))->logout();
