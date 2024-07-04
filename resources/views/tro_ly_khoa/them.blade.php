@@ -13,10 +13,6 @@
             <input type="email" name="email" class="form-control" required>
         </div>
         <div class="form-group">
-            <label for="mat_khau">Mật khẩu</label>
-            <input type="password" name="mat_khau" class="form-control" required>
-        </div>
-        <div class="form-group">
             <label for="khoa_id">Khoa đào tạo</label>
             <select name="khoa_id" class="form-control" required>
                 @foreach ($khoas as $khoa)

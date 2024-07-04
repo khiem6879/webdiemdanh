@@ -55,7 +55,6 @@ class TroLyKhoaController extends Controller
         $troLyKhoa->mat_khau = Hash::make($request->input('mat_khau'));
         $troLyKhoa->khoa_id = $request->input('khoa_id');
         $troLyKhoa->so_dien_thoai = $request->input('so_dien_thoai');
-        $troLyKhoa->thoi_gian_dang_nhap_cuoi = now();
 
         if ($request->hasFile('avt')) {
             $file = $request->file('avt');

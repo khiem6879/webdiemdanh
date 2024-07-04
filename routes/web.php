@@ -80,8 +80,10 @@ Route::middleware(['auth:giao_vien', 'checkRole:giao_vien'])->group(function () 
     
 
 });
-Route::post('sinh_vien/xem_excel', [SinhVienController::class, 'xemExcel'])->name('sinh_vien.xem_excel');
+
 Route::post('/sinh-vien/upload-excel', [SinhVienController::class, 'uploadExcel'])->name('sinh_vien.upload_excel');
+Route::post('/sinh-vien/upload-excel', [GiaoVienController::class, 'uploadExcel'])->name('giao_vien.upload_excel');
+
 
 Route::get('/mon-hoc/danh-sach', [MonHocController::class, 'danhSach'])->name('mon_hoc.danh-sach');
 Route::get('/mon-hoc/them', [MonHocController::class, 'them'])->name('mon_hoc.them');
