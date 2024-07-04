@@ -1,5 +1,4 @@
 @extends($layout)
-
 @section('content')
 <div class="col-md-12">
     <div class="card">
@@ -41,7 +40,7 @@
                             <td>{{ $giaovien->ho_ten }}</td>
                             <td>{{ $giaovien->email }}</td>
                             <td>{{ $giaovien->khoa->ten_khoa }}</td> 
-                            <td>{{ $giaovien->ngay_sinh }}</td>
+                            <td>{{ $Carbon::parse($giaovien->ngay_sinh)->format('d-m-Y') }}</td>
                             <td>{{ $giaovien->so_dien_thoai }}</td>
                             <td>{{ $giaovien->so_cccd }}</td>
                             <td>

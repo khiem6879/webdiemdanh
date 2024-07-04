@@ -32,7 +32,6 @@
                             <th>Tên</th>
                             <th>Email</th>
                             <th>Khoa đào tạo</th>
-                           
                             <th>Số điện thoại</th>
                             <th>Đăng nhập gần nhất</th>
                             <th>Thao tác</th>
@@ -93,8 +92,6 @@
     }
 </style>
 <script>
-
-
     $(document).ready(function () {
         $('#search').on('keyup', function () {
             var query = $(this).val();
@@ -109,5 +106,4 @@
         });
     });
 </script>
-
 @endsection
