@@ -8,13 +8,20 @@
                 <div class="col-sm-3">
                     <h1 class="card-title">Danh sách môn học</h1>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                     <input type="text" id="search" class="form-control" placeholder="Tìm kiếm môn học..." value="{{ request()->query('search') }}">
                 </div>
                 <div class="col-sm-2">
                     <a href="{{ route('mon_hoc.them') }}">
                         <button class="btn btn-primary btn-round ms-auto">
                             <i class="fa fa-plus"></i> THÊM
+                        </button>
+                    </a>
+                </div>
+                <div class="col-sm-2">
+                    <a href="{{ route('mon_hoc.danh_sach_da_xoa') }}">
+                        <button class="btn btn-secondary btn-round ms-auto">
+                            <i class="fa fa-trash"></i> ĐÃ XÓA
                         </button>
                     </a>
                 </div>

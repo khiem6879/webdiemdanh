@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LopHocPhan extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     protected $table = 'lop_hoc_phan';
     protected $primaryKey = 'ma_lop';
     public $incrementing = false;

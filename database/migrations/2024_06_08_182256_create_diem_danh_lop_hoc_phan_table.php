@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('thoi_gian_qr');
             $table->date('ngay');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('ma_lop')->references('ma_lop')->on('lop_hoc_phan')->onDelete('cascade');
         });

@@ -3,6 +3,11 @@
 
 @section('content')
 <div class="container">
+@if(session('thong_bao'))
+        <div class="alert alert-success">
+            {{ session('thong_bao') }}
+        </div>
+    @endif
     <h1>Thông Tin Tài Khoản</h1>
     <table class="table">
         <tr>

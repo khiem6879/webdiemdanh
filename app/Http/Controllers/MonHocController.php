@@ -22,17 +22,15 @@ class MonHocController extends Controller
         return view('mon_hoc.them', compact('khoas'));
     }
 
-    public function xuLyThem(Request $request)
+    public function xuLyThem(MonHocRequest $request)
     {
         $monHoc = new MonHoc();
         $monHoc->ma_mon = Str::random(8); 
         $monHoc->ten_mon = $request->input('ten_mon');
-       
         $monHoc->khoa_id = $request->input('khoa_id');
         $monHoc->save();
 
         return redirect()->route('mon_hoc.danh-sach')->with('thong_bao', 'Thêm mới môn học thành công!');
-       
     }
 
     public function sua($ma_mon)
@@ -42,12 +40,10 @@ class MonHocController extends Controller
         return view('mon_hoc.sua', compact('monHoc', 'khoas'));
     }
 
-    public function xuLySua(Request $request, $ma_mon)
+    public function xuLySua(MonHocRequest $request, $ma_mon)
     {
         $monHoc = MonHoc::find($ma_mon);
-        
         $monHoc->ten_mon = $request->input('ten_mon');
-      
         $monHoc->khoa_id = $request->input('khoa_id');
         $monHoc->save();
 
@@ -55,14 +51,28 @@ class MonHocController extends Controller
     }
 
     public function xoa($ma_mon)
-{
-    $monHoc = MonHoc::where('ma_mon', $ma_mon)->first();
-    if ($monHoc) {
-        $monHoc->delete();
-        return redirect()->route('mon_hoc.danh-sach')->with('thong_bao', 'Xóa môn học thành công!');
+    {
+        $monHoc = MonHoc::where('ma_mon', $ma_mon)->first();
+        if ($monHoc) {
+            $monHoc->delete();
+            return redirect()->route('mon_hoc.danh-sach')->with('thong_bao', 'Xóa môn học thành công!');
+        }
+        return redirect()->route('mon_hoc.danh-sach')->with('thong_bao', 'Không tìm thấy môn học cần xóa!');
     }
-    return redirect()->route('mon_hoc.danh-sach')->with('thong_bao', 'Không tìm thấy môn học cần xóa!');
-}
 
-    
+    public function danhSachDaXoa()
+    {
+        $monhocs = MonHoc::onlyTrashed()->paginate(5);
+        return view('mon_hoc.danh-sach-da-xoa', compact('monhocs'));
+    }
+
+    public function khoiPhuc($ma_mon)
+    {
+        $monHoc = MonHoc::withTrashed()->find($ma_mon);
+        if ($monHoc && $monHoc->trashed()) {
+            $monHoc->restore();
+            return redirect()->route('mon_hoc.danh-sach')->with('thong_bao', 'Khôi phục môn học thành công!');
+        }
+        return redirect()->route('mon_hoc.danh-sach')->with('error', 'Môn học không tồn tại hoặc chưa bị xóa.');
+    }
 }

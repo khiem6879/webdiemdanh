@@ -16,11 +16,11 @@ return new class extends Migration
            $table->string('ma_sinh_vien', 20)->primary();
            $table->string('ho_ten', 50);
            $table->date('ngay_sinh');
-           $table->string('dia_chi', 50);
+           $table->string('dia_chi', 300);
            $table->string('so_cccd', 12);
-           $table->string('email', 50);
+           $table->string('email', 50)->unique();
            $table->string('mat_khau', 255);
-           $table->string('so_dien_thoai', 11);
+           $table->string('so_dien_thoai', 11)->unique();
            $table->timestamps();
            $table->softDeletes();
         });

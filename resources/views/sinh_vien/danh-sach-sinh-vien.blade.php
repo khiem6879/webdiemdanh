@@ -7,7 +7,7 @@
                 <div class="col-sm-3">
                     <h1 class="card-title">Danh Sách Sinh Viên</h1>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                     <input type="text" id="search" class="form-control" placeholder="Tìm kiếm sinh viên..." value="{{ request()->query('search') }}">
                 </div>
                 <div class="col-sm-2">
@@ -17,6 +17,14 @@
                         </button>
                     </a>
                 </div>
+                <div class="col-sm-2">
+                    <a href="{{ route('sinh_vien.danh_sach_da_xoa') }}">
+                        <button class="btn btn-secondary btn-round ms-auto">
+                            <i class="fa fa-trash"></i> ĐÃ XÓA
+                        </button>
+                    </a>
+                </div>
+                
             </div>
         </div>
         <div class="card-body">

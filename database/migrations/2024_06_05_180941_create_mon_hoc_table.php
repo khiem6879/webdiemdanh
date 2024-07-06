@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('mon_hoc', function (Blueprint $table) {
             $table->string('ma_mon', 20)->primary();
             $table->string('ten_mon', 50);
-           
-            $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao');
+            $table->unsignedInteger('khoa_id'); // Ensure this column is defined before setting the foreign key
             $table->timestamps();
-            
-            $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao')->onDelete('cascade');
+            $table->softDeletes();
 
+            $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao')->onDelete('cascade');
         });
     }
 

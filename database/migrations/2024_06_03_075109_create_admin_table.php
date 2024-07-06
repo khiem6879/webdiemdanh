@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('khoa_dao_tao', function (Blueprint $table) {
-            $table->unsignedInteger('khoa_id')->primary();
-            $table->string('ten_khoa',50);
+        Schema::create('admin', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('mat_khau', 255);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('khoa_dao_tao');
+        Schema::dropIfExists('admin');
     }
 };

@@ -41,34 +41,16 @@
                             </select>
                         </div>
                     </div>
-                   
-
-    
-
-                    <div class="col-md-6">
-                        <div class="form-group mb-3">
-                            <label class="form-label">Ngày sinh</label>
-                            <input name="ngay_sinh" type="date" class="form-control" placeholder="Ngày sinh" value="{{  $troLyKhoa->ngay_sinh }}" required />
-                        </div>
-                    </div>
+                    
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label class="form-label">Số điện thoại</label>
                             <input name="so_dien_thoai" type="text" class="form-control" placeholder="Số điện thoại" value="{{  $troLyKhoa->so_dien_thoai }}" required />
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group mb-3">
-                            <label class="form-label">CCCD</label>
-                            <input name="so_cccd" type="text" class="form-control" placeholder="CCCD" value="{{  $troLyKhoa->so_cccd }}" required />
-                        </div>
+                    
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group mb-3">
-                            <label class="form-label">Địa chỉ</label>
-                            <input name="dia_chi" type="text" class="form-control" placeholder="Địa chỉ" value="{{  $troLyKhoa->dia_chi }}" required />
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="modal-footer border-0">
                     <button type="submit" class="btn btn-primary">

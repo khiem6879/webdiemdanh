@@ -6,34 +6,28 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class MonHocRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
+    public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-     */
     public function rules()
     {
         return [
-            'ten_mon' => 'required|string|max:1',
-            'mo_ta' => 'nullable|string',
-            'khoa_id' => 'required|exists:khoa_dao_taos,id',
+            'ten_mon' => 'required|string|min:3|max:100',
+            'khoa_id' => 'required|exists:khoa_dao_tao,khoa_id',
         ];
     }
+
     public function messages()
     {
         return [
-            'ten_mon.required' => 'ko bo trong',
-            'mo_ta.required' => 'ko bo trong', // Custom message for mo_ta
-            'khoa_id.required' => 'ko bo trong',
-            'khoa_id.exists' => 'Khoa đào tạo không hợp lệ.',
+            'ten_mon.required' => 'Tên môn học là bắt buộc.',
+            'ten_mon.string' => 'Tên môn học phải là chuỗi ký tự.',
+            'ten_mon.min' => 'Tên môn học phải có ít nhất 8 ký tự.',
+            'ten_mon.max' => 'Tên môn học không được vượt quá 100 ký tự.',
+            'khoa_id.required' => 'Khoa là bắt buộc.',
+            'khoa_id.exists' => 'Khoa không tồn tại.',
         ];
     }
 }

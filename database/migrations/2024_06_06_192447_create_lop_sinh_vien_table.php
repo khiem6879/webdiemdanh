@@ -18,6 +18,7 @@ return new class extends Migration
             $table->json('sinh_vien_mssv')->nullable(); // Cột JSON để lưu danh sách mã sinh viên
             $table->integer('khoa_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
             
             $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao');
             $table->foreign('giao_vien_email')->references('email')->on('giao_vien');

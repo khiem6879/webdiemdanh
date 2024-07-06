@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('thoi_gian_dang_nhap_cuoi');
             $table->string('avt')->default('default-avatar.png'); 
             $table->timestamps();
+            $table->softDeletes();
         
             $table->foreign('khoa_id')->references('khoa_id')->on('khoa_dao_tao');
         });

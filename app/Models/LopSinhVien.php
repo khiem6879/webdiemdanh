@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LopSinhVien extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     
     protected $table = 'lop_sinh_vien';
     protected $primaryKey = 'ma_lop';

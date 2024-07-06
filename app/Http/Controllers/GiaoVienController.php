@@ -41,12 +41,13 @@ class GiaoVienController extends Authenticatable
     }
 
     public function them()
-    {
-        $khoas = KhoaDaoTao::all();
-        return view('giao_vien.them', compact('khoas'));
-    }
+{
+    $khoas = KhoaDaoTao::all();
+    return view('giao_vien.them', compact('khoas'));
+}
 
-    public function xuLyThem(Request $request)
+
+    public function xuLyThem( GiaoVienRequest $request)
     {
         if (GiaoVien::where('email', $request->email)->exists()) {
             return redirect()->back()->withErrors(['email' => 'Email already exists.'])->withInput();
@@ -55,7 +56,7 @@ class GiaoVienController extends Authenticatable
         $giaovien = new GiaoVien;
         $giaovien->email = $request->email;
         $giaovien->ho_ten = $request->ho_ten;
-        $giaovien->mat_khau = Hash::make($request->mat_khau);
+        $giaovien->mat_khau = $request->mat_khau;
         $giaovien->khoa_id = $request->khoa_id;
         $giaovien->ngay_sinh = $request->ngay_sinh;
         $giaovien->so_dien_thoai = $request->so_dien_thoai;
@@ -69,7 +70,8 @@ class GiaoVienController extends Authenticatable
     public function danhSachGiaoVien()
     {
         $giaoviens = GiaoVien::all();
-        return view('giao_vien.danh-sach-giao-vien', compact('giaoviens'));
+        $khoas = KhoaDaoTao::all();
+        return view('giao_vien.danh-sach-giao-vien', compact('giaoviens','khoas'));
 
     }
 
@@ -80,27 +82,13 @@ class GiaoVienController extends Authenticatable
         return view('giao_vien.sua', compact('giao_vien', 'khoas'));
     }
 
-    public function xuLySua(Request $request, $email)
+    public function xuLySua(GiaoVienRequest $request, $email)
     {
 
         $giao_vien = GiaoVien::find($email);
         if ($giao_vien) {
             $giao_vien->email = $request->input('email');
             $giao_vien->ho_ten = $request->input('ho_ten');
-            if ($request->filled('mat_khau')) {
-                $giao_vien->mat_khau = bcrypt($request->input('mat_khau'));
-                $giao_vien->ten_khoa = $request->input('ten_khoa');
-                $giao_vien->ngay_sinh = $request->input('ngay_sinh');
-                $giao_vien->so_dien_thoai = $request->input('so_dien_thoai');
-                $giao_vien->so_cccd = $request->input('so_cccd');
-                $giao_vien->email = $request->input('email');
-
-                $giao_vien->dia_chi = $request->input('dia_chi');
-
-                $giao_vien->update($request->all());
-                return redirect()->route('sinh_vien.danh_sach')->with('thong_bao', 'Cập nhật thành công!');
-
-            }
             $giao_vien->khoa_id = $request->input('khoa_id');
             $giao_vien->ngay_sinh = $request->input('ngay_sinh');
             $giao_vien->so_dien_thoai = $request->input('so_dien_thoai');
@@ -116,16 +104,36 @@ class GiaoVienController extends Authenticatable
     }
 
 
-            public function xoa($email)
-            {
-                $giao_vien = GiaoVien::find($email);
-                if ($giao_vien) {
-                    $giao_vien->delete();
-                    return redirect()->route('giao_vien.danh_sach')->with('thong_bao', 'Xóa thành công!');
-                }
-                return redirect()->route('giao_vien.danh_sach')->with('error', 'giao viên không tồn tại.');
+    public function xoa($email)
+    {
+        $giao_vien = GiaoVien::find($email);
+        if ($giao_vien) {
+            $giao_vien->delete();
+            return redirect()->route('giao_vien.danh_sach')->with('thong_bao', 'Xóa thành công!');
+        }
+        return redirect()->route('giao_vien.danh_sach')->with('error', 'Giáo viên không tồn tại.');
+    }
+    public function khoiPhuc($email)
+        {
+            // Tìm giáo viên bao gồm cả những giáo viên đã bị xóa mềm
+            $giao_vien = GiaoVien::withTrashed()->find($email);
 
-
+            // Kiểm tra nếu giáo viên tồn tại và đã bị xóa mềm
+            if ($giao_vien && $giao_vien->trashed()) {
+                // Khôi phục tài khoản giáo viên
+                $giao_vien->restore();
+                return redirect()->route('giao_vien.danh_sach')->with('thong_bao', 'Khôi phục thành công!');
             }
+
+            return redirect()->route('giao_vien.danh_sach')->with('error', 'Giáo viên không tồn tại hoặc chưa bị xóa.');
+        }
+        public function danhSachGiaoVienDaXoa()
+        {
+            // Lấy danh sách giáo viên đã bị xóa mềm
+            $giaoviens = GiaoVien::onlyTrashed()->paginate(5);
+            return view('giao_vien.danh-sach-da-xoa', compact('giaoviens'));
+        }
+
+        
             
         }

@@ -30,6 +30,7 @@
                             <th>Khoa đào tạo</th>
                             <th>Mật khẩu</th>
                             <th>Số điện thoại</th>
+                           
                             <th>Đăng nhập gần nhất</th>
                             <th>Thao tác</th>
                         </tr>
@@ -38,8 +39,8 @@
                         @if ($trolykhoas->count() > 0)
                             @foreach($trolykhoas as $tlk)
                                 <tr>
-                                    <td><img src="{{ asset('storage/' . $tlk->avt) }}" alt="Ảnh đại diện" width="50" height="50"></td>
-                                    <td>{{ $tlk->ho_ten }}</td>
+                                <td><img src="{{ asset('storage/' . $tlk->avt) }}" alt="Ảnh đại diện" width="50" height="50"></td>
+                                <td>{{ $tlk->ho_ten }}</td>
                                     <td>{{ $tlk->email }}</td>
                                     <td>{{ $tlk->khoa->ten_khoa }}</td>
                                     <td>
@@ -49,6 +50,8 @@
                                         </span>
                                     </td>
                                     <td>{{ $tlk->so_dien_thoai }}</td>
+                                    
+                                
                                     <td>{{ $tlk->thoi_gian_dang_nhap_cuoi }}</td>
                                     <td>
                                         <a  href="{{ route('tro_ly_khoa.sua', $tlk->email) }}"class="btn btn-link btn-primary btn-lg" data-bs-toggle="tooltip" data-original-title="Edit Task">

@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->string('ma_diem_danh', 10)->primary();
             $table->string('ma_qr')->nullable();
             $table->string('giao_vien_email', 30);
-            $table->dateTime('thoi_gian_qr')->nullable();
+            $table->datetime('thoi_gian_qr');
             $table->date('ngay')->nullable();
             $table->integer('so_luong')->nullable();
             $table->timestamps();

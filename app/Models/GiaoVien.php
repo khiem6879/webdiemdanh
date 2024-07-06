@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GiaoVien extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
     protected $table = "giao_vien";
     protected $primaryKey = 'email';
@@ -32,6 +33,11 @@ class GiaoVien extends Authenticatable
     public function khoa()
     {
         return $this->belongsTo(KhoaDaoTao::class, 'khoa_id');
+    }
+ 
+    public function diemDanhNgoais()
+    {
+        return $this->hasMany(DiemDanhNgoai::class, 'giao_vien_email', 'email');
     }
    
 

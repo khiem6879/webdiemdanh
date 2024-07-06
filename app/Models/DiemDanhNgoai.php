@@ -13,7 +13,12 @@ class DiemDanhNgoai extends Model
     protected $primaryKey = 'ma_diem_danh';
     // Không sử dụng trường tự động tăng
     public $incrementing = false;
+    protected $dates = ['deleted_at'];
 
     // Kiểu dữ liệu của khóa chính là chuỗi
     protected $keyType = 'string';
+    public function giaoVien()
+    {
+        return $this->belongsTo(GiaoVien::class, 'giao_vien_email', 'email');
+    }
 }

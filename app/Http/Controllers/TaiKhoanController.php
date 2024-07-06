@@ -13,6 +13,7 @@ use App\Models\KhoaDaoTao;
 use App\Models\TroLyKhoa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class TaiKhoanController extends Controller
 {
@@ -57,26 +58,26 @@ class TaiKhoanController extends Controller
 
   }
   private function layThongTinNguoiDung()
-  {
-    $user = null;
-    $role = session('user_role');
+    {
+        $user = null;
+        $role = session('user_role');
 
-    if ($role === 'sinh_vien') {
-      $user = Auth::guard('sinh_vien')->user();
-    } elseif ($role === 'giao_vien') {
-      $user = Auth::guard('giao_vien')->user();
-    } elseif ($role === 'admin') {
-      $user = Auth::guard('admin')->user();
-    } elseif ($role === 'tro_ly_khoa') {
-      $user = Auth::guard('tro_ly_khoa')->user();
+        if ($role === 'sinh_vien') {
+            $user = Auth::guard('sinh_vien')->user();
+        } elseif ($role === 'giao_vien') {
+            $user = Auth::guard('giao_vien')->user();
+        } elseif ($role === 'admin') {
+            $user = Auth::guard('admin')->user();
+        } elseif ($role === 'tro_ly_khoa') {
+            $user = Auth::guard('tro_ly_khoa')->user();
+        }
+
+        if (!$user) {
+            return redirect()->route('DangNhap')->with('thong_bao', 'Vui lòng đăng nhập để tiếp tục.');
+        }
+
+        return compact('user', 'role');
     }
-
-    if (!$user) {
-      return redirect()->route('DangNhap')->with('thong_bao', 'Vui lòng đăng nhập để tiếp tục.');
-    }
-
-    return compact('user', 'role',);
-  }
 
   public function thongtinTaiKhoan()
   {
@@ -89,10 +90,6 @@ class TaiKhoanController extends Controller
       return redirect()->route('DangNhap')->with('thong_bao', 'Vui lòng đăng nhập để xem thông tin tài khoản.');
     }
   }
-
-
-
-
   public function suaTaiKhoan()
   {
 
@@ -152,43 +149,71 @@ class TaiKhoanController extends Controller
   }
 
   public function hienThiDoiMatKhau()
-  {
-    $data = $this->layThongTinNguoiDung();
+    {
+        $data = $this->layThongTinNguoiDung();
 
-
-    if ($data['user']) {
-      return view('tai_khoan.doi-mat-khau', $data);
-    } else {
-      return redirect()->route('DangNhap')->with('thong_bao', 'Vui lòng đăng nhập để đổi mật thông tin tài khoản.');
+        if ($data['user']) {
+            return view('tai_khoan.doi-mat-khau', $data);
+        } else {
+            return redirect()->route('DangNhap')->with('thong_bao', 'Vui lòng đăng nhập để đổi mật khẩu.');
+        }
     }
-  }
 
-  public function doiMatKhau(DoiMatKhauRequest $request)
-  {
+    public function doiMatKhau(Request $request)
+{
+    $request->validate([
+        'mat_khau' => 'required',
+        'mat_khau_moi' => 'required|confirmed',
+    ]);
 
     $data = $this->layThongTinNguoiDung();
 
-    // Kiểm tra xem người dùng đã đăng nhập hay chưa
     if (!$data['user']) {
-      return redirect()->route('DangNhap')->with('thong_bao', 'Vui lòng đăng nhập để đổi mật khẩu.');
+        return redirect()->route('DangNhap')->with('thong_bao', 'Vui lòng đăng nhập để đổi mật khẩu.');
     }
-    // dd($data['user']);
-    // Kiểm tra mật khẩu hiện tại
+
     if (!Hash::check($request->mat_khau, $data['user']->mat_khau)) {
-      return back()->withErrors(['mat_khau' => 'Mật khẩu hiện tại không chính xác']);
+        return back()->withErrors(['mat_khau' => 'Mật khẩu hiện tại không chính xác']);
     }
 
-    // Cập nhật mật khẩu mới
-    $data['user']->mat_khau = Hash::make($request->mat_khau_moi);
-    $data['user']->save();
+    // Tạo mã xác nhận
+    $code = rand(100000, 999999);
+    session(['password_reset_code' => $code, 'new_password' => $request->mat_khau_moi]);
 
-    return redirect()->route('tai_khoan.thong-tin-tai-khoan')->with('thong_bao', 'Đổi mật khẩu thành công');
-  }
+    // Gửi mã xác nhận qua email
+    Mail::send('emails.password_reset_code', ['code' => $code], function ($message) use ($data) {
+        $message->to($data['user']->email);
+        $message->subject('Mã xác nhận đổi mật khẩu');
+    });
+
+    return view('tai_khoan.xac-nhan-ma', $data);
+}
   public function dangXuat()
   {
     Auth::guard(session('user_role'))->logout();
     session()->flush();
     return redirect()->route('DangNhap')->with('thong_bao', 'ĐĂNG XUẤT THÀNH CÔNG');
   }
+  public function xacNhanMa(Request $request)
+{
+    $request->validate([
+        'code' => 'required',
+    ]);
+
+    if ($request->code != session('password_reset_code')) {
+        return back()->withErrors(['code' => 'Mã xác nhận không chính xác']);
+    }
+
+    $data = $this->layThongTinNguoiDung();
+
+    // Cập nhật mật khẩu mới
+    $data['user']->mat_khau = Hash::make(session('new_password'));
+    $data['user']->save();
+
+    session()->forget('password_reset_code');
+    session()->forget('new_password');
+
+    return redirect()->route('tai_khoan.thong-tin-tai-khoan')->with('thong_bao', 'Đổi mật khẩu thành công');
+}
 
 }
