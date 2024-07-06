@@ -22,6 +22,7 @@
             @enderror
         </div>
         <div class="form-group">
+<<<<<<< HEAD
             <label for="mat_khau">Mật khẩu</label>
             <input type="password" name="mat_khau" class="form-control @error('mat_khau') is-invalid @enderror" required>
             @error('mat_khau')
@@ -29,6 +30,8 @@
             @enderror
         </div>
         <div class="form-group">
+=======
+>>>>>>> badd37a6bcfa5c671b1ddd5787c452806d30cb02
             <label for="khoa_id">Khoa đào tạo</label>
             <select name="khoa_id" class="form-control @error('khoa_id') is-invalid @enderror" required>
                 @foreach ($khoas as $khoa)

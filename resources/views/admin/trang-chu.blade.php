@@ -32,6 +32,11 @@
                             <span class="sub-item">DANH SÁCH</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="/admin/tro-ly-khoa/them">
+                            <span class="sub-item">THÊM</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>
@@ -46,6 +51,11 @@
                     <li>
                         <a href="/admin/giao-vien/danh-sach">
                             <span class="sub-item">DANH SÁCH</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/giao-vien/them">
+                            <span class="sub-item">THÊM</span>
                         </a>
                     </li>
                 </ul>
@@ -65,8 +75,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="tables/datatables.html">
-                            <span class="sub-item">Datatables</span>
+                        <a href="/admin/sinh-vien/them">
+                            <span class="sub-item">THÊM</span>
                         </a>
                     </li>
                 </ul>
@@ -85,7 +95,11 @@
                             <span class="sub-item">DANH SÁCH</span>
                         </a>
                     </li>
-                    
+                    <li>
+                        <a href="/admin/lop-sinh-vien/them">
+                            <span class="sub-item">THÊM</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>
@@ -103,23 +117,66 @@
                         </a>
                     </li>
                     <li>
-                        <a href="maps/jsvectormap.html">
-                            <span class="sub-item">Jsvectormap</span>
+                    <a href="/admin/lop-hoc-phan/them">
+                            <span class="sub-item">THÊM</span>
                         </a>
                     </li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a href="widgets.html">
-                <i class="fas fa-desktop"></i>
-                <p>Widgets</p>
-                <span class="badge badge-success">4</span>
+            <a data-bs-toggle="collapse" href="#khoa-dao-tao">
+                <i class="fas fa-table"></i>
+                <p>KHOA ĐÀO TẠO</p>
+                <span class="caret"></span>
             </a>
+            <div class="collapse" id="khoa-dao-tao">
+                <ul class="nav nav-collapse">
+                    <li>
+                        <a href="/admin/khoa-dao-tao/danh-sach">
+                            <span class="sub-item">DANH SÁCH</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/khoa-dao-tao/them">
+                            <span class="sub-item">THÊM</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#diem-danh-lop-hoc-phan">
+                <i class="fas fa-table"></i>
+                <p>ĐIỂM DANH HỌC PHẦN</p>
+                <span class="caret"></span>
+            </a>
+            <div class="collapse" id="diem-danh-lop-hoc-phan">
+                <ul class="nav nav-collapse">
+                    <li>
+                        <a href="/admin/lop-hoc-phan/diem-danh-danh-sach">
+                            <span class="sub-item">DANH SÁCH</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#diem-danh-ngoai">
+                <i class="fas fa-table"></i>
+                <p>ĐIỂM DANH NGOÀI</p>
+                <span class="caret"></span>
+            </a>
+            <div class="collapse" id="diem-danh-ngoai">
+                <ul class="nav nav-collapse">
+                    <li>
+                        <a href="/admin/lop-hoc-phan/diem-danh-danh-sach">
+                            <span class="sub-item">DANH SÁCH</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </li>
     </ul>
 </div>
-@if (session('thong_bao'))
-        <script>Swal.fire("{{ session('thong_bao') }}")</script>
-@endif
 @endsection

@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 @extends('admin.trang-chu')
 
+=======
+@extends($layout)
+>>>>>>> badd37a6bcfa5c671b1ddd5787c452806d30cb02
 @section('content')
 <div class="container">
     <div class="card">
@@ -9,10 +13,17 @@
                     <h1 class="card-title">Danh Sách Khoa Đào Tạo</h1>
                 </div>
                 <div class="col-sm-3">
+<<<<<<< HEAD
                     <div class="float-right">
                         <a href="{{ route('khoa.them') }}" class="btn btn-primary">Thêm</a>
                         <a href="{{ route('khoa.danh_sach_da_xoa') }}" class="btn btn-secondary">Danh sách đã xóa</a>
                     </div>
+=======
+                    <h1 class="card-title">Danh Sách Khoa</h1>
+                </div>
+                <div class="col-sm-2">
+                    
+>>>>>>> badd37a6bcfa5c671b1ddd5787c452806d30cb02
                 </div>
             </div>
         </div>
@@ -27,8 +38,20 @@
                             <th>Hành Động</th>
                         </tr>
                     </thead>
+<<<<<<< HEAD
                     <tbody>
                         @forelse($khoadaotaos as $khoa)
+=======
+                    <tbody id="khoa-table">
+                        @if ($khoas->count() > 0)
+                            @foreach ($khoas as $khoa)
+                                <tr>
+                                    <td>{{ $khoa->khoa_id }}</td>
+                                    <td>{{ $khoa->ten_khoa }}</td>
+                                </tr>
+                            @endforeach
+                        @else
+>>>>>>> badd37a6bcfa5c671b1ddd5787c452806d30cb02
                             <tr>
                                 <td>{{ $khoa->khoa_id }}</td>
                                 <td>{{ $khoa->ten_khoa }}</td>
@@ -58,5 +81,15 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
+=======
+<style>
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap; /* Ngăn chặn ngắt dòng */
+}
+</style>
+>>>>>>> badd37a6bcfa5c671b1ddd5787c452806d30cb02
 @endsection
 

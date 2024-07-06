@@ -48,7 +48,7 @@
                             <tr>
                                 <td>{{ $sinhvien->ma_sinh_vien }}</td>
                                 <td>{{ $sinhvien->ho_ten }}</td>
-                                <td>{{ $sinhvien->ngay_sinh }}</td>
+                                <td>{{ $Carbon::parse($sinhvien->ngay_sinh)->format('d-m-Y') }}</td>
                                 <td>{{ $sinhvien->so_dien_thoai }}</td>
                                 <td>{{ $sinhvien->so_cccd }}</td>
                                 <td>{{ $sinhvien->email }}</td>
@@ -61,7 +61,7 @@
             <div class="d-flex justify-content-center">
                 {{ $students->links('pagination::bootstrap-4') }}
             </div>
-            <a href="{{ route('tro_ly_khoa.lop_hoc_phan.danh_sach') }}" class="btn btn-secondary mb-3">
+            <a href="{{ route('lop_hoc_phan.danh_sach') }}" class="btn btn-secondary mb-3">
                 <i class="fa fa-arrow-left fa-sm"></i> Quay Lại
             </a>   
         </div>

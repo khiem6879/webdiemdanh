@@ -34,7 +34,7 @@
                             <tr>
                                 <td>{{ $sinhvien->ma_sinh_vien }}</td>
                                 <td>{{ $sinhvien->ho_ten }}</td>
-                                <td>{{ $sinhvien->ngay_sinh }}</td>
+                                <td>{{ $Carbon::parse($sinhvien->ngay_sinh)->format('d-m-Y') }}</td>
                                 <td>{{ $sinhvien->so_dien_thoai }}</td>
                                 <td>{{ $sinhvien->so_cccd }}</td>
                                 <td>{{ $sinhvien->email }}</td>

@@ -8,10 +8,20 @@ use Illuminate\Support\Str;
 
 class KhoaDaoTaoController extends Controller
 {
+<<<<<<< HEAD
     public function danhSach()
     {
         $khoadaotaos = KhoaDaoTao::paginate(5);
         return view('khoa.danh-sach', compact('khoadaotaos'));
+=======
+   
+    
+    public function danhSach(){
+   
+      $khoas= KhoaDaoTao::all();
+        $khoas = KhoaDaoTao::paginate(5);
+        return view('khoa.danh-sach', compact('khoas'));
+>>>>>>> badd37a6bcfa5c671b1ddd5787c452806d30cb02
     }
 
     public function them()

@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\GiaoVien;
 use App\Models\KhoaDaoTao;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Carbon\Carbon;
 
 
 class GiaoVienController extends Authenticatable
@@ -56,7 +61,11 @@ class GiaoVienController extends Authenticatable
         $giaovien = new GiaoVien;
         $giaovien->email = $request->email;
         $giaovien->ho_ten = $request->ho_ten;
+<<<<<<< HEAD
         $giaovien->mat_khau = $request->mat_khau;
+=======
+        $giaovien->mat_khau = Hash::make($request->so_cccd);
+>>>>>>> badd37a6bcfa5c671b1ddd5787c452806d30cb02
         $giaovien->khoa_id = $request->khoa_id;
         $giaovien->ngay_sinh = $request->ngay_sinh;
         $giaovien->so_dien_thoai = $request->so_dien_thoai;
@@ -64,7 +73,7 @@ class GiaoVienController extends Authenticatable
         $giaovien->dia_chi = $request->dia_chi;
         $giaovien->save();
 
-        return redirect()->route('giao_vien.danh_sach');
+        return redirect()->route('giao_vien.danh_sach')->with('thong_bao', 'Thêm Giáo Viên thành công!');
 
     }
     public function danhSachGiaoVien()
@@ -74,7 +83,79 @@ class GiaoVienController extends Authenticatable
         return view('giao_vien.danh-sach-giao-vien', compact('giaoviens','khoas'));
 
     }
+    public function uploadExcel(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
 
+        $filePath = $request->file('file')->getRealPath();
+        $data = Excel::toArray([], $filePath)[0]; // Lấy sheet đầu tiên
+
+        $errors = [];
+        $successCount = 0;
+        $existingCount = 0;
+
+        foreach ($data as $index => $row) {
+            if ($index == 0) {
+                // Bỏ qua hàng tiêu đề
+                continue;
+            }
+
+            // Kiểm tra nếu hàng không có dữ liệu thì bỏ qua
+            if (empty($row[0]) && empty($row[1]) && empty($row[2]) && empty($row[3]) && empty($row[4]) && empty($row[5]) && empty($row[6])) {
+                continue;
+            }
+
+            
+            $email = $row[0];
+
+            // Kiểm tra tồn tại email
+            if (GiaoVien::where('email', $email)->exists()) {
+                $errors[] = "{$email}";
+                $existingCount++;
+                continue;
+            }
+
+            // Kiểm tra và chuyển đổi ngày tháng từ chuỗi thành ngày tháng
+            try {
+                $ngay_sinh = Carbon::createFromFormat('d/m/Y', $row[2])->format('Y-m-d');
+            } catch (\Exception $e) {
+                $errors[] = "Ngày sinh không hợp lệ cho {$email}.";
+                continue;
+            }
+
+            try {
+                GiaoVien::create([
+              
+                    'ho_ten' => $row[1],
+                    'ngay_sinh' => $ngay_sinh,
+                    'dia_chi' => $row[3],
+                    'so_cccd' => $row[4],
+                    'email' => $email,
+                    'so_dien_thoai' => $row[5],
+                    'khoa_id'=>$row[6],
+                    'mat_khau' => Hash::make($row[4]), // Hash mật khẩu từ số cccd
+                ]);
+                $successCount++;
+            } catch (\Exception $e) {
+                $errors[] = "Lỗi khi thêm giao viên với {$email}: " . $e->getMessage();
+            }
+        }
+        // Tạo thông báo tổng hợp
+        $message = '';
+        if ($successCount > 0) {
+            $message .= "Thêm {$successCount} giáo viên thành công.";
+        }
+        if ($existingCount > 0) {
+            $message .= "{$existingCount} giáo viên đã tồn tại.";
+        }
+        if (count($errors) > 0) {
+            $message .= " Lỗi với " . count($errors) . " giáo viên: " . implode(", ", $errors);
+        }
+
+        return redirect()->route('giao_vien.danh_sach')->with('thong_bao', $message);
+    }
     public function sua($email)
     {
         $giao_vien = GiaoVien::find($email);
